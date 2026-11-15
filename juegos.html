@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#F3EEE6" />
+  <title>Juegos para aprender</title>
+  <style>
+    :root {
+      --bg: #F3EEE6;
+      --bg-soft: #E8EFE8;
+      --card: #FFFcf7;
+      --ink: #4A4453;
+      --ink-soft: #6E6878;
+      --line: #E4DCD0;
+      --peach: #E8C4B0;
+      --peach-deep: #C98970;
+      --mint: #B7D4C6;
+      --mint-deep: #5E8F7A;
+      --lilac: #D4C6E0;
+      --lilac-deep: #7A6B93;
+      --gold: #E8D48A;
+      --gold-deep: #B0892E;
+      --ok: #7BA882;
+      --ok-bg: #E7F3EA;
+      --try: #C4A56A;
+      --try-bg: #F6EFE0;
+      --shadow: 0 8px 24px rgba(74, 68, 83, 0.08);
+      --radius: 28px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      min-height: 100dvh;
+      background:
+        radial-gradient(ellipse at top, #F8F4EE 0%, var(--bg) 55%),
+        var(--bg);
+    }
+
+    #app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding: calc(12px + var(--safe-top)) 16px calc(16px + var(--safe-bottom));
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 4px 2px 12px;
+      flex-shrink: 0;
+    }
+
+    .stars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold-deep);
+      box-shadow: var(--shadow);
+      min-width: 76px;
+    }
+
+    .stars span { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      font-size: 1.35rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .icon-btn:active { transform: scale(0.96); }
+    .icon-btn[aria-pressed="false"] { opacity: 0.55; }
+    .icon-btn:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    h1 { font-size: 1.7rem; margin: 8px 0 6px; }
+    .subtitle {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .home-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .game-btn {
+      border: 0;
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      text-align: left;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease;
+      width: 100%;
+    }
+
+    .game-btn:active { transform: scale(0.985); }
+    .game-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+    .game-btn .emoji {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 2.4rem;
+      background: rgba(255,255,255,0.55);
+      flex-shrink: 0;
+    }
+
+    .game-btn .label {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .game-btn .hint {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+
+    .btn-emociones { background: linear-gradient(180deg, #F6E4D8, var(--peach)); }
+    .btn-colores { background: linear-gradient(180deg, #DCEDE4, var(--mint)); }
+    .btn-formas { background: linear-gradient(180deg, #E8DEF0, var(--lilac)); }
+
+    .modes {
+      display: flex;
+      gap: 10px;
+      margin: 4px 0 18px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      min-height: 52px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink-soft);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .mode-btn[aria-pressed="true"] {
+      background: var(--ink);
+      color: #F8F4EE;
+      border-color: var(--ink);
+    }
+
+    .mode-btn:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+
+    .prompt-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 6px 0 20px;
+      min-height: 64px;
+    }
+
+    .prompt {
+      font-size: 1.45rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .speak-btn {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .speak-btn:active { transform: scale(0.96); }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+      align-content: start;
+    }
+
+    .choices:has(.choice:nth-child(3):last-child) .choice:last-child {
+      grid-column: 1 / -1;
+      width: calc((100% - 14px) / 2);
+      justify-self: center;
+    }
+
+    .choice {
+      min-height: 140px;
+      border: 2px solid var(--line);
+      background: var(--card);
+      border-radius: 24px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      padding: 12px;
+    }
+
+    .choice:active { transform: scale(0.97); }
+    .choice:focus-visible { outline: 3px solid var(--mint-deep); outline-offset: 2px; }
+    .choice .face { font-size: 4.2rem; line-height: 1; }
+    .choice .swatch {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 3px solid rgba(74, 68, 83, 0.12);
+      box-shadow: inset 0 -6px 12px rgba(0,0,0,0.08);
+    }
+    .choice .shape { width: 92px; height: 92px; }
+    .choice .shape svg { width: 100%; height: 100%; display: block; }
+
+    .choice.correct {
+      border-color: var(--ok);
+      background: var(--ok-bg);
+    }
+
+    .choice.wiggle {
+      animation: wiggle 0.55s ease-in-out;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-5deg); }
+      40% { transform: rotate(5deg); }
+      60% { transform: rotate(-4deg); }
+      80% { transform: rotate(3deg); }
+    }
+
+    .feedback {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .feedback.ok { color: var(--mint-deep); }
+    .feedback.try { color: #9A7A3A; }
+
+    .feedback .star-pop {
+      display: inline-block;
+      margin-right: 8px;
+      animation: starIn 0.6s ease;
+      font-size: 1.5rem;
+    }
+
+    @keyframes starIn {
+      0% { transform: scale(0.4); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .next-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+      min-height: 64px;
+    }
+
+    .next-btn, .nav-btn {
+      min-height: 56px;
+      min-width: 0;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 20px;
+      background: var(--ink);
+      color: #F8F4EE;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .next-btn { min-width: 160px; }
+
+    .next-btn:active, .nav-btn:active { transform: scale(0.97); }
+    .next-btn[hidden], .hidden { display: none !important; }
+
+    /* Learn mode */
+    .learn-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 24px 16px;
+      min-height: 320px;
+    }
+
+    .learn-visual {
+      width: 200px;
+      height: 200px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+    }
+
+    .learn-visual .face { font-size: 8rem; line-height: 1; }
+    .learn-visual .swatch {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid rgba(74, 68, 83, 0.1);
+      box-shadow: inset 0 -10px 18px rgba(0,0,0,0.08), var(--shadow);
+    }
+    .learn-visual .shape { width: 180px; height: 180px; }
+    .learn-visual .shape svg { width: 100%; height: 100%; display: block; }
+
+    .learn-name {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 8px 0 4px;
+    }
+
+    .learn-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .nav-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 0 10px;
+      font-size: 1.05rem;
+    }
+    .learn-count {
+      color: var(--ink-soft);
+      font-weight: 600;
+      flex: 0 0 auto;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .screen-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 360px) {
+      .choice { min-height: 120px; }
+      .choice .face { font-size: 3.4rem; }
+      .learn-visual { width: 160px; height: 160px; }
+      .learn-visual .face { font-size: 6.4rem; }
+      h1 { font-size: 1.45rem; }
+      .prompt { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="stars" aria-live="polite">
+        ⭐ <span id="starCount">0</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="voiceBtn" aria-pressed="true" aria-label="Voz encendida" title="Voz">🔊</button>
+        <button type="button" class="icon-btn" id="homeBtn" aria-label="Ir al inicio" title="Inicio">🏠</button>
+      </div>
+    </header>
+    <main id="screen"></main>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_STARS = "juegosAprenderStars";
+      var STORAGE_VOICE = "juegosAprenderVoice";
+      var SHAPE_FILL = "#6B8F8F";
+
+      var EMOTIONS = [
+        { id: "feliz", name: "Feliz", emoji: "😊", prompt: "¿Cuál está feliz?" },
+        { id: "triste", name: "Triste", emoji: "😢", prompt: "¿Cuál está triste?" },
+        { id: "enojado", name: "Enojado", emoji: "😠", prompt: "¿Cuál está enojado?" },
+        { id: "asustado", name: "Asustado", emoji: "😨", prompt: "¿Cuál está asustado?" },
+        { id: "sorprendido", name: "Sorprendido", emoji: "😲", prompt: "¿Cuál está sorprendido?" },
+        { id: "calmado", name: "Calmado", emoji: "😌", prompt: "¿Cuál está calmado?" }
+      ];
+
+      var COLORS = [
+        { id: "rojo", name: "Rojo", color: "#C45C5C", prompt: "¿Dónde está el rojo?" },
+        { id: "azul", name: "Azul", color: "#5A8FBF", prompt: "¿Dónde está el azul?" },
+        { id: "amarillo", name: "Amarillo", color: "#E0C04A", prompt: "¿Dónde está el amarillo?" },
+        { id: "verde", name: "Verde", color: "#6BA56B", prompt: "¿Dónde está el verde?" },
+        { id: "naranja", name: "Naranja", color: "#E09A5A", prompt: "¿Dónde está el naranja?" },
+        { id: "morado", name: "Morado", color: "#8B7BB8", prompt: "¿Dónde está el morado?" },
+        { id: "rosa", name: "Rosa", color: "#E89BB0", prompt: "¿Dónde está el rosa?" },
+        { id: "cafe", name: "Café", color: "#7A5C3E", prompt: "¿Dónde está el café?" }
+      ];
+
+      var SHAPES = [
+        { id: "circulo", name: "Círculo", prompt: "¿Cuál es el círculo?" },
+        { id: "cuadrado", name: "Cuadrado", prompt: "¿Cuál es el cuadrado?" },
+        { id: "triangulo", name: "Triángulo", prompt: "¿Cuál es el triángulo?" },
+        { id: "estrella", name: "Estrella", prompt: "¿Cuál es la estrella?" },
+        { id: "corazon", name: "Corazón", prompt: "¿Cuál es el corazón?" },
+        { id: "rectangulo", name: "Rectángulo", prompt: "¿Cuál es el rectángulo?" }
+      ];
+
+      var GAMES = {
+        emociones: { title: "Emociones", items: EMOTIONS, kind: "emotion" },
+        colores: { title: "Colores", items: COLORS, kind: "color" },
+        formas: { title: "Formas", items: SHAPES, kind: "shape" }
+      };
+
+      var state = {
+        screen: "home",
+        game: null,
+        mode: "jugar",
+        learnIndex: 0,
+        question: null,
+        choices: [],
+        answered: false,
+        lastPrompt: "",
+        stars: 0,
+        voiceOn: true,
+        spanishVoice: null
+      };
+
+      var screenEl = document.getElementById("screen");
+      var starCountEl = document.getElementById("starCount");
+      var voiceBtn = document.getElementById("voiceBtn");
+      var homeBtn = document.getElementById("homeBtn");
+
+      function loadStars() {
+        try {
+          var n = parseInt(localStorage.getItem(STORAGE_STARS), 10);
+          return isNaN(n) ? 0 : Math.max(0, n);
+        } catch (e) {
+          return 0;
+        }
+      }
+
+      function saveStars() {
+        try { localStorage.setItem(STORAGE_STARS, String(state.stars)); } catch (e) {}
+      }
+
+      function loadVoice() {
+        try {
+          var v = localStorage.getItem(STORAGE_VOICE);
+          return v === null ? true : v === "on";
+        } catch (e) {
+          return true;
+        }
+      }
+
+      function saveVoice() {
+        try { localStorage.setItem(STORAGE_VOICE, state.voiceOn ? "on" : "off"); } catch (e) {}
+      }
+
+      function pickSpanishVoice() {
+        if (!window.speechSynthesis) return;
+        var voices = speechSynthesis.getVoices() || [];
+        var preferred =
+          voices.filter(function (v) { return v.lang === "es-MX"; })[0] ||
+          voices.filter(function (v) { return v.lang === "es-US"; })[0] ||
+          voices.filter(function (v) { return /^es[-_]/i.test(v.lang); })[0] ||
+          voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf("es") === 0; })[0] ||
+          null;
+        state.spanishVoice = preferred;
+      }
+
+      function speak(text) {
+        state.lastPrompt = text || "";
+        if (!state.voiceOn || !text || !window.speechSynthesis) return;
+        try {
+          speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = (state.spanishVoice && state.spanishVoice.lang) || "es-MX";
+          u.rate = 0.88;
+          u.pitch = 1.05;
+          u.volume = 0.85;
+          if (state.spanishVoice) u.voice = state.spanishVoice;
+          speechSynthesis.speak(u);
+        } catch (e) {}
+      }
+
+      function repeatSpeech() {
+        if (state.lastPrompt) speak(state.lastPrompt);
+      }
+
+      function updateVoiceButton() {
+        voiceBtn.setAttribute("aria-pressed", state.voiceOn ? "true" : "false");
+        voiceBtn.setAttribute("aria-label", state.voiceOn ? "Voz encendida" : "Voz apagada");
+        voiceBtn.textContent = state.voiceOn ? "🔊" : "🔇";
+      }
+
+      function updateStars() {
+        starCountEl.textContent = String(state.stars);
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i];
+          a[i] = a[j];
+          a[j] = t;
+        }
+        return a;
+      }
+
+      function shapeSVG(id) {
+        var f = SHAPE_FILL;
+        if (id === "circulo") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="' + f + '"/></svg>';
+        }
+        if (id === "cuadrado") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="15" y="15" width="70" height="70" rx="8" fill="' + f + '"/></svg>';
+        }
+        if (id === "triangulo") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,12 92,86 8,86" fill="' + f + '"/></svg>';
+        }
+        if (id === "estrella") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,8 61,38 94,38 67,57 78,90 50,70 22,90 33,57 6,38 39,38" fill="' + f + '"/></svg>';
+        }
+        if (id === "corazon") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 86 C22 64 8 46 22 28 C32 16 45 20 50 32 C55 20 68 16 78 28 C92 46 78 64 50 86 Z" fill="' + f + '"/></svg>';
+        }
+        if (id === "rectangulo") {
+          return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="28" width="88" height="44" rx="8" fill="' + f + '"/></svg>';
+        }
+        return "";
+      }
+
+      function itemVisual(item, kind, sizeClass) {
+        if (kind === "emotion") {
+          return '<div class="face" aria-hidden="true">' + item.emoji + "</div>";
+        }
+        if (kind === "color") {
+          return '<div class="swatch" style="background:' + item.color + '" aria-hidden="true"></div>';
+        }
+        return '<div class="shape" aria-hidden="true">' + shapeSVG(item.id) + "</div>";
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function renderHome() {
+        state.screen = "home";
+        state.game = null;
+        state.lastPrompt = "Elige un juego";
+        screenEl.innerHTML =
+          "<h1>Juegos para aprender</h1>" +
+          '<p class="subtitle">Emociones, colores y formas</p>' +
+          '<div class="home-buttons">' +
+            '<button type="button" class="game-btn btn-emociones" data-game="emociones">' +
+              '<div class="emoji">😊</div>' +
+              '<div><div class="label">Emociones</div><div class="hint">Feliz, triste, calmado…</div></div>' +
+            "</button>" +
+            '<button type="button" class="game-btn btn-colores" data-game="colores">' +
+              '<div class="emoji">🎨</div>' +
+              '<div><div class="label">Colores</div><div class="hint">Rojo, azul, verde…</div></div>' +
+            "</button>" +
+            '<button type="button" class="game-btn btn-formas" data-game="formas">' +
+              '<div class="emoji">⭐</div>' +
+              '<div><div class="label">Formas</div><div class="hint">Círculo, estrella, corazón…</div></div>' +
+            "</button>" +
+          "</div>";
+
+        var buttons = screenEl.querySelectorAll("[data-game]");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function (e) {
+            var g = e.currentTarget.getAttribute("data-game");
+            openGame(g, "jugar");
+          });
+        }
+        speak("Elige un juego");
+      }
+
+      function modeBar(active) {
+        return '<div class="modes" role="tablist">' +
+          '<button type="button" class="mode-btn" data-mode="aprender" aria-pressed="' + (active === "aprender") + '">Aprender</button>' +
+          '<button type="button" class="mode-btn" data-mode="jugar" aria-pressed="' + (active === "jugar") + '">Jugar</button>' +
+          "</div>";
+      }
+
+      function bindModes() {
+        var buttons = screenEl.querySelectorAll("[data-mode]");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function (e) {
+            openGame(state.game, e.currentTarget.getAttribute("data-mode"));
+          });
+        }
+      }
+
+      function openGame(gameId, mode) {
+        if (!GAMES[gameId]) return;
+        state.screen = "game";
+        state.game = gameId;
+        state.mode = mode || "jugar";
+        state.answered = false;
+        if (state.mode === "aprender") {
+          state.learnIndex = 0;
+          renderLearn();
+        } else {
+          newQuestion();
+          renderPlay();
+        }
+      }
+
+      function newQuestion() {
+        var items = GAMES[state.game].items;
+        var avoidId = state.question ? state.question.id : null;
+        var pool = items.filter(function (it) { return it.id !== avoidId; });
+        if (!pool.length) pool = items.slice();
+        var correct = pool[Math.floor(Math.random() * pool.length)];
+        var others = shuffle(items.filter(function (it) { return it.id !== correct.id; }));
+        var count = Math.random() < 0.5 ? 3 : 4;
+        if (count > others.length + 1) count = others.length + 1;
+        var choices = [correct].concat(others.slice(0, count - 1));
+        state.question = correct;
+        state.choices = shuffle(choices);
+        state.answered = false;
+      }
+
+      function renderPlay() {
+        var game = GAMES[state.game];
+        var q = state.question;
+        var html = '<div class="screen-title">' + escapeHtml(game.title) + "</div>";
+        html += modeBar("jugar");
+        html += '<div class="prompt-row">';
+        html += '<h2 class="prompt" id="promptText">' + escapeHtml(q.prompt) + "</h2>";
+        html += '<button type="button" class="speak-btn" id="repeatBtn" aria-label="Repetir">🔈</button>';
+        html += "</div>";
+        html += '<div class="choices" id="choices">';
+        for (var i = 0; i < state.choices.length; i++) {
+          var it = state.choices[i];
+          html += '<button type="button" class="choice" data-id="' + escapeHtml(it.id) + '" aria-label="' + escapeHtml(it.name) + '">';
+          html += itemVisual(it, game.kind);
+          html += "</button>";
+        }
+        html += "</div>";
+        html += '<div class="feedback" id="feedback" aria-live="polite"></div>';
+        html += '<div class="next-wrap"><button type="button" class="next-btn" id="nextBtn" hidden>Siguiente</button></div>';
+        screenEl.innerHTML = html;
+        bindModes();
+        document.getElementById("repeatBtn").addEventListener("click", repeatSpeech);
+        document.getElementById("nextBtn").addEventListener("click", function () {
+          newQuestion();
+          renderPlay();
+        });
+        var choiceBtns = screenEl.querySelectorAll(".choice");
+        for (var c = 0; c < choiceBtns.length; c++) {
+          choiceBtns[c].addEventListener("click", onChoice);
+        }
+        speak(q.prompt);
+      }
+
+      function onChoice(e) {
+        if (state.answered) return;
+        var btn = e.currentTarget;
+        var id = btn.getAttribute("data-id");
+        var feedback = document.getElementById("feedback");
+        var nextBtn = document.getElementById("nextBtn");
+
+        if (id === state.question.id) {
+          state.answered = true;
+          btn.classList.add("correct");
+          state.stars += 1;
+          saveStars();
+          updateStars();
+          feedback.className = "feedback ok";
+          feedback.innerHTML = '<span class="star-pop">⭐</span>¡Muy bien!';
+          nextBtn.hidden = false;
+          speak("¡Muy bien!");
+          var all = screenEl.querySelectorAll(".choice");
+          for (var i = 0; i < all.length; i++) {
+            if (all[i] !== btn) all[i].disabled = true;
+          }
+        } else {
+          btn.classList.remove("wiggle");
+          void btn.offsetWidth;
+          btn.classList.add("wiggle");
+          feedback.className = "feedback try";
+          feedback.textContent = "Intenta otra vez";
+          speak("Intenta otra vez");
+          setTimeout(function () {
+            btn.classList.remove("wiggle");
+          }, 600);
+        }
+      }
+
+      function renderLearn() {
+        var game = GAMES[state.game];
+        var items = game.items;
+        if (state.learnIndex < 0) state.learnIndex = 0;
+        if (state.learnIndex >= items.length) state.learnIndex = items.length - 1;
+        var item = items[state.learnIndex];
+        var html = '<div class="screen-title">' + escapeHtml(game.title) + "</div>";
+        html += modeBar("aprender");
+        html += '<div class="prompt-row">';
+        html += '<h2 class="prompt" id="promptText">' + escapeHtml(item.name) + "</h2>";
+        html += '<button type="button" class="speak-btn" id="repeatBtn" aria-label="Repetir">🔈</button>';
+        html += "</div>";
+        html += '<div class="learn-card">';
+        html += '<div class="learn-visual">' + itemVisual(item, game.kind) + "</div>";
+        html += '<div class="learn-name">' + escapeHtml(item.name) + "</div>";
+        html += '<div class="learn-nav">';
+        html += '<button type="button" class="nav-btn" id="prevBtn"' + (state.learnIndex === 0 ? " disabled" : "") + ">Anterior</button>";
+        html += '<div class="learn-count">' + (state.learnIndex + 1) + " / " + items.length + "</div>";
+        html += '<button type="button" class="nav-btn" id="nextBtn"' + (state.learnIndex === items.length - 1 ? " disabled" : "") + ">Siguiente</button>";
+        html += "</div></div>";
+        screenEl.innerHTML = html;
+        bindModes();
+        document.getElementById("repeatBtn").addEventListener("click", repeatSpeech);
+        document.getElementById("prevBtn").addEventListener("click", function () {
+          if (state.learnIndex > 0) {
+            state.learnIndex -= 1;
+            renderLearn();
+          }
+        });
+        document.getElementById("nextBtn").addEventListener("click", function () {
+          if (state.learnIndex < items.length - 1) {
+            state.learnIndex += 1;
+            renderLearn();
+          }
+        });
+        var visual = screenEl.querySelector(".learn-visual");
+        if (visual) {
+          visual.style.cursor = "pointer";
+          visual.addEventListener("click", repeatSpeech);
+        }
+        speak(item.name);
+      }
+
+      voiceBtn.addEventListener("click", function () {
+        state.voiceOn = !state.voiceOn;
+        saveVoice();
+        updateVoiceButton();
+        if (!state.voiceOn && window.speechSynthesis) {
+          try { speechSynthesis.cancel(); } catch (e) {}
+        } else if (state.voiceOn && state.lastPrompt) {
+          speak(state.lastPrompt);
+        }
+      });
+
+      homeBtn.addEventListener("click", function () {
+        if (window.speechSynthesis) {
+          try { speechSynthesis.cancel(); } catch (e) {}
+        }
+        renderHome();
+      });
+
+      if (window.speechSynthesis) {
+        pickSpanishVoice();
+        speechSynthesis.addEventListener("voiceschanged", pickSpanishVoice);
+      }
+
+      state.stars = loadStars();
+      state.voiceOn = loadVoice();
+      updateStars();
+      updateVoiceButton();
+
+      // Optional deep links for tests: #emociones, #colores/aprender, etc.
+      function startFromHash() {
+        var hash = (location.hash || "").replace(/^#/, "").replace(/^\//, "");
+        if (!hash) {
+          renderHome();
+          return;
+        }
+        var parts = hash.split("/");
+        var gameId = parts[0];
+        var mode = parts[1] === "aprender" ? "aprender" : "jugar";
+        if (GAMES[gameId]) {
+          openGame(gameId, mode);
+        } else {
+          renderHome();
+        }
+      }
+
+      startFromHash();
+      window.addEventListener("hashchange", startFromHash);
+    })();
+  </script>
+</body>
+</html>
