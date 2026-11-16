@@ -1,876 +1,1011 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="theme-color" content="#F3EEE6" />
-  <title>Juegos para aprender</title>
-  <style>
-    :root {
-      --bg: #F3EEE6;
-      --bg-soft: #E8EFE8;
-      --card: #FFFcf7;
-      --ink: #4A4453;
-      --ink-soft: #6E6878;
-      --line: #E4DCD0;
-      --peach: #E8C4B0;
-      --peach-deep: #C98970;
-      --mint: #B7D4C6;
-      --mint-deep: #5E8F7A;
-      --lilac: #D4C6E0;
-      --lilac-deep: #7A6B93;
-      --gold: #E8D48A;
-      --gold-deep: #B0892E;
-      --ok: #7BA882;
-      --ok-bg: #E7F3EA;
-      --try: #C4A56A;
-      --try-bg: #F6EFE0;
-      --shadow: 0 8px 24px rgba(74, 68, 83, 0.08);
-      --radius: 28px;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#F3EEE6" />
+<title>Aprendo Jugando</title>
+<style>
+:root{
+  --bg:#F3EEE6;--card:#FFFCF7;--ink:#4A4453;--ink-soft:#6E6878;--line:#E4DCD0;
+  --peach:#F2D3C2;--mint:#CDE3D6;--lilac:#E0D6EA;--sky:#CFE0EE;--sun:#F3E5B5;--rose:#F1D5DC;
+  --mint-deep:#5E8F7A;--gold-deep:#B0892E;--ok:#7BA882;--ok-bg:#E7F3EA;
+  --shadow:0 8px 24px rgba(74,68,83,.08);--r:26px;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
+  --sl:env(safe-area-inset-left,0px);--sr:env(safe-area-inset-right,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{height:100%;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI","Helvetica Neue","Noto Sans","Noto Sans CJK SC","Noto Sans Arabic","Noto Sans Devanagari",sans-serif;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+  -webkit-touch-callout:none;touch-action:manipulation;overscroll-behavior:none}
+body{min-height:100dvh;background:radial-gradient(ellipse at top,#F9F5EF 0%,var(--bg) 60%)}
+button{font:inherit;color:inherit}
+#app{max-width:560px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;
+  padding:calc(10px + var(--st)) calc(16px + var(--sr)) calc(16px + var(--sb)) calc(16px + var(--sl))}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 0 10px;flex-shrink:0}
+.pill{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:10px 16px;font-size:1.2rem;font-weight:800;box-shadow:var(--shadow);font-variant-numeric:tabular-nums}
+.hbtns{display:flex;gap:8px}
+.ib{width:54px;height:54px;border:1px solid var(--line);background:var(--card);border-radius:18px;display:grid;place-items:center;
+  cursor:pointer;box-shadow:var(--shadow);font-size:1.45rem;position:relative;transition:transform .15s ease}
+.ib:active{transform:scale(.95)}
+.ib[aria-pressed="false"]{opacity:.5}
+.ib .ring{position:absolute;inset:-4px;border-radius:21px;pointer-events:none;
+  background:conic-gradient(var(--mint-deep) calc(var(--p,0)*1turn),transparent 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:4px;opacity:.8}
+button:focus-visible{outline:3px solid var(--mint-deep);outline-offset:3px}
+main{flex:1;display:flex;flex-direction:column;gap:14px}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+/* mascot */
+.hero{display:flex;align-items:center;gap:12px}
+.mascot{flex:0 0 auto;width:110px;height:110px;cursor:pointer;border:0;background:none;padding:0}
+.mascot.sm{width:84px;height:84px}
+.mascot svg{width:100%;height:100%;display:block;overflow:visible}
+.bubble{position:relative;flex:1;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:14px 16px;
+  font-size:1.3rem;font-weight:800;line-height:1.3;box-shadow:var(--shadow);min-height:64px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.bubble .t{flex:1}
+.bubble .spk{font-size:1.2rem;opacity:.6}
+.m-body{transform-origin:60px 100px;animation:bob 4.5s ease-in-out infinite}
+.m-eyes{transform-origin:60px 56px;animation:blink 6s infinite}
+.m-mouth{transform-origin:60px 84px}
+.talking .m-mouth{animation:talk .32s ease-in-out infinite alternate}
+.dance .m-body{animation:dance 1.6s ease-in-out 1}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes talk{from{transform:scaleY(1)}to{transform:scaleY(1.5)}}
+@keyframes dance{0%{transform:translateY(0) rotate(0)}15%{transform:translateY(-8px) rotate(-7deg)}30%{transform:translateY(0) rotate(0)}
+  45%{transform:translateY(-8px) rotate(7deg)}60%{transform:translateY(0) rotate(0)}75%{transform:translateY(-6px) rotate(-4deg)}100%{transform:translateY(0) rotate(0)}}
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      touch-action: manipulation;
-    }
+/* languages */
+.langs{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.langs::-webkit-scrollbar{display:none}
+.lang{flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:8px;min-height:58px;padding:0 16px;border-radius:20px;
+  border:2px solid var(--line);background:var(--card);font-size:1.1rem;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
+.lang .f{font-size:1.7rem;line-height:1}
+.lang[aria-pressed="true"]{border-color:var(--mint-deep);background:var(--ok-bg)}
+.langgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.langgrid .lang{min-height:64px}
+.note{font-size:.95rem;color:var(--ink-soft);background:#F7EFDF;border-radius:14px;padding:8px 12px}
 
-    body {
-      min-height: 100dvh;
-      background:
-        radial-gradient(ellipse at top, #F8F4EE 0%, var(--bg) 55%),
-        var(--bg);
-    }
+/* home */
+h2{font-size:1.25rem;font-weight:800;color:var(--ink-soft);text-align:center}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gcard{border:0;border-radius:var(--r);min-height:132px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:6px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s ease}
+.gcard:active{transform:scale(.97)}
+.gcard .ic{font-size:3rem;line-height:1}
+.gcard .nm{font-size:1.25rem;font-weight:800}
+.gcard .lv{font-size:.85rem;font-weight:700;color:var(--ink-soft)}
+.c-peach{background:var(--peach)}.c-mint{background:var(--mint)}.c-lilac{background:var(--lilac)}
+.c-sky{background:var(--sky)}.c-sun{background:var(--sun)}.c-rose{background:var(--rose)}
+.big{border:0;min-height:68px;border-radius:22px;font-size:1.25rem;font-weight:800;cursor:pointer;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;gap:10px;padding:0 18px;background:var(--card);border:1px solid var(--line)}
+.big.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.big:active{transform:scale(.98)}
 
-    #app {
-      max-width: 480px;
-      margin: 0 auto;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      padding: calc(12px + var(--safe-top)) 16px calc(16px + var(--safe-bottom));
-    }
+/* game */
+.gtitle{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gtitle .nm{font-size:1.35rem;font-weight:800}
+.lvl{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink-soft);font-size:.95rem}
+.dots{display:flex;gap:5px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--line);display:block}
+.dots i.on{background:var(--gold-deep)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modes button{min-height:56px;border-radius:18px;border:1px solid var(--line);background:var(--card);font-size:1.15rem;font-weight:800;cursor:pointer}
+.modes button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.choices{display:grid;gap:12px}
+.choices.n2{grid-template-columns:1fr 1fr}
+.choices.n3{grid-template-columns:1fr 1fr 1fr}
+.choices.n4{grid-template-columns:1fr 1fr}
+.choice{border:3px solid var(--line);background:var(--card);border-radius:var(--r);min-height:150px;display:grid;place-items:center;
+  cursor:pointer;box-shadow:var(--shadow);transition:opacity .4s ease,border-color .3s ease,background .3s ease;padding:8px}
+.choices.n2 .choice{min-height:210px}.choices.n3 .choice{min-height:160px}.choices.n4 .choice{min-height:170px}
+.choices.n2 .face{font-size:5.4rem}.choices.n2 .sw{width:110px;height:110px}.choices.n2 .shape{width:120px;height:120px}.choices.n2 .digit{font-size:4.6rem}
+.choice:active{transform:scale(.97)}
+.choice.no{opacity:.4;pointer-events:none}
+.choice.yes{border-color:var(--ok);background:var(--ok-bg)}
+.choice.hint{border-color:#D9C27A;animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(217,194,122,.0)}50%{box-shadow:0 0 0 8px rgba(217,194,122,.35)}}
+.face{font-size:4.2rem;line-height:1}
+.choices.n3 .face{font-size:3.2rem}
+.sw{width:84px;height:84px;border-radius:50%;border:4px solid rgba(74,68,83,.08);box-shadow:inset 0 -8px 14px rgba(0,0,0,.08)}
+.choices.n3 .sw{width:70px;height:70px}
+.shape{width:96px;height:96px}.choices.n3 .shape{width:78px;height:78px}
+.shape svg{width:100%;height:100%;display:block}
+.digit{font-size:3.6rem;font-weight:900}
+.objs{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:6px;font-size:2.5rem;line-height:1.15;min-height:90px;align-items:center;box-shadow:var(--shadow)}
+.next{margin-top:auto}
+.learnbox{display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:32px;
+  padding:22px 16px;box-shadow:var(--shadow);cursor:pointer}
+.learnbox .face{font-size:7.5rem}.learnbox .sw{width:150px;height:150px}.learnbox .shape{width:160px;height:160px}
+.learnbox .digit{font-size:6rem}
+.learnbox .lname{font-size:2rem;font-weight:900;text-align:center}
+.lnav{display:flex;gap:10px;align-items:center}
+.lnav .big{flex:1}
+.lnav .cnt{min-width:56px;text-align:center;font-weight:800;color:var(--ink-soft)}
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 4px 2px 12px;
-      flex-shrink: 0;
-    }
+/* memory */
+.mem{display:grid;gap:12px}
+.mem.c2{grid-template-columns:1fr 1fr}.mem.c3{grid-template-columns:1fr 1fr 1fr}
+.card{border:0;background:none;aspect-ratio:3/4;perspective:800px;cursor:pointer;padding:0}
+.card .in{display:block;position:relative;width:100%;height:100%;transition:transform .45s ease;transform-style:preserve-3d}
+.card.up .in,.card.done .in{transform:rotateY(180deg)}
+.card .fc{display:grid;position:absolute;inset:0;border-radius:22px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:var(--shadow);border:3px solid var(--line)}
+.card .bk{background:repeating-linear-gradient(45deg,#E0D6EA 0 12px,#E9E1F0 12px 24px);font-size:2.4rem}
+.card .fr{background:var(--card);transform:rotateY(180deg);font-size:3.6rem}
+.card.done .fr{border-color:var(--ok);background:var(--ok-bg)}
 
-    .stars {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--gold-deep);
-      box-shadow: var(--shadow);
-      min-width: 76px;
-    }
+/* stickers */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stk{border:2px dashed var(--line);background:#F8F4EE;border-radius:24px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:4px;cursor:pointer;padding:6px}
+.stk .e{font-size:3rem;line-height:1}
+.stk .n{font-size:.9rem;font-weight:800;text-align:center}
+.stk.lock .e{filter:grayscale(1);opacity:.18}
+.stk.got{border:2px solid var(--line);background:var(--card);box-shadow:var(--shadow)}
+.progress{height:16px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress b{display:block;height:100%;background:var(--gold-deep);border-radius:99px}
 
-    .stars span { color: var(--ink); font-variant-numeric: tabular-nums; }
+/* settings */
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:12px 16px;min-height:64px;font-size:1.15rem;font-weight:800;cursor:pointer;width:100%;text-align:start}
+.sw2{flex:0 0 auto;width:60px;height:36px;border-radius:99px;background:var(--line);position:relative;transition:background .2s}
+.sw2::after{content:"";position:absolute;top:4px;inset-inline-start:4px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.15);transition:inset-inline-start .2s}
+.row[aria-checked="true"] .sw2{background:var(--mint-deep)}
+.row[aria-checked="true"] .sw2::after{inset-inline-start:28px}
+.danger{color:#9A5A4A}
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+/* overlay + toast */
+.ov{position:fixed;inset:0;background:rgba(74,68,83,.28);display:grid;place-items:center;z-index:10;padding:24px}
+.ovc{background:var(--card);border-radius:32px;padding:26px 22px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.15);
+  display:flex;flex-direction:column;gap:14px;align-items:center;animation:pop .5s ease}
+.ovc .e{font-size:6rem;line-height:1}
+.ovc .tx{font-size:1.4rem;font-weight:900}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.toast{position:fixed;left:50%;bottom:calc(24px + var(--sb));transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:16px;
+  font-weight:700;z-index:11;max-width:90vw;text-align:center}
+.sparkle{position:absolute;pointer-events:none;font-size:1.4rem;animation:spark 1.2s ease-out forwards}
+@keyframes spark{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
 
-    .icon-btn {
-      width: 52px;
-      height: 52px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      color: var(--ink);
-      font-size: 1.35rem;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
+/* calm / reduced motion */
+.calm *,.calm *::before,.calm *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-    .icon-btn:active { transform: scale(0.96); }
-    .icon-btn[aria-pressed="false"] { opacity: 0.55; }
-    .icon-btn:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+@media (min-width:700px){#app{max-width:720px}.games{grid-template-columns:1fr 1fr 1fr}.gcard{min-height:170px}
+  .choice{min-height:200px}.face{font-size:5.5rem}.sgrid{grid-template-columns:repeat(5,1fr)}.langgrid{grid-template-columns:1fr 1fr 1fr}
+  .mascot{width:140px;height:140px}
+  #app .choices .choice{min-height:260px}#app .choices .face{font-size:7rem}#app .choices .shape{width:170px;height:170px}#app .choices .sw{width:160px;height:160px}#app .choices .digit{font-size:6rem}
+  #app .mascot.sm{width:110px;height:110px}.bubble{font-size:1.6rem}.objs{font-size:3.6rem}}
+@media (max-width:360px){.choice{min-height:120px}.face{font-size:3.4rem}.gcard{min-height:116px}.gcard .ic{font-size:2.5rem}.bubble{font-size:1.1rem}}
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    h1, h2 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      text-align: center;
-      line-height: 1.25;
-    }
-
-    h1 { font-size: 1.7rem; margin: 8px 0 6px; }
-    .subtitle {
-      text-align: center;
-      color: var(--ink-soft);
-      font-size: 1.05rem;
-      margin-bottom: 28px;
-    }
-
-    .home-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 8px;
-    }
-
-    .game-btn {
-      border: 0;
-      border-radius: var(--radius);
-      padding: 22px 20px;
-      min-height: 108px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      cursor: pointer;
-      text-align: left;
-      box-shadow: var(--shadow);
-      transition: transform 0.15s ease;
-      width: 100%;
-    }
-
-    .game-btn:active { transform: scale(0.985); }
-    .game-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-
-    .game-btn .emoji {
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
-      display: grid;
-      place-items: center;
-      font-size: 2.4rem;
-      background: rgba(255,255,255,0.55);
-      flex-shrink: 0;
-    }
-
-    .game-btn .label {
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .game-btn .hint {
-      font-size: 0.95rem;
-      color: var(--ink-soft);
-      margin-top: 2px;
-    }
-
-    .btn-emociones { background: linear-gradient(180deg, #F6E4D8, var(--peach)); }
-    .btn-colores { background: linear-gradient(180deg, #DCEDE4, var(--mint)); }
-    .btn-formas { background: linear-gradient(180deg, #E8DEF0, var(--lilac)); }
-
-    .modes {
-      display: flex;
-      gap: 10px;
-      margin: 4px 0 18px;
-    }
-
-    .mode-btn {
-      flex: 1;
-      min-height: 52px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--ink-soft);
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-
-    .mode-btn[aria-pressed="true"] {
-      background: var(--ink);
-      color: #F8F4EE;
-      border-color: var(--ink);
-    }
-
-    .mode-btn:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
-
-    .prompt-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 6px 0 20px;
-      min-height: 64px;
-    }
-
-    .prompt {
-      font-size: 1.45rem;
-      font-weight: 700;
-      text-align: center;
-      line-height: 1.3;
-    }
-
-    .speak-btn {
-      width: 52px;
-      height: 52px;
-      flex-shrink: 0;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      font-size: 1.3rem;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-
-    .speak-btn:active { transform: scale(0.96); }
-
-    .choices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      flex: 1;
-      align-content: start;
-    }
-
-    .choices:has(.choice:nth-child(3):last-child) .choice:last-child {
-      grid-column: 1 / -1;
-      width: calc((100% - 14px) / 2);
-      justify-self: center;
-    }
-
-    .choice {
-      min-height: 140px;
-      border: 2px solid var(--line);
-      background: var(--card);
-      border-radius: 24px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow: var(--shadow);
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-      padding: 12px;
-    }
-
-    .choice:active { transform: scale(0.97); }
-    .choice:focus-visible { outline: 3px solid var(--mint-deep); outline-offset: 2px; }
-    .choice .face { font-size: 4.2rem; line-height: 1; }
-    .choice .swatch {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 3px solid rgba(74, 68, 83, 0.12);
-      box-shadow: inset 0 -6px 12px rgba(0,0,0,0.08);
-    }
-    .choice .shape { width: 92px; height: 92px; }
-    .choice .shape svg { width: 100%; height: 100%; display: block; }
-
-    .choice.correct {
-      border-color: var(--ok);
-      background: var(--ok-bg);
-    }
-
-    .choice.wiggle {
-      animation: wiggle 0.55s ease-in-out;
-    }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      20% { transform: rotate(-5deg); }
-      40% { transform: rotate(5deg); }
-      60% { transform: rotate(-4deg); }
-      80% { transform: rotate(3deg); }
-    }
-
-    .feedback {
-      min-height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 14px;
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .feedback.ok { color: var(--mint-deep); }
-    .feedback.try { color: #9A7A3A; }
-
-    .feedback .star-pop {
-      display: inline-block;
-      margin-right: 8px;
-      animation: starIn 0.6s ease;
-      font-size: 1.5rem;
-    }
-
-    @keyframes starIn {
-      0% { transform: scale(0.4); opacity: 0; }
-      60% { transform: scale(1.15); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .next-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 8px;
-      min-height: 64px;
-    }
-
-    .next-btn, .nav-btn {
-      min-height: 56px;
-      min-width: 0;
-      padding: 0 16px;
-      border: 0;
-      border-radius: 20px;
-      background: var(--ink);
-      color: #F8F4EE;
-      font-size: 1.15rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-
-    .next-btn { min-width: 160px; }
-
-    .next-btn:active, .nav-btn:active { transform: scale(0.97); }
-    .next-btn[hidden], .hidden { display: none !important; }
-
-    /* Learn mode */
-    .learn-card {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-      padding: 24px 16px;
-      min-height: 320px;
-    }
-
-    .learn-visual {
-      width: 200px;
-      height: 200px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 12px;
-    }
-
-    .learn-visual .face { font-size: 8rem; line-height: 1; }
-    .learn-visual .swatch {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 4px solid rgba(74, 68, 83, 0.1);
-      box-shadow: inset 0 -10px 18px rgba(0,0,0,0.08), var(--shadow);
-    }
-    .learn-visual .shape { width: 180px; height: 180px; }
-    .learn-visual .shape svg { width: 100%; height: 100%; display: block; }
-
-    .learn-name {
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 8px 0 4px;
-    }
-
-    .learn-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-      margin-top: 22px;
-    }
-
-    .nav-btn {
-      flex: 1 1 0;
-      min-width: 0;
-      background: var(--card);
-      color: var(--ink);
-      border: 1px solid var(--line);
-      padding: 0 10px;
-      font-size: 1.05rem;
-    }
-    .learn-count {
-      color: var(--ink-soft);
-      font-weight: 600;
-      flex: 0 0 auto;
-      min-width: 52px;
-      text-align: center;
-    }
-
-    .screen-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      text-align: center;
-      color: var(--ink-soft);
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 360px) {
-      .choice { min-height: 120px; }
-      .choice .face { font-size: 3.4rem; }
-      .learn-visual { width: 160px; height: 160px; }
-      .learn-visual .face { font-size: 6.4rem; }
-      h1 { font-size: 1.45rem; }
-      .prompt { font-size: 1.25rem; }
-    }
-  </style>
+</style>
 </head>
 <body>
-  <div id="app">
-    <header>
-      <div class="stars" aria-live="polite">
-        ⭐ <span id="starCount">0</span>
-      </div>
-      <div class="header-actions">
-        <button type="button" class="icon-btn" id="voiceBtn" aria-pressed="true" aria-label="Voz encendida" title="Voz">🔊</button>
-        <button type="button" class="icon-btn" id="homeBtn" aria-label="Ir al inicio" title="Inicio">🏠</button>
-      </div>
-    </header>
-    <main id="screen"></main>
-  </div>
+<div id="app">
+  <header>
+    <div class="pill" aria-live="polite"><span aria-hidden="true">⭐</span><span id="starCount">0</span></div>
+    <div class="hbtns">
+      <button type="button" class="ib" id="voiceBtn" aria-pressed="true">🔊</button>
+      <button type="button" class="ib" id="musicBtn" aria-pressed="false">🎵</button>
+      <button type="button" class="ib" id="navBtn">⚙️</button>
+    </div>
+  </header>
+  <main id="screen"></main>
+</div>
+<script>
+var LANGS = [
+  { code: "es", name: "Español", flag: "🇪🇸", voices: ["es-MX", "es-US", "es-419", "es-ES", "es"] },
+  { code: "en", name: "English", flag: "🇺🇸", voices: ["en-US", "en-GB", "en-AU", "en"] },
+  { code: "pt", name: "Português", flag: "🇧🇷", voices: ["pt-BR", "pt-PT", "pt"] },
+  { code: "fr", name: "Français", flag: "🇫🇷", voices: ["fr-FR", "fr-CA", "fr"] },
+  { code: "de", name: "Deutsch", flag: "🇩🇪", voices: ["de-DE", "de-AT", "de"] },
+  { code: "it", name: "Italiano", flag: "🇮🇹", voices: ["it-IT", "it"] },
+  { code: "zh", name: "中文", flag: "🇨🇳", voices: ["zh-CN", "zh-TW", "zh-HK", "zh", "cmn"] },
+  { code: "ja", name: "日本語", flag: "🇯🇵", voices: ["ja-JP", "ja"] },
+  { code: "ko", name: "한국어", flag: "🇰🇷", voices: ["ko-KR", "ko"] },
+  { code: "ar", name: "العربية", flag: "🇸🇦", voices: ["ar-SA", "ar-EG", "ar-AE", "ar"], rtl: true },
+  { code: "hi", name: "हिन्दी", flag: "🇮🇳", voices: ["hi-IN", "hi"] },
+  { code: "tl", name: "Tagalog", flag: "🇵🇭", voices: ["fil-PH", "fil", "tl-PH", "tl"] }
+];
 
-  <script>
-    (function () {
-      "use strict";
+/* E emotions, C colors, S shapes, A animals, AS animal sounds, K stickers (5 animals, 5 fruits, 5 vehicles) */
+var TR = {
+es: {
+  sub: "Juegos para aprender", hello: "¡Hola! Soy Pipo. ¿Jugamos juntos?", choose: "Elige un juego",
+  g_emo: "Emociones", g_col: "Colores", g_sha: "Formas", g_num: "Números", g_ani: "Animales", g_mem: "Memoria",
+  learn: "Aprender", play: "Jugar", next: "Siguiente", prev: "Anterior", back: "Volver", level: "Nivel {n}",
+  tryAgain: "Intenta otra vez", praise: ["¡Muy bien!", "¡Excelente!", "¡Lo lograste!", "¡Súper!"],
+  howMany: "¿Cuántos hay?", memIntro: "Busca las parejas", memDone: "¡Encontraste todas las parejas!",
+  newSticker: "¡Ganaste un sticker: {x}!", levelUp: "¡Subiste al nivel {n}!", ok: "¡Genial!",
+  stickers: "Mis stickers", stickersHint: "Gana estrellas para abrir más stickers",
+  parents: "Para papás", hold: "Mantén presionado 3 segundos", voice: "Voz", sounds: "Sonidos",
+  music: "Música suave", motion: "Menos movimiento", language: "Idioma", reset: "Borrar progreso",
+  resetConfirm: "Toca otra vez para borrar", resetDone: "Progreso borrado",
+  noVoice: "Este dispositivo no tiene voz en este idioma. El texto se ve igual.",
+  qEmo: "¿Quién está {x}?", qCol: "Busca el color {x}", qSha: "Busca la forma: {x}",
+  qAni: "¿Quién dice {s}?", qAniName: "Busca el animal: {x}", aniSays: "{x} dice {s}",
+  E: ["feliz", "triste", "enojado", "asustado", "sorprendido", "calmado"],
+  C: ["rojo", "azul", "amarillo", "verde", "naranja", "morado", "rosa", "café"],
+  S: ["círculo", "cuadrado", "triángulo", "estrella", "corazón", "rectángulo"],
+  A: ["vaca", "perro", "gato", "pato", "oveja", "caballo", "león", "rana"],
+  AS: ["muuu", "guau guau", "miau", "cuac cuac", "beee", "hiii", "grrr", "croac"],
+  K: ["conejo", "panda", "zorro", "tortuga", "mariposa", "manzana", "plátano", "fresa", "uvas", "sandía", "carro", "autobús", "tren", "avión", "barco"]
+},
+en: {
+  sub: "Games to learn", hello: "Hi! I'm Pipo. Shall we play together?", choose: "Choose a game",
+  g_emo: "Emotions", g_col: "Colors", g_sha: "Shapes", g_num: "Numbers", g_ani: "Animals", g_mem: "Memory",
+  learn: "Learn", play: "Play", next: "Next", prev: "Previous", back: "Back", level: "Level {n}",
+  tryAgain: "Try again", praise: ["Very good!", "Excellent!", "You did it!", "Super!"],
+  howMany: "How many are there?", memIntro: "Find the pairs", memDone: "You found all the pairs!",
+  newSticker: "You got a sticker: {x}!", levelUp: "You reached level {n}!", ok: "Great!",
+  stickers: "My stickers", stickersHint: "Earn stars to unlock more stickers",
+  parents: "For parents", hold: "Hold for 3 seconds", voice: "Voice", sounds: "Sounds",
+  music: "Soft music", motion: "Less motion", language: "Language", reset: "Reset progress",
+  resetConfirm: "Tap again to reset", resetDone: "Progress reset",
+  noVoice: "This device has no voice for this language. The text still shows.",
+  qEmo: "Who is {x}?", qCol: "Find the color {x}", qSha: "Find the shape: {x}",
+  qAni: "Who says {s}?", qAniName: "Find the animal: {x}", aniSays: "The {x} says {s}",
+  E: ["happy", "sad", "angry", "scared", "surprised", "calm"],
+  C: ["red", "blue", "yellow", "green", "orange", "purple", "pink", "brown"],
+  S: ["circle", "square", "triangle", "star", "heart", "rectangle"],
+  A: ["cow", "dog", "cat", "duck", "sheep", "horse", "lion", "frog"],
+  AS: ["moo", "woof woof", "meow", "quack quack", "baa", "neigh", "roar", "ribbit"],
+  K: ["rabbit", "panda", "fox", "turtle", "butterfly", "apple", "banana", "strawberry", "grapes", "watermelon", "car", "bus", "train", "airplane", "boat"]
+},
+pt: {
+  sub: "Jogos para aprender", hello: "Oi! Eu sou o Pipo. Vamos brincar juntos?", choose: "Escolha um jogo",
+  g_emo: "Emoções", g_col: "Cores", g_sha: "Formas", g_num: "Números", g_ani: "Animais", g_mem: "Memória",
+  learn: "Aprender", play: "Jogar", next: "Próximo", prev: "Anterior", back: "Voltar", level: "Nível {n}",
+  tryAgain: "Tente de novo", praise: ["Muito bem!", "Excelente!", "Você conseguiu!", "Super!"],
+  howMany: "Quantos tem?", memIntro: "Encontre os pares", memDone: "Você encontrou todos os pares!",
+  newSticker: "Você ganhou um adesivo: {x}!", levelUp: "Você chegou ao nível {n}!", ok: "Legal!",
+  stickers: "Meus adesivos", stickersHint: "Ganhe estrelas para abrir mais adesivos",
+  parents: "Para os pais", hold: "Segure por 3 segundos", voice: "Voz", sounds: "Sons",
+  music: "Música suave", motion: "Menos movimento", language: "Idioma", reset: "Apagar progresso",
+  resetConfirm: "Toque de novo para apagar", resetDone: "Progresso apagado",
+  noVoice: "Este aparelho não tem voz neste idioma. O texto aparece mesmo assim.",
+  qEmo: "Quem está {x}?", qCol: "Encontre a cor {x}", qSha: "Encontre a forma: {x}",
+  qAni: "Quem faz {s}?", qAniName: "Encontre o animal: {x}", aniSays: "{x} faz {s}",
+  E: ["feliz", "triste", "bravo", "assustado", "surpreso", "calmo"],
+  C: ["vermelho", "azul", "amarelo", "verde", "laranja", "roxo", "rosa", "marrom"],
+  S: ["círculo", "quadrado", "triângulo", "estrela", "coração", "retângulo"],
+  A: ["vaca", "cachorro", "gato", "pato", "ovelha", "cavalo", "leão", "sapo"],
+  AS: ["muuu", "au au", "miau", "quá quá", "béé", "hiii", "grrr", "croac"],
+  K: ["coelho", "panda", "raposa", "tartaruga", "borboleta", "maçã", "banana", "morango", "uvas", "melancia", "carro", "ônibus", "trem", "avião", "barco"]
+},
+fr: {
+  sub: "Jeux pour apprendre", hello: "Coucou ! Je suis Pipo. On joue ensemble ?", choose: "Choisis un jeu",
+  g_emo: "Émotions", g_col: "Couleurs", g_sha: "Formes", g_num: "Nombres", g_ani: "Animaux", g_mem: "Mémoire",
+  learn: "Apprendre", play: "Jouer", next: "Suivant", prev: "Précédent", back: "Retour", level: "Niveau {n}",
+  tryAgain: "Essaie encore", praise: ["Très bien !", "Excellent !", "Tu as réussi !", "Super !"],
+  howMany: "Combien y en a-t-il ?", memIntro: "Trouve les paires", memDone: "Tu as trouvé toutes les paires !",
+  newSticker: "Tu as gagné un autocollant : {x} !", levelUp: "Tu passes au niveau {n} !", ok: "Génial !",
+  stickers: "Mes autocollants", stickersHint: "Gagne des étoiles pour débloquer plus d'autocollants",
+  parents: "Pour les parents", hold: "Maintiens appuyé 3 secondes", voice: "Voix", sounds: "Sons",
+  music: "Musique douce", motion: "Moins d'animations", language: "Langue", reset: "Effacer la progression",
+  resetConfirm: "Touche encore pour effacer", resetDone: "Progression effacée",
+  noVoice: "Cet appareil n'a pas de voix pour cette langue. Le texte s'affiche quand même.",
+  qEmo: "Qui est {x} ?", qCol: "Trouve la couleur {x}", qSha: "Trouve la forme : {x}",
+  qAni: "Qui fait {s} ?", qAniName: "Trouve l'animal : {x}", aniSays: "{x} fait {s}",
+  E: ["content", "triste", "fâché", "effrayé", "surpris", "calme"],
+  C: ["rouge", "bleu", "jaune", "vert", "orange", "violet", "rose", "marron"],
+  S: ["cercle", "carré", "triangle", "étoile", "cœur", "rectangle"],
+  A: ["vache", "chien", "chat", "canard", "mouton", "cheval", "lion", "grenouille"],
+  AS: ["meuh", "ouaf ouaf", "miaou", "coin coin", "bêê", "hiii", "grrr", "croâ"],
+  K: ["lapin", "panda", "renard", "tortue", "papillon", "pomme", "banane", "fraise", "raisins", "pastèque", "voiture", "bus", "train", "avion", "bateau"]
+},
+de: {
+  sub: "Spiele zum Lernen", hello: "Hallo! Ich bin Pipo. Spielen wir zusammen?", choose: "Wähle ein Spiel",
+  g_emo: "Gefühle", g_col: "Farben", g_sha: "Formen", g_num: "Zahlen", g_ani: "Tiere", g_mem: "Memory",
+  learn: "Lernen", play: "Spielen", next: "Weiter", prev: "Vorher", back: "Zurück", level: "Stufe {n}",
+  tryAgain: "Versuch es noch einmal", praise: ["Sehr gut!", "Toll!", "Geschafft!", "Super!"],
+  howMany: "Wie viele sind es?", memIntro: "Finde die Paare", memDone: "Du hast alle Paare gefunden!",
+  newSticker: "Du hast einen Sticker bekommen: {x}!", levelUp: "Du bist jetzt auf Stufe {n}!", ok: "Toll!",
+  stickers: "Meine Sticker", stickersHint: "Sammle Sterne für mehr Sticker",
+  parents: "Für Eltern", hold: "3 Sekunden gedrückt halten", voice: "Stimme", sounds: "Töne",
+  music: "Leise Musik", motion: "Weniger Bewegung", language: "Sprache", reset: "Fortschritt löschen",
+  resetConfirm: "Noch einmal tippen zum Löschen", resetDone: "Fortschritt gelöscht",
+  noVoice: "Dieses Gerät hat keine Stimme für diese Sprache. Der Text wird trotzdem angezeigt.",
+  qEmo: "Wer ist {x}?", qCol: "Finde die Farbe {x}", qSha: "Finde die Form: {x}",
+  qAni: "Wer macht {s}?", qAniName: "Finde das Tier: {x}", aniSays: "{x} macht {s}",
+  E: ["fröhlich", "traurig", "wütend", "ängstlich", "überrascht", "ruhig"],
+  C: ["rot", "blau", "gelb", "grün", "orange", "lila", "rosa", "braun"],
+  S: ["Kreis", "Quadrat", "Dreieck", "Stern", "Herz", "Rechteck"],
+  A: ["Kuh", "Hund", "Katze", "Ente", "Schaf", "Pferd", "Löwe", "Frosch"],
+  AS: ["muh", "wau wau", "miau", "quak quak", "mäh", "wieher", "grrr", "quak"],
+  K: ["Hase", "Panda", "Fuchs", "Schildkröte", "Schmetterling", "Apfel", "Banane", "Erdbeere", "Trauben", "Wassermelone", "Auto", "Bus", "Zug", "Flugzeug", "Boot"]
+},
+it: {
+  sub: "Giochi per imparare", hello: "Ciao! Sono Pipo. Giochiamo insieme?", choose: "Scegli un gioco",
+  g_emo: "Emozioni", g_col: "Colori", g_sha: "Forme", g_num: "Numeri", g_ani: "Animali", g_mem: "Memoria",
+  learn: "Impara", play: "Gioca", next: "Avanti", prev: "Indietro", back: "Torna", level: "Livello {n}",
+  tryAgain: "Riprova", praise: ["Molto bene!", "Eccellente!", "Ce l'hai fatta!", "Super!"],
+  howMany: "Quanti sono?", memIntro: "Trova le coppie", memDone: "Hai trovato tutte le coppie!",
+  newSticker: "Hai vinto un adesivo: {x}!", levelUp: "Sei al livello {n}!", ok: "Fantastico!",
+  stickers: "I miei adesivi", stickersHint: "Guadagna stelle per sbloccare altri adesivi",
+  parents: "Per i genitori", hold: "Tieni premuto 3 secondi", voice: "Voce", sounds: "Suoni",
+  music: "Musica dolce", motion: "Meno movimento", language: "Lingua", reset: "Cancella i progressi",
+  resetConfirm: "Tocca di nuovo per cancellare", resetDone: "Progressi cancellati",
+  noVoice: "Questo dispositivo non ha una voce per questa lingua. Il testo si vede lo stesso.",
+  qEmo: "Chi è {x}?", qCol: "Trova il colore {x}", qSha: "Trova la forma: {x}",
+  qAni: "Chi fa {s}?", qAniName: "Trova l'animale: {x}", aniSays: "{x} fa {s}",
+  E: ["felice", "triste", "arrabbiato", "spaventato", "sorpreso", "calmo"],
+  C: ["rosso", "blu", "giallo", "verde", "arancione", "viola", "rosa", "marrone"],
+  S: ["cerchio", "quadrato", "triangolo", "stella", "cuore", "rettangolo"],
+  A: ["mucca", "cane", "gatto", "anatra", "pecora", "cavallo", "leone", "rana"],
+  AS: ["muu", "bau bau", "miao", "qua qua", "bee", "hiii", "grrr", "cra cra"],
+  K: ["coniglio", "panda", "volpe", "tartaruga", "farfalla", "mela", "banana", "fragola", "uva", "anguria", "macchina", "autobus", "treno", "aereo", "barca"]
+},
+zh: {
+  sub: "边玩边学", hello: "你好！我是皮波。我们一起玩吧！", choose: "选一个游戏",
+  g_emo: "情绪", g_col: "颜色", g_sha: "形状", g_num: "数字", g_ani: "动物", g_mem: "记忆",
+  learn: "学习", play: "玩", next: "下一个", prev: "上一个", back: "返回", level: "第{n}关",
+  tryAgain: "再试一次", praise: ["真棒！", "太好了！", "你做到了！", "超级棒！"],
+  howMany: "有几个？", memIntro: "找出一样的两张", memDone: "你找到了所有的对子！",
+  newSticker: "你得到一张贴纸：{x}！", levelUp: "你到了第{n}关！", ok: "好的！",
+  stickers: "我的贴纸", stickersHint: "赢得星星，解锁更多贴纸",
+  parents: "家长专区", hold: "按住3秒", voice: "语音", sounds: "音效",
+  music: "轻音乐", motion: "减少动画", language: "语言", reset: "清除进度",
+  resetConfirm: "再点一次清除", resetDone: "进度已清除",
+  noVoice: "这台设备没有这种语言的语音。文字仍会显示。",
+  qEmo: "谁很{x}？", qCol: "找出{x}", qSha: "找出{x}",
+  qAni: "谁在叫“{s}”？", qAniName: "找出{x}", aniSays: "{x}叫“{s}”",
+  E: ["开心", "难过", "生气", "害怕", "惊讶", "平静"],
+  C: ["红色", "蓝色", "黄色", "绿色", "橙色", "紫色", "粉色", "棕色"],
+  S: ["圆形", "正方形", "三角形", "星形", "心形", "长方形"],
+  A: ["牛", "狗", "猫", "鸭子", "羊", "马", "狮子", "青蛙"],
+  AS: ["哞哞", "汪汪", "喵喵", "嘎嘎", "咩咩", "咴咴", "嗷呜", "呱呱"],
+  K: ["兔子", "熊猫", "狐狸", "乌龟", "蝴蝶", "苹果", "香蕉", "草莓", "葡萄", "西瓜", "汽车", "公共汽车", "火车", "飞机", "船"]
+},
+ja: {
+  sub: "あそんで まなぼう", hello: "こんにちは！ぼくは ピポ。いっしょに あそぼう！", choose: "ゲームを えらんでね",
+  g_emo: "きもち", g_col: "いろ", g_sha: "かたち", g_num: "かず", g_ani: "どうぶつ", g_mem: "メモリー",
+  learn: "まなぶ", play: "あそぶ", next: "つぎ", prev: "まえ", back: "もどる", level: "レベル{n}",
+  tryAgain: "もういちど やってみよう", praise: ["よくできました！", "すごい！", "できたね！", "やったね！"],
+  howMany: "いくつ あるかな？", memIntro: "おなじ ペアを さがそう", memDone: "ぜんぶの ペアを みつけたね！",
+  newSticker: "シールを もらったよ：{x}！", levelUp: "レベル{n}に なったよ！", ok: "やったー！",
+  stickers: "わたしの シール", stickersHint: "ほしを あつめて シールを ふやそう",
+  parents: "おうちの かたへ", hold: "3びょう ながおし してください", voice: "こえ", sounds: "こうかおん",
+  music: "やさしい おんがく", motion: "うごきを へらす", language: "ことば", reset: "きろくを けす",
+  resetConfirm: "もういちど タップで けします", resetDone: "きろくを けしました",
+  noVoice: "この きかいには この ことばの こえが ありません。もじは ひょうじされます。",
+  qEmo: "{x} かおは どれ？", qCol: "{x}は どれ？", qSha: "{x}は どれ？",
+  qAni: "「{s}」と なくのは だれ？", qAniName: "{x}は どれ？", aniSays: "{x}は「{s}」",
+  E: ["うれしい", "かなしい", "おこった", "こわい", "びっくりした", "おだやかな"],
+  C: ["あか", "あお", "きいろ", "みどり", "オレンジ", "むらさき", "ピンク", "ちゃいろ"],
+  S: ["まる", "しかく", "さんかく", "ほし", "ハート", "ながしかく"],
+  A: ["うし", "いぬ", "ねこ", "あひる", "ひつじ", "うま", "ライオン", "かえる"],
+  AS: ["モーモー", "ワンワン", "ニャー", "ガーガー", "メェー", "ヒヒーン", "ガオー", "ケロケロ"],
+  K: ["うさぎ", "パンダ", "きつね", "かめ", "ちょうちょ", "りんご", "バナナ", "いちご", "ぶどう", "すいか", "くるま", "バス", "でんしゃ", "ひこうき", "ふね"]
+},
+ko: {
+  sub: "놀면서 배워요", hello: "안녕! 나는 피포야. 같이 놀자!", choose: "게임을 골라요",
+  g_emo: "감정", g_col: "색깔", g_sha: "모양", g_num: "숫자", g_ani: "동물", g_mem: "기억력",
+  learn: "배우기", play: "놀기", next: "다음", prev: "이전", back: "돌아가기", level: "레벨 {n}",
+  tryAgain: "다시 해 봐요", praise: ["아주 잘했어요!", "훌륭해요!", "해냈어요!", "최고예요!"],
+  howMany: "몇 개 있을까?", memIntro: "같은 짝을 찾아요", memDone: "짝을 모두 찾았어요!",
+  newSticker: "스티커를 받았어요: {x}!", levelUp: "레벨 {n}이 되었어요!", ok: "좋아요!",
+  stickers: "내 스티커", stickersHint: "별을 모아 스티커를 더 열어요",
+  parents: "부모님용", hold: "3초 동안 길게 누르세요", voice: "목소리", sounds: "효과음",
+  music: "잔잔한 음악", motion: "움직임 줄이기", language: "언어", reset: "기록 지우기",
+  resetConfirm: "한 번 더 누르면 지워져요", resetDone: "기록을 지웠어요",
+  noVoice: "이 기기에는 이 언어의 음성이 없어요. 글자는 그대로 보여요.",
+  qEmo: "{x} 얼굴은 어디 있을까?", qCol: "{x}, 어디 있을까?", qSha: "{x}, 어디 있을까?",
+  qAni: "'{s}' 하고 우는 건 누구?", qAniName: "{x}, 어디 있을까?", aniSays: "{x}: {s}",
+  E: ["기쁜", "슬픈", "화난", "무서운", "놀란", "차분한"],
+  C: ["빨간색", "파란색", "노란색", "초록색", "주황색", "보라색", "분홍색", "갈색"],
+  S: ["동그라미", "네모", "세모", "별", "하트", "직사각형"],
+  A: ["소", "강아지", "고양이", "오리", "양", "말", "사자", "개구리"],
+  AS: ["음매", "멍멍", "야옹", "꽥꽥", "메에", "히힝", "어흥", "개굴개굴"],
+  K: ["토끼", "판다", "여우", "거북이", "나비", "사과", "바나나", "딸기", "포도", "수박", "자동차", "버스", "기차", "비행기", "배"]
+},
+ar: {
+  sub: "ألعاب للتعلّم", hello: "مرحبًا! أنا بيبو. هيا نلعب معًا!", choose: "اختر لعبة",
+  g_emo: "المشاعر", g_col: "الألوان", g_sha: "الأشكال", g_num: "الأرقام", g_ani: "الحيوانات", g_mem: "الذاكرة",
+  learn: "تعلّم", play: "العب", next: "التالي", prev: "السابق", back: "رجوع", level: "المستوى {n}",
+  tryAgain: "حاول مرة أخرى", praise: ["أحسنت!", "ممتاز!", "لقد نجحت!", "رائع!"],
+  howMany: "كم عددها؟", memIntro: "ابحث عن الأزواج", memDone: "وجدت كل الأزواج!",
+  newSticker: "ربحت ملصقًا: {x}!", levelUp: "وصلت إلى المستوى {n}!", ok: "رائع!",
+  stickers: "ملصقاتي", stickersHint: "اجمع النجوم لتفتح ملصقات أكثر",
+  parents: "للوالدين", hold: "اضغط مطولًا 3 ثوانٍ", voice: "الصوت", sounds: "المؤثرات",
+  music: "موسيقى هادئة", motion: "حركة أقل", language: "اللغة", reset: "مسح التقدم",
+  resetConfirm: "اضغط مرة أخرى للمسح", resetDone: "تم مسح التقدم",
+  noVoice: "لا يوجد صوت لهذه اللغة على هذا الجهاز. سيظهر النص كما هو.",
+  qEmo: "من هو {x}؟", qCol: "ابحث عن اللون {x}", qSha: "ابحث عن الشكل: {x}",
+  qAni: "من يقول {s}؟", qAniName: "ابحث عن الحيوان: {x}", aniSays: "{x} يقول {s}",
+  E: ["سعيد", "حزين", "غاضب", "خائف", "متفاجئ", "هادئ"],
+  C: ["أحمر", "أزرق", "أصفر", "أخضر", "برتقالي", "بنفسجي", "وردي", "بني"],
+  S: ["دائرة", "مربع", "مثلث", "نجمة", "قلب", "مستطيل"],
+  A: ["بقرة", "كلب", "قطة", "بطة", "خروف", "حصان", "أسد", "ضفدع"],
+  AS: ["مووو", "هو هو", "مياو", "كواك كواك", "ماااء", "هييي", "غرر", "نق نق"],
+  K: ["أرنب", "باندا", "ثعلب", "سلحفاة", "فراشة", "تفاحة", "موزة", "فراولة", "عنب", "بطيخ", "سيارة", "حافلة", "قطار", "طائرة", "قارب"]
+},
+hi: {
+  sub: "खेल-खेल में सीखें", hello: "नमस्ते! मैं पीपो हूँ। चलो साथ में खेलें!", choose: "एक खेल चुनो",
+  g_emo: "भावनाएँ", g_col: "रंग", g_sha: "आकार", g_num: "संख्याएँ", g_ani: "जानवर", g_mem: "याददाश्त",
+  learn: "सीखो", play: "खेलो", next: "आगे", prev: "पीछे", back: "वापस", level: "स्तर {n}",
+  tryAgain: "फिर से कोशिश करो", praise: ["बहुत बढ़िया!", "शाबाश!", "तुमने कर दिखाया!", "सुपर!"],
+  howMany: "कितने हैं?", memIntro: "जोड़े ढूँढो", memDone: "तुमने सारे जोड़े ढूँढ लिए!",
+  newSticker: "तुम्हें एक स्टिकर मिला: {x}!", levelUp: "तुम स्तर {n} पर पहुँच गए!", ok: "बढ़िया!",
+  stickers: "मेरे स्टिकर", stickersHint: "और स्टिकर खोलने के लिए सितारे जीतो",
+  parents: "माता-पिता के लिए", hold: "3 सेकंड दबाकर रखें", voice: "आवाज़", sounds: "ध्वनियाँ",
+  music: "धीमा संगीत", motion: "कम हलचल", language: "भाषा", reset: "प्रगति मिटाएँ",
+  resetConfirm: "मिटाने के लिए फिर से दबाएँ", resetDone: "प्रगति मिटा दी गई",
+  noVoice: "इस डिवाइस में इस भाषा की आवाज़ नहीं है। लिखा हुआ फिर भी दिखेगा।",
+  qEmo: "कौन {x} है?", qCol: "{x} रंग ढूँढो", qSha: "आकार ढूँढो: {x}",
+  qAni: "कौन {s} बोलता है?", qAniName: "जानवर ढूँढो: {x}", aniSays: "{x} बोलता है {s}",
+  E: ["खुश", "उदास", "गुस्सा", "डरा हुआ", "हैरान", "शांत"],
+  C: ["लाल", "नीला", "पीला", "हरा", "नारंगी", "बैंगनी", "गुलाबी", "भूरा"],
+  S: ["गोला", "वर्ग", "त्रिभुज", "तारा", "दिल", "आयत"],
+  A: ["गाय", "कुत्ता", "बिल्ली", "बत्तख", "भेड़", "घोड़ा", "शेर", "मेंढक"],
+  AS: ["मू मू", "भौं भौं", "म्याऊँ", "क्वैक क्वैक", "मे मे", "हिनहिन", "गर्रर", "टर्र टर्र"],
+  K: ["खरगोश", "पांडा", "लोमड़ी", "कछुआ", "तितली", "सेब", "केला", "स्ट्रॉबेरी", "अंगूर", "तरबूज", "कार", "बस", "रेलगाड़ी", "हवाई जहाज़", "नाव"]
+},
+tl: {
+  sub: "Mga laro para matuto", hello: "Kumusta! Ako si Pipo. Maglaro tayo!", choose: "Pumili ng laro",
+  g_emo: "Damdamin", g_col: "Kulay", g_sha: "Hugis", g_num: "Numero", g_ani: "Hayop", g_mem: "Memorya",
+  learn: "Matuto", play: "Maglaro", next: "Susunod", prev: "Nakaraan", back: "Bumalik", level: "Antas {n}",
+  tryAgain: "Subukan ulit", praise: ["Magaling!", "Napakahusay!", "Nagawa mo!", "Ang galing!"],
+  howMany: "Ilan ang nakikita mo?", memIntro: "Hanapin ang magkapares", memDone: "Nahanap mo lahat ng pares!",
+  newSticker: "May bago kang sticker: {x}!", levelUp: "Nasa antas {n} ka na!", ok: "Ayos!",
+  stickers: "Aking mga sticker", stickersHint: "Mangolekta ng bituin para sa mas maraming sticker",
+  parents: "Para sa magulang", hold: "Pindutin nang matagal nang 3 segundo", voice: "Boses", sounds: "Tunog",
+  music: "Malumanay na musika", motion: "Bawasan ang galaw", language: "Wika", reset: "Burahin ang progreso",
+  resetConfirm: "Pindutin ulit para burahin", resetDone: "Nabura na ang progreso",
+  noVoice: "Walang boses para sa wikang ito sa device na ito. Makikita pa rin ang teksto.",
+  qEmo: "Sino ang {x}?", qCol: "Hanapin ang kulay {x}", qSha: "Hanapin ang hugis: {x}",
+  qAni: "Sino ang nagsasabing {s}?", qAniName: "Hanapin ang hayop: {x}", aniSays: "Ang {x} ay nagsasabing {s}",
+  E: ["masaya", "malungkot", "galit", "takot", "gulat", "kalmado"],
+  C: ["pula", "asul", "dilaw", "berde", "kahel", "lila", "rosas", "kayumanggi"],
+  S: ["bilog", "parisukat", "tatsulok", "bituin", "puso", "parihaba"],
+  A: ["baka", "aso", "pusa", "bibe", "tupa", "kabayo", "leon", "palaka"],
+  AS: ["moo", "aw aw", "miyaw", "kwak kwak", "mee", "hiii", "rawr", "kokak"],
+  K: ["kuneho", "panda", "soro", "pagong", "paru-paro", "mansanas", "saging", "presa", "ubas", "pakwan", "kotse", "bus", "tren", "eroplano", "bangka"]
+}
+};
 
-      var STORAGE_STARS = "juegosAprenderStars";
-      var STORAGE_VOICE = "juegosAprenderVoice";
-      var SHAPE_FILL = "#6B8F8F";
+(function () {
+"use strict";
+var KEY = "aprendoJugandoV2";
+var NEED = 5, NEED_MEM = 2, STARS_PER_STICKER = 3;
+var EMO = ["😊", "😢", "😠", "😨", "😲", "😌"];
+var COL = ["#D86A6A", "#5A8FBF", "#E8C84A", "#6BA56B", "#E8964F", "#8B7BB8", "#EEA0B6", "#8A6542"];
+var SHA = ["circulo", "cuadrado", "triangulo", "estrella", "corazon", "rectangulo"];
+var SHA_FILL = ["#7FA7C9", "#E3A27F", "#8FBF94", "#E6C35C", "#E393A6", "#A895C9"];
+var ANI = ["🐮", "🐶", "🐱", "🦆", "🐑", "🐴", "🦁", "🐸"];
+var STK = ["🐰", "🐼", "🦊", "🐢", "🦋", "🍎", "🍌", "🍓", "🍇", "🍉", "🚗", "🚌", "🚂", "✈️", "⛵"];
+var OBJ = ["🍎", "⭐", "🐟", "🎈", "🌸", "🐥", "🍓", "⚽"];
+var GAMES = [
+  { id: "emociones", k: "g_emo", ic: "😊", c: "c-peach", kind: "emo", n: 6 },
+  { id: "colores", k: "g_col", ic: "🎨", c: "c-mint", kind: "col", n: 8 },
+  { id: "formas", k: "g_sha", ic: "🔷", c: "c-lilac", kind: "sha", n: 6 },
+  { id: "numeros", k: "g_num", ic: "🔢", c: "c-sky", kind: "num", n: 10 },
+  { id: "animales", k: "g_ani", ic: "🐮", c: "c-sun", kind: "ani", n: 8 },
+  { id: "memoria", k: "g_mem", ic: "🃏", c: "c-rose", kind: "mem", n: 0 }
+];
+function gameById(id) { for (var i = 0; i < GAMES.length; i++) if (GAMES[i].id === id) return GAMES[i]; return null; }
 
-      var EMOTIONS = [
-        { id: "feliz", name: "Feliz", emoji: "😊", prompt: "¿Cuál está feliz?" },
-        { id: "triste", name: "Triste", emoji: "😢", prompt: "¿Cuál está triste?" },
-        { id: "enojado", name: "Enojado", emoji: "😠", prompt: "¿Cuál está enojado?" },
-        { id: "asustado", name: "Asustado", emoji: "😨", prompt: "¿Cuál está asustado?" },
-        { id: "sorprendido", name: "Sorprendido", emoji: "😲", prompt: "¿Cuál está sorprendido?" },
-        { id: "calmado", name: "Calmado", emoji: "😌", prompt: "¿Cuál está calmado?" }
-      ];
+/* ---------- state ---------- */
+function defaults() {
+  return { stars: 0, stickers: 0, levels: {}, lang: "es",
+    s: { voice: true, sfx: true, music: false, calm: false } };
+}
+var S = defaults();
+try {
+  var raw = localStorage.getItem(KEY);
+  if (raw) { var p = JSON.parse(raw); S = Object.assign(defaults(), p); S.s = Object.assign(defaults().s, p.s || {}); }
+  else { var old = parseInt(localStorage.getItem("juegosAprenderStars") || "0", 10); if (old > 0) S.stars = old;
+    if (localStorage.getItem("juegosAprenderVoice") === "0") S.s.voice = false; }
+} catch (e) {}
+if (!TR[S.lang]) S.lang = "es";
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function lv(id) { if (!S.levels[id]) S.levels[id] = { level: 1, prog: 0 }; return S.levels[id]; }
 
-      var COLORS = [
-        { id: "rojo", name: "Rojo", color: "#C45C5C", prompt: "¿Dónde está el rojo?" },
-        { id: "azul", name: "Azul", color: "#5A8FBF", prompt: "¿Dónde está el azul?" },
-        { id: "amarillo", name: "Amarillo", color: "#E0C04A", prompt: "¿Dónde está el amarillo?" },
-        { id: "verde", name: "Verde", color: "#6BA56B", prompt: "¿Dónde está el verde?" },
-        { id: "naranja", name: "Naranja", color: "#E09A5A", prompt: "¿Dónde está el naranja?" },
-        { id: "morado", name: "Morado", color: "#8B7BB8", prompt: "¿Dónde está el morado?" },
-        { id: "rosa", name: "Rosa", color: "#E89BB0", prompt: "¿Dónde está el rosa?" },
-        { id: "cafe", name: "Café", color: "#7A5C3E", prompt: "¿Dónde está el café?" }
-      ];
+var V = { screen: "home", game: null, mode: "play", li: 0, q: null, answered: false, wrong: 0, last: -1, qn: 0, mem: null, bubble: "" };
 
-      var SHAPES = [
-        { id: "circulo", name: "Círculo", prompt: "¿Cuál es el círculo?" },
-        { id: "cuadrado", name: "Cuadrado", prompt: "¿Cuál es el cuadrado?" },
-        { id: "triangulo", name: "Triángulo", prompt: "¿Cuál es el triángulo?" },
-        { id: "estrella", name: "Estrella", prompt: "¿Cuál es la estrella?" },
-        { id: "corazon", name: "Corazón", prompt: "¿Cuál es el corazón?" },
-        { id: "rectangulo", name: "Rectángulo", prompt: "¿Cuál es el rectángulo?" }
-      ];
+/* ---------- i18n ---------- */
+function L() { return TR[S.lang] || TR.es; }
+function t(k, vars) {
+  var s = L()[k]; if (s == null) s = TR.es[k]; if (s == null) return k;
+  if (vars && typeof s === "string") s = s.replace(/\{(\w)\}/g, function (m, v) { return vars[v] != null ? vars[v] : m; });
+  return s;
+}
+function langInfo(code) { for (var i = 0; i < LANGS.length; i++) if (LANGS[i].code === code) return LANGS[i]; return LANGS[0]; }
+function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function applyLang() {
+  var li = langInfo(S.lang);
+  document.documentElement.lang = li.voices[0];
+  document.documentElement.dir = li.rtl ? "rtl" : "ltr";
+  document.title = "Aprendo Jugando";
+}
 
-      var GAMES = {
-        emociones: { title: "Emociones", items: EMOTIONS, kind: "emotion" },
-        colores: { title: "Colores", items: COLORS, kind: "color" },
-        formas: { title: "Formas", items: SHAPES, kind: "shape" }
-      };
+/* ---------- speech ---------- */
+var synth = window.speechSynthesis || null;
+var voiceCache = {};
+function norm(x) { return String(x || "").toLowerCase().replace(/_/g, "-"); }
+function findVoice(code) {
+  if (!synth) return { known: true, v: null };
+  var vs = []; try { vs = synth.getVoices() || []; } catch (e) {}
+  if (!vs.length) return { known: false, v: null };
+  var prefs = langInfo(code).voices, i, j;
+  for (i = 0; i < prefs.length; i++) for (j = 0; j < vs.length; j++) if (norm(vs[j].lang) === norm(prefs[i])) return { known: true, v: vs[j] };
+  for (i = 0; i < prefs.length; i++) { var base = norm(prefs[i]).split("-")[0];
+    for (j = 0; j < vs.length; j++) if (norm(vs[j].lang).split("-")[0] === base) return { known: true, v: vs[j] }; }
+  return { known: true, v: null };
+}
+function voiceMissing() { var f = findVoice(S.lang); return f.known && !f.v; }
+var talkTimer = null;
+function setTalking(on) {
+  var ms = document.querySelectorAll(".mascot");
+  for (var i = 0; i < ms.length; i++) ms[i].classList.toggle("talking", on);
+}
+function speak(text, queue) {
+  if (!text) return;
+  if (!S.s.voice || !synth) return;
+  var f = findVoice(S.lang);
+  if (f.known && !f.v) return; /* no voice for this language: text stays on screen */
+  try {
+    if (!queue) synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = f.v ? f.v.lang : langInfo(S.lang).voices[0];
+    if (f.v) u.voice = f.v;
+    u.rate = 0.88; u.pitch = 1.08; u.volume = 0.9;
+    u.onstart = function () { setTalking(true); };
+    u.onend = u.onerror = function () { setTalking(false); };
+    synth.speak(u);
+    clearTimeout(talkTimer); setTalking(true);
+    talkTimer = setTimeout(function () { setTalking(false); }, Math.min(6000, 600 + text.length * 70));
+  } catch (e) {}
+}
+function say(text, queue) { setBubble(text); speak(text, queue); }
+function setBubble(text) { V.bubble = text; var b = document.getElementById("bubbleText"); if (b) b.textContent = text; }
+if (synth) { try { synth.getVoices(); synth.addEventListener("voiceschanged", function () { var n = document.getElementById("vnote"); if (n) n.hidden = !voiceMissing(); }); } catch (e) {} }
 
-      var state = {
-        screen: "home",
-        game: null,
-        mode: "jugar",
-        learnIndex: 0,
-        question: null,
-        choices: [],
-        answered: false,
-        lastPrompt: "",
-        stars: 0,
-        voiceOn: true,
-        spanishVoice: null
-      };
+/* ---------- audio (Web Audio, soft) ---------- */
+var AC = null, master = null, musicGain = null, musicTimer = null, musicStep = 0, musicNext = 0;
+function ac() {
+  if (!AC) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null;
+    try { AC = new C(); master = AC.createGain(); master.gain.value = 0.9; master.connect(AC.destination);
+      musicGain = AC.createGain(); musicGain.gain.value = 0; musicGain.connect(master); } catch (e) { AC = null; return null; } }
+  if (AC.state === "suspended") { try { AC.resume(); } catch (e) {} }
+  return AC;
+}
+function tone(freq, start, dur, vol, type, dest) {
+  var a = AC; if (!a) return;
+  var o = a.createOscillator(), g = a.createGain();
+  o.type = type || "sine"; o.frequency.value = freq;
+  g.gain.setValueAtTime(0.0001, start);
+  g.gain.exponentialRampToValueAtTime(vol, start + 0.04);
+  g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+  o.connect(g); g.connect(dest || master); o.start(start); o.stop(start + dur + 0.05);
+}
+function sfx(kind) {
+  if (!S.s.sfx || !ac()) return;
+  var n = AC.currentTime + 0.01;
+  if (kind === "tap") tone(660, n, 0.12, 0.04);
+  else if (kind === "flip") tone(587, n, 0.15, 0.035, "triangle");
+  else if (kind === "yes") { tone(523.25, n, 0.35, 0.07); tone(659.25, n + 0.12, 0.35, 0.07); tone(783.99, n + 0.24, 0.5, 0.07); }
+  else if (kind === "soft") { tone(392, n, 0.3, 0.035, "triangle"); tone(349.23, n + 0.16, 0.35, 0.03, "triangle"); }
+  else if (kind === "sticker") { [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, n + i * 0.13, 0.5, 0.06); }); }
+}
+var MEL = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46, 523.25, 659.25, 783.99, 880, 783.99, 659.25, 587.33, 523.25];
+var BASS = [130.81, 130.81, 174.61, 174.61, 196, 196, 130.81, 130.81];
+function musicTick() {
+  if (!AC) return;
+  while (musicNext < AC.currentTime + 0.6) {
+    var i = musicStep % MEL.length;
+    tone(MEL[i], musicNext, 1.1, 0.05, "sine", musicGain);
+    if (i % 2 === 0) tone(BASS[(i / 2) % BASS.length], musicNext, 2.2, 0.04, "triangle", musicGain);
+    musicStep++; musicNext += 0.62;
+  }
+}
+function setMusic(on) {
+  if (on) { if (!ac()) return; musicGain.gain.cancelScheduledValues(AC.currentTime);
+    musicGain.gain.setTargetAtTime(0.5, AC.currentTime, 0.8);
+    if (!musicTimer) { musicNext = AC.currentTime + 0.1; musicTimer = setInterval(musicTick, 200); musicTick(); } }
+  else { if (AC && musicGain) musicGain.gain.setTargetAtTime(0, AC.currentTime, 0.3);
+    if (musicTimer) { clearInterval(musicTimer); musicTimer = null; } }
+}
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) { setMusic(false); if (synth) try { synth.cancel(); } catch (e) {} }
+  else if (S.s.music) setMusic(true);
+});
+/* unlock audio on first touch (iOS) */
+function unlock() { if (S.s.music) setMusic(true); else if (S.s.sfx) ac(); }
+document.addEventListener("pointerdown", unlock, { once: true });
 
-      var screenEl = document.getElementById("screen");
-      var starCountEl = document.getElementById("starCount");
-      var voiceBtn = document.getElementById("voiceBtn");
-      var homeBtn = document.getElementById("homeBtn");
+/* ---------- motion ---------- */
+var RM = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+function calm() { return S.s.calm || (RM && RM.matches); }
+function applyCalm() { document.body.classList.toggle("calm", !!S.s.calm); }
 
-      function loadStars() {
-        try {
-          var n = parseInt(localStorage.getItem(STORAGE_STARS), 10);
-          return isNaN(n) ? 0 : Math.max(0, n);
-        } catch (e) {
-          return 0;
-        }
-      }
+/* ---------- mascot ---------- */
+function mascotSVG() {
+  return '<svg viewBox="0 0 120 120" aria-hidden="true"><g class="m-body">' +
+    '<circle cx="28" cy="30" r="16" fill="#C99E77"/><circle cx="28" cy="30" r="8" fill="#F0C9B6"/>' +
+    '<circle cx="92" cy="30" r="16" fill="#C99E77"/><circle cx="92" cy="30" r="8" fill="#F0C9B6"/>' +
+    '<circle cx="60" cy="64" r="44" fill="#DDB892"/>' +
+    '<ellipse cx="60" cy="80" rx="20" ry="15" fill="#F6E6D4"/>' +
+    '<g class="m-eyes"><circle cx="44" cy="56" r="5.5" fill="#4A4453"/><circle cx="76" cy="56" r="5.5" fill="#4A4453"/>' +
+    '<circle cx="46" cy="54" r="1.8" fill="#fff"/><circle cx="78" cy="54" r="1.8" fill="#fff"/></g>' +
+    '<ellipse cx="33" cy="72" rx="7" ry="4.5" fill="#EBA3A0" opacity=".55"/><ellipse cx="87" cy="72" rx="7" ry="4.5" fill="#EBA3A0" opacity=".55"/>' +
+    '<ellipse cx="60" cy="73" rx="6.5" ry="4.8" fill="#4A4453"/>' +
+    '<path class="m-mouth" d="M51 83 Q60 92 69 83" stroke="#4A4453" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '</g></svg>';
+}
+function mascot(small) { return '<button type="button" class="mascot' + (small ? " sm" : "") + '" id="mascot" aria-label="Pipo">' + mascotSVG() + '</button>'; }
+function heroHTML(small) {
+  return '<div class="hero">' + mascot(small) + '<div class="bubble" id="bubble" role="status" aria-live="polite"><span class="t" id="bubbleText"></span><span class="spk" aria-hidden="true">🔈</span></div></div>';
+}
+function bindHero() {
+  var r = function () { sfx("tap"); speak(V.bubble); };
+  var m = document.getElementById("mascot"), b = document.getElementById("bubble");
+  if (m) m.addEventListener("click", r); if (b) b.addEventListener("click", r);
+  setBubble(V.bubble);
+}
+function dance() {
+  var m = document.getElementById("mascot"); if (!m) return;
+  if (calm()) return;
+  m.classList.remove("dance"); void m.offsetWidth; m.classList.add("dance");
+  setTimeout(function () { m.classList.remove("dance"); }, 1700);
+}
 
-      function saveStars() {
-        try { localStorage.setItem(STORAGE_STARS, String(state.stars)); } catch (e) {}
-      }
+/* ---------- visuals ---------- */
+function shapeSVG(i) {
+  var f = SHA_FILL[i], id = SHA[i], s = '<svg viewBox="0 0 100 100" aria-hidden="true">';
+  if (id === "circulo") s += '<circle cx="50" cy="50" r="42" fill="' + f + '"/>';
+  else if (id === "cuadrado") s += '<rect x="12" y="12" width="76" height="76" rx="8" fill="' + f + '"/>';
+  else if (id === "triangulo") s += '<path d="M50 10 L92 88 L8 88 Z" fill="' + f + '" stroke="' + f + '" stroke-width="6" stroke-linejoin="round"/>';
+  else if (id === "estrella") s += '<path d="M50 6 L62 37 L95 38 L69 58 L78 91 L50 72 L22 91 L31 58 L5 38 L38 37 Z" fill="' + f + '" stroke="' + f + '" stroke-width="4" stroke-linejoin="round"/>';
+  else if (id === "corazon") s += '<path d="M50 88 C20 66 6 48 6 32 C6 18 17 8 30 8 C39 8 46 13 50 21 C54 13 61 8 70 8 C83 8 94 18 94 32 C94 48 80 66 50 88 Z" fill="' + f + '"/>';
+  else s += '<rect x="4" y="26" width="92" height="48" rx="7" fill="' + f + '"/>';
+  return s + "</svg>";
+}
+function visual(kind, i) {
+  if (kind === "emo") return '<span class="face">' + EMO[i] + "</span>";
+  if (kind === "col") return '<span class="sw" style="background:' + COL[i] + '"></span>';
+  if (kind === "sha") return '<span class="shape">' + shapeSVG(i) + "</span>";
+  if (kind === "ani") return '<span class="face">' + ANI[i] + "</span>";
+  if (kind === "num") return '<span class="digit">' + i + "</span>";
+  return "";
+}
+function itemName(kind, i) {
+  if (kind === "emo") return L().E[i]; if (kind === "col") return L().C[i]; if (kind === "sha") return L().S[i];
+  if (kind === "ani") return L().A[i]; if (kind === "num") return String(i); return "";
+}
+function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+function range(n) { var r = []; for (var i = 0; i < n; i++) r.push(i); return r; }
 
-      function loadVoice() {
-        try {
-          var v = localStorage.getItem(STORAGE_VOICE);
-          return v === null ? true : v === "on";
-        } catch (e) {
-          return true;
-        }
-      }
+/* ---------- header ---------- */
+var screenEl, starEl, voiceBtn, musicBtn, navBtn;
+function updHeader() {
+  starEl.textContent = S.stars;
+  voiceBtn.setAttribute("aria-pressed", S.s.voice ? "true" : "false"); voiceBtn.textContent = S.s.voice ? "🔊" : "🔇";
+  voiceBtn.setAttribute("aria-label", t("voice")); musicBtn.setAttribute("aria-label", t("music"));
+  musicBtn.setAttribute("aria-pressed", S.s.music ? "true" : "false");
+  if (V.screen === "home") { navBtn.innerHTML = '<span aria-hidden="true">⚙️</span><span class="ring"></span>'; navBtn.setAttribute("aria-label", t("parents") + " — " + t("hold")); }
+  else { navBtn.textContent = "🏠"; navBtn.setAttribute("aria-label", t("back")); }
+}
+function toast(msg) {
+  var old = document.querySelector(".toast"); if (old) old.remove();
+  var d = document.createElement("div"); d.className = "toast"; d.textContent = msg; document.body.appendChild(d);
+  setTimeout(function () { d.remove(); }, 2600);
+}
 
-      function saveVoice() {
-        try { localStorage.setItem(STORAGE_VOICE, state.voiceOn ? "on" : "off"); } catch (e) {}
-      }
+/* ---------- language picker ---------- */
+function langButtons(cls) {
+  var h = '<div class="' + cls + '" role="group" aria-label="' + esc(t("language")) + '">';
+  LANGS.forEach(function (l) {
+    h += '<button type="button" class="lang" data-lang="' + l.code + '" aria-pressed="' + (l.code === S.lang) + '" lang="' + l.voices[0] + '"><span class="f" aria-hidden="true">' + l.flag + "</span><span>" + esc(l.name) + "</span></button>";
+  });
+  return h + "</div>" + '<p class="note" id="vnote"' + (voiceMissing() ? "" : " hidden") + ">" + esc(t("noVoice")) + "</p>";
+}
+function bindLang(rerender) {
+  var bs = screenEl.querySelectorAll("[data-lang]");
+  for (var i = 0; i < bs.length; i++) bs[i].addEventListener("click", function (e) {
+    var c = e.currentTarget.getAttribute("data-lang"); if (c === S.lang) { speak(t("hello")); return; }
+    S.lang = c; save(); applyLang(); sfx("tap"); rerender(); speak(t("hello"));
+  });
+  var sel = screenEl.querySelector('.langs [aria-pressed="true"]'); if (sel && sel.scrollIntoView) try { sel.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {}
+}
 
-      function pickSpanishVoice() {
-        if (!window.speechSynthesis) return;
-        var voices = speechSynthesis.getVoices() || [];
-        var preferred =
-          voices.filter(function (v) { return v.lang === "es-MX"; })[0] ||
-          voices.filter(function (v) { return v.lang === "es-US"; })[0] ||
-          voices.filter(function (v) { return /^es[-_]/i.test(v.lang); })[0] ||
-          voices.filter(function (v) { return (v.lang || "").toLowerCase().indexOf("es") === 0; })[0] ||
-          null;
-        state.spanishVoice = preferred;
-      }
+/* ---------- home ---------- */
+function renderHome() {
+  V.screen = "home"; updHeader();
+  V.bubble = t("hello");
+  var h = heroHTML(false) + langButtons("langs") + "<h2>" + esc(t("choose")) + '</h2><div class="games">';
+  GAMES.forEach(function (g) {
+    h += '<button type="button" class="gcard ' + g.c + '" data-game="' + g.id + '"><span class="ic" aria-hidden="true">' + g.ic + '</span><span class="nm">' + esc(t(g.k)) + '</span><span class="lv">' + esc(t("level", { n: lv(g.id).level })) + "</span></button>";
+  });
+  h += '</div><button type="button" class="big" id="stkBtn">🏅 ' + esc(t("stickers")) + " · " + S.stickers + "/" + STK.length + "</button>";
+  screenEl.innerHTML = h;
+  bindHero(); bindLang(renderHome);
+  var gs = screenEl.querySelectorAll("[data-game]");
+  for (var i = 0; i < gs.length; i++) gs[i].addEventListener("click", function (e) { sfx("tap"); openGame(e.currentTarget.getAttribute("data-game"), "play"); });
+  document.getElementById("stkBtn").addEventListener("click", function () { sfx("tap"); renderStickers(); });
+}
 
-      function speak(text) {
-        state.lastPrompt = text || "";
-        if (!state.voiceOn || !text || !window.speechSynthesis) return;
-        try {
-          speechSynthesis.cancel();
-          var u = new SpeechSynthesisUtterance(text);
-          u.lang = (state.spanishVoice && state.spanishVoice.lang) || "es-MX";
-          u.rate = 0.88;
-          u.pitch = 1.05;
-          u.volume = 0.85;
-          if (state.spanishVoice) u.voice = state.spanishVoice;
-          speechSynthesis.speak(u);
-        } catch (e) {}
-      }
+/* ---------- game shell ---------- */
+function dotsHTML(g) {
+  var s = lv(g.id), need = g.kind === "mem" ? NEED_MEM : NEED, h = '<span class="dots" aria-hidden="true">';
+  for (var i = 0; i < need; i++) h += "<i" + (i < s.prog ? ' class="on"' : "") + "></i>";
+  return h + "</span>";
+}
+function topHTML(g) {
+  var h = '<div class="gtitle"><span class="nm">' + g.ic + " " + esc(t(g.k)) + '</span><span class="lvl" id="lvl">' + esc(t("level", { n: lv(g.id).level })) + " " + dotsHTML(g) + "</span></div>";
+  if (g.kind !== "mem") h += '<div class="modes"><button type="button" data-mode="learn" aria-pressed="' + (V.mode === "learn") + '">📖 ' + esc(t("learn")) + '</button><button type="button" data-mode="play" aria-pressed="' + (V.mode === "play") + '">🎲 ' + esc(t("play")) + "</button></div>";
+  return h;
+}
+function bindModes() {
+  var bs = screenEl.querySelectorAll("[data-mode]");
+  for (var i = 0; i < bs.length; i++) bs[i].addEventListener("click", function (e) { sfx("tap"); openGame(V.game.id, e.currentTarget.getAttribute("data-mode")); });
+}
+function openGame(id, mode) {
+  var g = gameById(id); if (!g) return renderHome();
+  V.game = g; V.mode = g.kind === "mem" ? "play" : mode; V.screen = "game"; V.li = 0; V.last = -1; updHeader();
+  if (g.kind === "mem") return newMemory();
+  if (V.mode === "learn") return renderLearn();
+  newQuestion();
+}
+function nChoices(g) { return [2, 3, 4][lv(g.id).level - 1] || 4; }
 
-      function repeatSpeech() {
-        if (state.lastPrompt) speak(state.lastPrompt);
-      }
+/* ---------- learn ---------- */
+function learnCount(g) { return g.kind === "num" ? 10 : g.n; }
+function learnSpeech(g, i) {
+  if (g.kind === "ani") return cap(t("aniSays", { x: L().A[i], s: L().AS[i] }));
+  if (g.kind === "num") return String(i + 1);
+  return cap(itemName(g.kind, i));
+}
+function renderLearn() {
+  var g = V.game, i = V.li, n = learnCount(g), vis;
+  if (g.kind === "num") { var o = ""; for (var k = 0; k <= i; k++) o += OBJ[i % OBJ.length]; vis = '<span class="digit">' + (i + 1) + '</span><div class="objs" style="box-shadow:none;border:0">' + o + "</div>"; }
+  else vis = visual(g.kind, i);
+  var label = g.kind === "num" ? "" : '<span class="lname">' + esc(cap(itemName(g.kind, i))) + "</span>";
+  screenEl.innerHTML = topHTML(g) + heroHTML(true) + '<div class="learnbox" id="lb">' + vis + label + "</div>" +
+    '<div class="lnav"><button type="button" class="big" id="pv">' + esc(t("prev")) + '</button><span class="cnt">' + (i + 1) + "/" + n + '</span><button type="button" class="big primary" id="nx">' + esc(t("next")) + "</button></div>";
+  bindModes();
+  V.bubble = learnSpeech(g, i); bindHero(); speak(V.bubble);
+  document.getElementById("lb").addEventListener("click", function () { sfx("tap"); speak(V.bubble); });
+  document.getElementById("pv").addEventListener("click", function () { sfx("tap"); V.li = (V.li - 1 + n) % n; renderLearn(); });
+  document.getElementById("nx").addEventListener("click", function () { sfx("tap"); V.li = (V.li + 1) % n; renderLearn(); });
+}
 
-      function updateVoiceButton() {
-        voiceBtn.setAttribute("aria-pressed", state.voiceOn ? "true" : "false");
-        voiceBtn.setAttribute("aria-label", state.voiceOn ? "Voz encendida" : "Voz apagada");
-        voiceBtn.textContent = state.voiceOn ? "🔊" : "🔇";
-      }
+/* ---------- play ---------- */
+function newQuestion() {
+  var g = V.game, k = nChoices(g), correct, opts;
+  V.answered = false; V.wrong = 0; V.qn++;
+  if (g.kind === "num") {
+    var max = [5, 7, 10][lv(g.id).level - 1] || 10;
+    do { correct = 1 + Math.floor(Math.random() * max); } while (correct === V.last && max > 1);
+    var pool = shuffle(range(max).map(function (x) { return x + 1; }).filter(function (x) { return x !== correct; }));
+    opts = shuffle([correct].concat(pool.slice(0, k - 1)));
+    V.q = { correct: correct, opts: opts, prompt: t("howMany"), obj: OBJ[Math.floor(Math.random() * OBJ.length)] };
+  } else {
+    do { correct = Math.floor(Math.random() * g.n); } while (correct === V.last);
+    var others = shuffle(range(g.n).filter(function (x) { return x !== correct; }));
+    opts = shuffle([correct].concat(others.slice(0, k - 1)));
+    var name = itemName(g.kind, correct), pr;
+    if (g.kind === "emo") pr = t("qEmo", { x: name });
+    else if (g.kind === "col") pr = t("qCol", { x: name });
+    else if (g.kind === "sha") pr = t("qSha", { x: name });
+    else pr = (V.qn % 2) ? t("qAni", { s: L().AS[correct] }) : t("qAniName", { x: name });
+    V.q = { correct: correct, opts: opts, prompt: pr };
+  }
+  V.last = correct;
+  renderPlay();
+}
+function renderPlay() {
+  var g = V.game, q = V.q, h = topHTML(g) + heroHTML(true);
+  if (g.kind === "num") { var o = ""; for (var i = 0; i < q.correct; i++) o += "<span>" + q.obj + "</span>"; h += '<div class="objs" id="objs" aria-hidden="true">' + o + "</div>"; }
+  h += '<div class="choices n' + q.opts.length + '" id="choices">';
+  q.opts.forEach(function (v) { h += '<button type="button" class="choice" data-v="' + v + '" aria-label="' + esc(itemName(g.kind, v)) + '">' + visual(g.kind, v) + "</button>"; });
+  h += '</div><button type="button" class="big primary next" id="nx" hidden>' + esc(t("next")) + "</button>";
+  screenEl.innerHTML = h;
+  bindModes(); V.bubble = q.prompt; bindHero(); speak(q.prompt);
+  var cs = screenEl.querySelectorAll(".choice");
+  for (var j = 0; j < cs.length; j++) cs[j].addEventListener("click", onChoice);
+  document.getElementById("nx").addEventListener("click", function () { sfx("tap"); newQuestion(); });
+}
+function onChoice(e) {
+  if (V.answered) return;
+  var b = e.currentTarget, v = parseInt(b.getAttribute("data-v"), 10), g = V.game;
+  if (v === V.q.correct) {
+    V.answered = true; b.classList.add("yes");
+    var others = screenEl.querySelectorAll(".choice:not(.yes)"); for (var i = 0; i < others.length; i++) others[i].classList.add("no");
+    sfx("yes"); dance(); sparkle(b);
+    var praise = L().praise[Math.floor(Math.random() * L().praise.length)];
+    var extra = g.kind === "ani" ? cap(t("aniSays", { x: L().A[v], s: L().AS[v] })) : cap(itemName(g.kind, v));
+    say(praise + " " + extra);
+    reward(g, 1, 1);
+    var nx = document.getElementById("nx"); nx.hidden = false;
+  } else {
+    V.wrong++; b.classList.add("no"); sfx("soft");
+    say(t("tryAgain") + ". " + V.q.prompt);
+    if (V.wrong >= 2) { var c = screenEl.querySelector('.choice[data-v="' + V.q.correct + '"]'); if (c) c.classList.add("hint"); }
+  }
+}
+function sparkle(el) {
+  if (calm()) return;
+  var r = el.getBoundingClientRect();
+  ["⭐", "✨", "⭐"].forEach(function (s, i) {
+    var d = document.createElement("span"); d.className = "sparkle"; d.textContent = s;
+    d.style.left = (r.left + r.width * (0.25 + i * 0.25)) + "px"; d.style.top = (r.top + window.scrollY + 10) + "px"; d.style.position = "absolute";
+    document.body.appendChild(d); setTimeout(function () { d.remove(); }, 1300);
+  });
+}
+function reward(g, stars, prog) {
+  S.stars += stars;
+  var st = lv(g.id), need = g.kind === "mem" ? NEED_MEM : NEED, leveled = false;
+  st.prog += prog;
+  if (st.prog >= need) { st.prog = 0; if (st.level < 3) { st.level++; leveled = true; } }
+  var newStk = null, target = Math.min(STK.length, Math.floor(S.stars / STARS_PER_STICKER));
+  if (target > S.stickers) { S.stickers = target; newStk = target - 1; }
+  save(); updHeader();
+  var l = document.getElementById("lvl"); if (l) l.innerHTML = esc(t("level", { n: st.level })) + " " + dotsHTML(g);
+  if (leveled) speak(t("levelUp", { n: st.level }), true);
+  if (newStk != null) setTimeout(function () { showSticker(newStk); }, 900);
+}
+function showSticker(i) {
+  sfx("sticker");
+  var name = cap(L().K[i]), msg = t("newSticker", { x: name });
+  var ov = document.createElement("div"); ov.className = "ov"; ov.setAttribute("role", "dialog");
+  ov.innerHTML = '<div class="ovc"><div class="e">' + STK[i] + '</div><div class="tx">' + esc(msg) + '</div><button type="button" class="big primary" style="width:100%">' + esc(t("ok")) + "</button></div>";
+  document.body.appendChild(ov);
+  speak(msg, true);
+  ov.querySelector("button").addEventListener("click", function () { sfx("tap"); ov.remove(); });
+}
 
-      function updateStars() {
-        starCountEl.textContent = String(state.stars);
-      }
+/* ---------- memory ---------- */
+function newMemory() {
+  var g = V.game, level = lv(g.id).level, pairs = level === 1 ? 2 : 3;
+  var pool = level === 3 ? range(STK.length) : (V.qn % 2 ? range(5) : range(5).map(function (x) { return x + 5; }));
+  V.qn++;
+  var picks = shuffle(pool).slice(0, pairs), cards = shuffle(picks.concat(picks));
+  V.mem = { cards: cards, up: [], done: {}, lock: false, found: 0, pairs: pairs };
+  var h = topHTML(g) + heroHTML(true) + '<div class="mem ' + (cards.length === 4 ? "c2" : "c3") + '" id="mem">';
+  cards.forEach(function (c, i) {
+    h += '<button type="button" class="card" data-i="' + i + '" aria-label="?"><span class="in"><span class="fc bk" aria-hidden="true">⭐</span><span class="fc fr">' + STK[c] + "</span></span></button>";
+  });
+  h += '</div><button type="button" class="big primary next" id="nx" hidden>' + esc(t("next")) + "</button>";
+  screenEl.innerHTML = h;
+  V.bubble = t("memIntro"); bindHero(); speak(V.bubble);
+  var cs = screenEl.querySelectorAll(".card"); for (var i = 0; i < cs.length; i++) cs[i].addEventListener("click", onCard);
+  document.getElementById("nx").addEventListener("click", function () { sfx("tap"); newMemory(); });
+}
+function onCard(e) {
+  var m = V.mem, b = e.currentTarget, i = parseInt(b.getAttribute("data-i"), 10);
+  if (m.lock || m.done[i] || m.up.indexOf(i) >= 0) return;
+  b.classList.add("up"); b.setAttribute("aria-label", L().K[m.cards[i]]); sfx("flip"); m.up.push(i);
+  setBubble(cap(L().K[m.cards[i]])); speak(cap(L().K[m.cards[i]]));
+  if (m.up.length < 2) return;
+  var a = m.up[0], c = m.up[1];
+  if (m.cards[a] === m.cards[c]) {
+    m.done[a] = m.done[c] = true; m.up = []; m.found++;
+    setTimeout(function () {
+      screenEl.querySelector('[data-i="' + a + '"]').classList.add("done"); screenEl.querySelector('[data-i="' + c + '"]').classList.add("done");
+      sfx("yes"); dance();
+      if (m.found === m.pairs) { say(t("memDone")); reward(V.game, 2, 1); document.getElementById("nx").hidden = false; }
+      else { say(L().praise[m.found % L().praise.length], true); }
+    }, 350);
+  } else {
+    m.lock = true;
+    setTimeout(function () {
+      [a, c].forEach(function (k) { var el = screenEl.querySelector('[data-i="' + k + '"]'); if (el) { el.classList.remove("up"); el.setAttribute("aria-label", "?"); } });
+      m.up = []; m.lock = false;
+    }, 1300);
+  }
+}
 
-      function shuffle(arr) {
-        var a = arr.slice();
-        for (var i = a.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var t = a[i];
-          a[i] = a[j];
-          a[j] = t;
-        }
-        return a;
-      }
+/* ---------- stickers ---------- */
+function renderStickers() {
+  V.screen = "stickers"; updHeader();
+  V.bubble = t("stickers") + ": " + S.stickers + "/" + STK.length;
+  var pct = Math.round(((S.stars % STARS_PER_STICKER) / STARS_PER_STICKER) * 100);
+  var h = heroHTML(true) + "<h2>🏅 " + esc(t("stickers")) + " · " + S.stickers + "/" + STK.length + "</h2>";
+  if (S.stickers < STK.length) h += '<p class="note">' + esc(t("stickersHint")) + ' ⭐</p><div class="progress" aria-hidden="true"><b style="width:' + Math.max(6, pct) + '%"></b></div>';
+  h += '<div class="sgrid">';
+  STK.forEach(function (e, i) {
+    var got = i < S.stickers;
+    h += '<button type="button" class="stk ' + (got ? "got" : "lock") + '" data-s="' + i + '" aria-label="' + (got ? esc(L().K[i]) : "?") + '"><span class="e" aria-hidden="true">' + e + '</span><span class="n">' + (got ? esc(cap(L().K[i])) : "?") + "</span></button>";
+  });
+  h += '</div><button type="button" class="big" id="bk">' + esc(t("back")) + "</button>";
+  screenEl.innerHTML = h; bindHero(); speak(V.bubble);
+  var ss = screenEl.querySelectorAll("[data-s]");
+  for (var i = 0; i < ss.length; i++) ss[i].addEventListener("click", function (e) {
+    var k = parseInt(e.currentTarget.getAttribute("data-s"), 10); sfx("tap");
+    if (k < S.stickers) { say(cap(L().K[k])); dance(); } else say(t("stickersHint"));
+  });
+  document.getElementById("bk").addEventListener("click", function () { sfx("tap"); renderHome(); });
+}
 
-      function shapeSVG(id) {
-        var f = SHAPE_FILL;
-        if (id === "circulo") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="' + f + '"/></svg>';
-        }
-        if (id === "cuadrado") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="15" y="15" width="70" height="70" rx="8" fill="' + f + '"/></svg>';
-        }
-        if (id === "triangulo") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,12 92,86 8,86" fill="' + f + '"/></svg>';
-        }
-        if (id === "estrella") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,8 61,38 94,38 67,57 78,90 50,70 22,90 33,57 6,38 39,38" fill="' + f + '"/></svg>';
-        }
-        if (id === "corazon") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 86 C22 64 8 46 22 28 C32 16 45 20 50 32 C55 20 68 16 78 28 C92 46 78 64 50 86 Z" fill="' + f + '"/></svg>';
-        }
-        if (id === "rectangulo") {
-          return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="28" width="88" height="44" rx="8" fill="' + f + '"/></svg>';
-        }
-        return "";
-      }
+/* ---------- parent settings (hold 3 s) ---------- */
+var holdT = null, holdStart = 0, holdIv = 0, swallow = 0;
+function holdBegin() {
+  holdEnd(); holdStart = Date.now();
+  holdIv = setInterval(function () { navBtn.style.setProperty("--p", Math.min(1, (Date.now() - holdStart) / 3000)); }, 50);
+  holdT = setTimeout(function () { holdEnd(); swallow = Date.now(); sfx("tap"); renderSettings(); }, 3000);
+}
+function holdEnd() { clearTimeout(holdT); clearInterval(holdIv); holdT = 0; holdIv = 0; navBtn.style.setProperty("--p", 0); holdStart = 0; }
+function renderSettings() {
+  V.screen = "settings"; updHeader();
+  var rows = [["voice", "🗣️"], ["sfx", "🔔"], ["music", "🎵"], ["calm", "🐢"]];
+  var labels = { voice: t("voice"), sfx: t("sounds"), music: t("music"), calm: t("motion") };
+  var h = "<h2>🔒 " + esc(t("parents")) + '</h2><div class="rows">';
+  rows.forEach(function (r) { h += '<button type="button" class="row" role="switch" data-set="' + r[0] + '" aria-checked="' + !!S.s[r[0]] + '"><span>' + r[1] + " " + esc(labels[r[0]]) + '</span><span class="sw2" aria-hidden="true"></span></button>'; });
+  h += "</div><h2>🌐 " + esc(t("language")) + "</h2>" + langButtons("langgrid") +
+    '<button type="button" class="big danger" id="rst">🗑️ ' + esc(t("reset")) + '</button><button type="button" class="big primary" id="bk">' + esc(t("back")) + "</button>";
+  screenEl.innerHTML = h;
+  bindLang(renderSettings);
+  var rs = screenEl.querySelectorAll("[data-set]");
+  for (var i = 0; i < rs.length; i++) rs[i].addEventListener("click", function (e) {
+    var k = e.currentTarget.getAttribute("data-set"); S.s[k] = !S.s[k]; save();
+    e.currentTarget.setAttribute("aria-checked", String(S.s[k]));
+    if (k === "music") setMusic(S.s.music);
+    if (k === "calm") applyCalm();
+    if (k === "voice" && !S.s.voice && synth) try { synth.cancel(); } catch (x) {}
+    updHeader(); sfx("tap");
+  });
+  var armed = false, rst = document.getElementById("rst");
+  rst.addEventListener("click", function () {
+    if (!armed) { armed = true; rst.textContent = "⚠️ " + t("resetConfirm"); setTimeout(function () { armed = false; if (rst.isConnected) rst.textContent = "🗑️ " + t("reset"); }, 4000); return; }
+    S.stars = 0; S.stickers = 0; S.levels = {}; save(); updHeader(); toast(t("resetDone")); armed = false; rst.textContent = "🗑️ " + t("reset");
+  });
+  document.getElementById("bk").addEventListener("click", function () { sfx("tap"); renderHome(); });
+}
 
-      function itemVisual(item, kind, sizeClass) {
-        if (kind === "emotion") {
-          return '<div class="face" aria-hidden="true">' + item.emoji + "</div>";
-        }
-        if (kind === "color") {
-          return '<div class="swatch" style="background:' + item.color + '" aria-hidden="true"></div>';
-        }
-        return '<div class="shape" aria-hidden="true">' + shapeSVG(item.id) + "</div>";
-      }
+/* ---------- boot ---------- */
+function boot() {
+  screenEl = document.getElementById("screen"); starEl = document.getElementById("starCount");
+  voiceBtn = document.getElementById("voiceBtn"); musicBtn = document.getElementById("musicBtn"); navBtn = document.getElementById("navBtn");
+  applyLang(); applyCalm();
+  voiceBtn.addEventListener("click", function () {
+    S.s.voice = !S.s.voice; save(); updHeader();
+    if (!S.s.voice) { if (synth) try { synth.cancel(); } catch (e) {} } else speak(V.bubble);
+  });
+  musicBtn.addEventListener("click", function () { S.s.music = !S.s.music; save(); setMusic(S.s.music); updHeader(); });
+  navBtn.addEventListener("pointerdown", function (e) {
+    if (V.screen !== "home") return;
+    holdBegin();
+  });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+    navBtn.addEventListener(ev, function () {
+      if (V.screen !== "home" || !holdStart) return;
+      var short = Date.now() - holdStart < 3000; holdEnd();
+      if (short && ev === "pointerup") toast("🔒 " + t("parents") + ": " + t("hold"));
+    });
+  });
+  navBtn.addEventListener("pointerup", function () { if (swallow) setTimeout(function () { swallow = 0; }, 400); });
+  navBtn.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  navBtn.addEventListener("click", function () {
+    if (V.screen === "home") return;
+    if (swallow && Date.now() - swallow < 8000) { swallow = 0; return; }
+    if (synth) try { synth.cancel(); } catch (e) {}
+    sfx("tap"); renderHome();
+  });
+  route();
+  window.addEventListener("hashchange", route);
+}
+/* deep links for testing: #emociones, #colores/learn, #stickers, #ajustes */
+function route() {
+  var h = (location.hash || "").replace(/^#\/?/, ""); var p = h.split("/");
+  if (!h) return renderHome();
+  if (p[0] === "stickers") return renderStickers();
+  if (p[0] === "ajustes") return renderSettings();
+  if (gameById(p[0])) return openGame(p[0], p[1] === "learn" || p[1] === "aprender" ? "learn" : "play");
+  renderHome();
+}
+window.AJ = { S: S, V: V, setLang: function (c) { if (TR[c]) { S.lang = c; save(); applyLang(); route(); } }, save: save, home: renderHome, openGame: openGame, stickers: renderStickers, settings: renderSettings };
+boot();
+})();
 
-      function escapeHtml(s) {
-        return String(s)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
-      }
-
-      function renderHome() {
-        state.screen = "home";
-        state.game = null;
-        state.lastPrompt = "Elige un juego";
-        screenEl.innerHTML =
-          "<h1>Juegos para aprender</h1>" +
-          '<p class="subtitle">Emociones, colores y formas</p>' +
-          '<div class="home-buttons">' +
-            '<button type="button" class="game-btn btn-emociones" data-game="emociones">' +
-              '<div class="emoji">😊</div>' +
-              '<div><div class="label">Emociones</div><div class="hint">Feliz, triste, calmado…</div></div>' +
-            "</button>" +
-            '<button type="button" class="game-btn btn-colores" data-game="colores">' +
-              '<div class="emoji">🎨</div>' +
-              '<div><div class="label">Colores</div><div class="hint">Rojo, azul, verde…</div></div>' +
-            "</button>" +
-            '<button type="button" class="game-btn btn-formas" data-game="formas">' +
-              '<div class="emoji">⭐</div>' +
-              '<div><div class="label">Formas</div><div class="hint">Círculo, estrella, corazón…</div></div>' +
-            "</button>" +
-          "</div>";
-
-        var buttons = screenEl.querySelectorAll("[data-game]");
-        for (var i = 0; i < buttons.length; i++) {
-          buttons[i].addEventListener("click", function (e) {
-            var g = e.currentTarget.getAttribute("data-game");
-            openGame(g, "jugar");
-          });
-        }
-        speak("Elige un juego");
-      }
-
-      function modeBar(active) {
-        return '<div class="modes" role="tablist">' +
-          '<button type="button" class="mode-btn" data-mode="aprender" aria-pressed="' + (active === "aprender") + '">Aprender</button>' +
-          '<button type="button" class="mode-btn" data-mode="jugar" aria-pressed="' + (active === "jugar") + '">Jugar</button>' +
-          "</div>";
-      }
-
-      function bindModes() {
-        var buttons = screenEl.querySelectorAll("[data-mode]");
-        for (var i = 0; i < buttons.length; i++) {
-          buttons[i].addEventListener("click", function (e) {
-            openGame(state.game, e.currentTarget.getAttribute("data-mode"));
-          });
-        }
-      }
-
-      function openGame(gameId, mode) {
-        if (!GAMES[gameId]) return;
-        state.screen = "game";
-        state.game = gameId;
-        state.mode = mode || "jugar";
-        state.answered = false;
-        if (state.mode === "aprender") {
-          state.learnIndex = 0;
-          renderLearn();
-        } else {
-          newQuestion();
-          renderPlay();
-        }
-      }
-
-      function newQuestion() {
-        var items = GAMES[state.game].items;
-        var avoidId = state.question ? state.question.id : null;
-        var pool = items.filter(function (it) { return it.id !== avoidId; });
-        if (!pool.length) pool = items.slice();
-        var correct = pool[Math.floor(Math.random() * pool.length)];
-        var others = shuffle(items.filter(function (it) { return it.id !== correct.id; }));
-        var count = Math.random() < 0.5 ? 3 : 4;
-        if (count > others.length + 1) count = others.length + 1;
-        var choices = [correct].concat(others.slice(0, count - 1));
-        state.question = correct;
-        state.choices = shuffle(choices);
-        state.answered = false;
-      }
-
-      function renderPlay() {
-        var game = GAMES[state.game];
-        var q = state.question;
-        var html = '<div class="screen-title">' + escapeHtml(game.title) + "</div>";
-        html += modeBar("jugar");
-        html += '<div class="prompt-row">';
-        html += '<h2 class="prompt" id="promptText">' + escapeHtml(q.prompt) + "</h2>";
-        html += '<button type="button" class="speak-btn" id="repeatBtn" aria-label="Repetir">🔈</button>';
-        html += "</div>";
-        html += '<div class="choices" id="choices">';
-        for (var i = 0; i < state.choices.length; i++) {
-          var it = state.choices[i];
-          html += '<button type="button" class="choice" data-id="' + escapeHtml(it.id) + '" aria-label="' + escapeHtml(it.name) + '">';
-          html += itemVisual(it, game.kind);
-          html += "</button>";
-        }
-        html += "</div>";
-        html += '<div class="feedback" id="feedback" aria-live="polite"></div>';
-        html += '<div class="next-wrap"><button type="button" class="next-btn" id="nextBtn" hidden>Siguiente</button></div>';
-        screenEl.innerHTML = html;
-        bindModes();
-        document.getElementById("repeatBtn").addEventListener("click", repeatSpeech);
-        document.getElementById("nextBtn").addEventListener("click", function () {
-          newQuestion();
-          renderPlay();
-        });
-        var choiceBtns = screenEl.querySelectorAll(".choice");
-        for (var c = 0; c < choiceBtns.length; c++) {
-          choiceBtns[c].addEventListener("click", onChoice);
-        }
-        speak(q.prompt);
-      }
-
-      function onChoice(e) {
-        if (state.answered) return;
-        var btn = e.currentTarget;
-        var id = btn.getAttribute("data-id");
-        var feedback = document.getElementById("feedback");
-        var nextBtn = document.getElementById("nextBtn");
-
-        if (id === state.question.id) {
-          state.answered = true;
-          btn.classList.add("correct");
-          state.stars += 1;
-          saveStars();
-          updateStars();
-          feedback.className = "feedback ok";
-          feedback.innerHTML = '<span class="star-pop">⭐</span>¡Muy bien!';
-          nextBtn.hidden = false;
-          speak("¡Muy bien!");
-          var all = screenEl.querySelectorAll(".choice");
-          for (var i = 0; i < all.length; i++) {
-            if (all[i] !== btn) all[i].disabled = true;
-          }
-        } else {
-          btn.classList.remove("wiggle");
-          void btn.offsetWidth;
-          btn.classList.add("wiggle");
-          feedback.className = "feedback try";
-          feedback.textContent = "Intenta otra vez";
-          speak("Intenta otra vez");
-          setTimeout(function () {
-            btn.classList.remove("wiggle");
-          }, 600);
-        }
-      }
-
-      function renderLearn() {
-        var game = GAMES[state.game];
-        var items = game.items;
-        if (state.learnIndex < 0) state.learnIndex = 0;
-        if (state.learnIndex >= items.length) state.learnIndex = items.length - 1;
-        var item = items[state.learnIndex];
-        var html = '<div class="screen-title">' + escapeHtml(game.title) + "</div>";
-        html += modeBar("aprender");
-        html += '<div class="prompt-row">';
-        html += '<h2 class="prompt" id="promptText">' + escapeHtml(item.name) + "</h2>";
-        html += '<button type="button" class="speak-btn" id="repeatBtn" aria-label="Repetir">🔈</button>';
-        html += "</div>";
-        html += '<div class="learn-card">';
-        html += '<div class="learn-visual">' + itemVisual(item, game.kind) + "</div>";
-        html += '<div class="learn-name">' + escapeHtml(item.name) + "</div>";
-        html += '<div class="learn-nav">';
-        html += '<button type="button" class="nav-btn" id="prevBtn"' + (state.learnIndex === 0 ? " disabled" : "") + ">Anterior</button>";
-        html += '<div class="learn-count">' + (state.learnIndex + 1) + " / " + items.length + "</div>";
-        html += '<button type="button" class="nav-btn" id="nextBtn"' + (state.learnIndex === items.length - 1 ? " disabled" : "") + ">Siguiente</button>";
-        html += "</div></div>";
-        screenEl.innerHTML = html;
-        bindModes();
-        document.getElementById("repeatBtn").addEventListener("click", repeatSpeech);
-        document.getElementById("prevBtn").addEventListener("click", function () {
-          if (state.learnIndex > 0) {
-            state.learnIndex -= 1;
-            renderLearn();
-          }
-        });
-        document.getElementById("nextBtn").addEventListener("click", function () {
-          if (state.learnIndex < items.length - 1) {
-            state.learnIndex += 1;
-            renderLearn();
-          }
-        });
-        var visual = screenEl.querySelector(".learn-visual");
-        if (visual) {
-          visual.style.cursor = "pointer";
-          visual.addEventListener("click", repeatSpeech);
-        }
-        speak(item.name);
-      }
-
-      voiceBtn.addEventListener("click", function () {
-        state.voiceOn = !state.voiceOn;
-        saveVoice();
-        updateVoiceButton();
-        if (!state.voiceOn && window.speechSynthesis) {
-          try { speechSynthesis.cancel(); } catch (e) {}
-        } else if (state.voiceOn && state.lastPrompt) {
-          speak(state.lastPrompt);
-        }
-      });
-
-      homeBtn.addEventListener("click", function () {
-        if (window.speechSynthesis) {
-          try { speechSynthesis.cancel(); } catch (e) {}
-        }
-        renderHome();
-      });
-
-      if (window.speechSynthesis) {
-        pickSpanishVoice();
-        speechSynthesis.addEventListener("voiceschanged", pickSpanishVoice);
-      }
-
-      state.stars = loadStars();
-      state.voiceOn = loadVoice();
-      updateStars();
-      updateVoiceButton();
-
-      // Optional deep links for tests: #emociones, #colores/aprender, etc.
-      function startFromHash() {
-        var hash = (location.hash || "").replace(/^#/, "").replace(/^\//, "");
-        if (!hash) {
-          renderHome();
-          return;
-        }
-        var parts = hash.split("/");
-        var gameId = parts[0];
-        var mode = parts[1] === "aprender" ? "aprender" : "jugar";
-        if (GAMES[gameId]) {
-          openGame(gameId, mode);
-        } else {
-          renderHome();
-        }
-      }
-
-      startFromHash();
-      window.addEventListener("hashchange", startFromHash);
-    })();
-  </script>
+</script>
 </body>
 </html>

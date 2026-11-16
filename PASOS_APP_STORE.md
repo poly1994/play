@@ -111,10 +111,12 @@ Entra a la app que acabas de crear y completa lo siguiente. Abajo tienes el text
 
 Apple pide capturas del iPhone de **6.7 pulgadas**. Ya están hechas, en tamaño 1290 × 2796, en la carpeta `screenshots`:
 
-- `01-inicio.png` — menú principal
+- `01-inicio.png` — menú principal con Pipo y los idiomas
 - `02-emociones.png` — juego de emociones
-- `03-colores.png` — juego de colores
-- `04-formas.png` — juego de formas
+- `03-animales.png` — juego de animales y sticker nuevo
+- `04-memoria.png` — juego de memoria
+- `05-stickers.png` — colección de stickers
+- `06-english.png` — juego de números en inglés
 
 Súbelas en ese orden, en el recuadro de iPhone de 6.7". Se pueden arrastrar.
 
