@@ -322,6 +322,14 @@ h3{font-size:1.1rem;font-weight:800;color:var(--ink-soft)}
 .opppair{display:flex;align-items:center;justify-content:center;gap:10px}.opppair>div{display:flex;flex-direction:column;align-items:center}.opppair .face{font-size:5rem}.opppair .lname{font-size:1.5rem}.opppair .arr{font-size:2.4rem;font-weight:900;opacity:.5}
 .iotag.ok{background:#E6F5E6}.iotag.warn{background:#FCEBD9}
 .vsnd.listen{font-size:1.25rem;padding:14px 26px;margin:6px auto 12px}
+.startov{position:fixed;inset:0;z-index:50;background:#F3EEE6;display:grid;place-items:center;padding:24px}
+.startbtn{border:0;background:#fff;min-width:260px;border-radius:40px;padding:28px 34px;box-shadow:0 20px 50px rgba(0,0,0,.15);display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer;font:inherit;color:var(--ink)}
+.startbtn .st{font-size:1.7rem;font-weight:900;background:#4A4453;color:#fff;border-radius:24px;padding:16px 26px}
+.startbtn .sm{display:block;width:160px;height:160px}.startbtn .sm svg{width:100%;height:100%}
+.startbtn:active{transform:scale(.97)}
+.vrow{display:flex;gap:8px;align-items:stretch}
+.vrow .vsel{flex:1;text-align:start}
+.vtry{border:0;border-radius:18px;padding:0 14px;font-weight:800;font-size:1rem;background:var(--card);box-shadow:var(--shadow);cursor:pointer;color:var(--ink);min-height:56px}
 
 </style>
 </head>
@@ -993,6 +1001,23 @@ tl: { g_act: "Ano ang ginagawa?", g_wx: "Panahon", g_where: "Nasaan?", g_let: "M
 };
 Object.keys(TR6).forEach(function (l) { Object.assign(TR[l], TR6[l]); });
 
+/* v3.1 voice UI text */
+var TR7 = {
+es: { tapStart: "Toca para empezar", pvoice: "Voz de Poly", vAuto: "Automática (recomendada)", vTry: "Probar", vTest: "¡Hola! Soy Poly. ¿Jugamos?" },
+en: { tapStart: "Tap to start", pvoice: "Poly's voice", vAuto: "Automatic (recommended)", vTry: "Try", vTest: "Hi! I'm Poly. Let's play!" },
+pt: { tapStart: "Toque para começar", pvoice: "Voz do Poly", vAuto: "Automática (recomendada)", vTry: "Testar", vTest: "Oi! Eu sou o Poly. Vamos brincar?" },
+fr: { tapStart: "Touche pour commencer", pvoice: "Voix de Poly", vAuto: "Automatique (conseillée)", vTry: "Essayer", vTest: "Salut ! Je suis Poly. On joue ?" },
+de: { tapStart: "Tippe zum Starten", pvoice: "Polys Stimme", vAuto: "Automatisch (empfohlen)", vTry: "Testen", vTest: "Hallo! Ich bin Poly. Spielen wir?" },
+it: { tapStart: "Tocca per iniziare", pvoice: "Voce di Poly", vAuto: "Automatica (consigliata)", vTry: "Prova", vTest: "Ciao! Sono Poly. Giochiamo?" },
+zh: { tapStart: "点一下开始", pvoice: "Poly的声音", vAuto: "自动（推荐）", vTry: "试听", vTest: "你好！我是Poly。一起玩吧！" },
+ja: { tapStart: "タッチして はじめよう", pvoice: "Polyの こえ", vAuto: "じどう（おすすめ）", vTry: "きいてみる", vTest: "こんにちは！ポリーだよ。あそぼう！" },
+ko: { tapStart: "눌러서 시작해요", pvoice: "Poly 목소리", vAuto: "자동 (추천)", vTry: "들어보기", vTest: "안녕! 나는 폴리야. 같이 놀자!" },
+ar: { tapStart: "المس للبدء", pvoice: "صوت بولي", vAuto: "تلقائي (مستحسن)", vTry: "جرّب", vTest: "مرحبًا! أنا بولي. هيا نلعب!" },
+hi: { tapStart: "शुरू करने के लिए छुओ", pvoice: "पॉली की आवाज़", vAuto: "अपने आप (सुझाई गई)", vTry: "सुनो", vTest: "नमस्ते! मैं पॉली हूँ। चलो खेलें!" },
+tl: { tapStart: "Pindutin para magsimula", pvoice: "Boses ni Poly", vAuto: "Awtomatiko (inirerekomenda)", vTry: "Subukan", vTest: "Hi! Ako si Poly. Maglaro tayo!" }
+};
+Object.keys(TR7).forEach(function (l) { Object.assign(TR[l], TR7[l]); });
+
 /* v3 stage 2 data. Row = [icon, es, en, pt, fr, de, it, zh, ja, ko, ar, hi, tl]; "label|spoken" when the spoken form differs. icon "svg:name" = drawn icon. */
 var LO = ["es", "en", "pt", "fr", "de", "it", "zh", "ja", "ko", "ar", "hi", "tl"];
 var OBJ_FIRST = { ja: 1, ko: 1, hi: 1 };
@@ -1532,12 +1557,12 @@ function gameById(id) { for (var i = 0; i < GAMES.length; i++) if (GAMES[i].id =
 /* ---------- state ---------- */
 function defaults() {
   return { stars: 0, stickers: 0, levels: {}, lang: "es",
-    s: { voice: true, sfx: true, music: false, calm: false, quiet: false }, name: "" };
+    s: { voice: true, sfx: true, music: false, calm: false, quiet: false }, name: "", vpick: {} };
 }
 var S = defaults();
 try {
   var raw = localStorage.getItem(KEY);
-  if (raw) { var p = JSON.parse(raw); S = Object.assign(defaults(), p); S.s = Object.assign(defaults().s, p.s || {}); }
+  if (raw) { var p = JSON.parse(raw); S = Object.assign(defaults(), p); S.s = Object.assign(defaults().s, p.s || {}); if (!S.vpick || typeof S.vpick !== "object") S.vpick = {}; }
   else { var old = parseInt(localStorage.getItem("juegosAprenderStars") || "0", 10); if (old > 0) S.stars = old;
     if (localStorage.getItem("juegosAprenderVoice") === "0") S.s.voice = false; }
 } catch (e) {}
@@ -1567,52 +1592,99 @@ function applyLang() {
 
 /* ---------- speech ---------- */
 var synth = window.speechSynthesis || null;
-var voiceCache = {};
 function norm(x) { return String(x || "").toLowerCase().replace(/_/g, "-"); }
-/* Poly speaks with a male voice: prefer known male system voices per language, else lower the pitch */
-var MALE_RE = /\b(jorge|juan|diego|carlos|eddy|reed|rocko|grandpa|aaron|daniel|fred|alex|arthur|gordon|rishi|thomas|martin|yannick|luca|felipe|otoya|hattori|li-?mu|yu-?shu|minsu|maged|majed|yuri|ralph|albert|junior|oliver|tom|lee|nicolas|henri|jacques|xander|reed|male|man|hombre|homme|mann|uomo|masculino)\b/i;
-var FEMALE_RE = /female|woman|mujer|femme|frau|donna|feminino/i;
-function isMale(v) { var n = String(v.name || "") + " " + String(v.voiceURI || ""); return MALE_RE.test(n) && !FEMALE_RE.test(n); }
-function findVoice(code) {
-  if (!synth) return { known: true, v: null, male: false };
-  var vs = []; try { vs = synth.getVoices() || []; } catch (e) {}
-  if (!vs.length) return { known: false, v: null, male: false };
-  var prefs = langInfo(code).voices, i, j, exact = [], base = [];
-  for (i = 0; i < prefs.length; i++) for (j = 0; j < vs.length; j++) if (norm(vs[j].lang) === norm(prefs[i]) && exact.indexOf(vs[j]) < 0) exact.push(vs[j]);
-  for (i = 0; i < prefs.length; i++) { var b = norm(prefs[i]).split("-")[0];
-    for (j = 0; j < vs.length; j++) if (norm(vs[j].lang).split("-")[0] === b && exact.indexOf(vs[j]) < 0 && base.indexOf(vs[j]) < 0) base.push(vs[j]); }
-  var all = exact.concat(base);
-  if (!all.length) return { known: true, v: null, male: false };
-  for (i = 0; i < all.length; i++) if (isMale(all[i])) return { known: true, v: all[i], male: true };
-  return { known: true, v: all[0], male: false };
+/* Natural first, robotic never: Eloquence + novelty voices are excluded everywhere */
+var ROBOT = ["eddy", "flo", "grandma", "grandpa", "reed", "rocko", "sandy", "shelley", "albert", "bad", "bahh", "bells", "boing", "bubbles", "cellos", "good", "jester", "organ", "superstar", "trinoids", "whisper", "wobble", "zarvox", "fred", "junior", "ralph", "kathy", "bruce", "hysterical", "deranged", "pipe", "princess", "vicki", "victoria", "agnes"];
+/* natural male voices, best first (English: Siri-style / premium first) */
+var MALE_NAT = ["evan", "nathan", "tom", "alex", "aaron", "daniel", "arthur", "oliver", "jamie", "gordon", "rishi", "lee",
+  "jorge", "juan", "diego", "carlos", "felipe", "thomas", "nicolas", "yannick", "martin", "luca", "li-mu", "yu-shu", "otoya", "hattori", "minsu", "maged", "majed"];
+function vName(v) { return String(v.name || "").toLowerCase(); }
+function first(v) { return vName(v).replace(/[()]/g, " ").trim().split(/\s+/)[0] || ""; }
+function isRobot(v) {
+  var u = String(v.voiceURI || "").toLowerCase();
+  if (u.indexOf("eloquence") >= 0 || u.indexOf("speech.synthesis.voice") >= 0) return true;
+  return ROBOT.indexOf(first(v)) >= 0;
 }
-function voiceMissing() { var f = findVoice(S.lang); return f.known && !f.v; }
-var talkTimer = null;
+function isHQ(v) { return /premium|enhanced|mejorad|neural|natural/i.test(String(v.name || "") + " " + String(v.voiceURI || "")); }
+function maleRank(v) {
+  var i = MALE_NAT.indexOf(first(v));
+  if (i < 0 && /\bmale\b/i.test(vName(v)) && !/female/i.test(vName(v))) i = MALE_NAT.length;
+  return i;
+}
+/* all usable (non-robotic) voices for a language, exact region matches first */
+function langVoices(code) {
+  var vs = []; try { vs = synth ? (synth.getVoices() || []) : []; } catch (e) {}
+  var prefs = langInfo(code).voices, i, j, out = [];
+  for (i = 0; i < prefs.length; i++) for (j = 0; j < vs.length; j++) if (norm(vs[j].lang) === norm(prefs[i]) && out.indexOf(vs[j]) < 0) out.push(vs[j]);
+  for (i = 0; i < prefs.length; i++) { var b = norm(prefs[i]).split("-")[0];
+    for (j = 0; j < vs.length; j++) if (norm(vs[j].lang).split("-")[0] === b && out.indexOf(vs[j]) < 0) out.push(vs[j]); }
+  return { any: vs.length > 0, list: out.filter(function (v) { return !isRobot(v); }), raw: out.length };
+}
+var badVoice = {}; /* voiceURIs that failed to start on this device */
+function vKey(v) { return String(v.voiceURI || v.name || ""); }
+function findVoice(code) {
+  if (!synth) return { known: true, v: null, male: false, has: false };
+  var lv = langVoices(code);
+  if (!lv.any) return { known: false, v: null, male: false, has: false };
+  var all = lv.list.filter(function (v) { return !badVoice[vKey(v)]; });
+  var has = lv.raw > 0;
+  if (!all.length) return { known: true, v: null, male: false, has: has };
+  var pick = S.vpick && S.vpick[code], i;
+  if (pick) for (i = 0; i < all.length; i++) if (vKey(all[i]) === pick) return { known: true, v: all[i], male: maleRank(all[i]) >= 0, has: true, picked: true };
+  var males = all.map(function (v, k) { return { v: v, r: maleRank(v), k: k }; }).filter(function (x) { return x.r >= 0; });
+  males.sort(function (a, b) { return (isHQ(b.v) - isHQ(a.v)) || (a.r - b.r) || ((b.v.localService !== false) - (a.v.localService !== false)) || (a.k - b.k); });
+  if (males.length) return { known: true, v: males[0].v, male: true, has: true };
+  /* no natural male: the system default voice for this language */
+  var def = null;
+  for (i = 0; i < all.length && !def; i++) if (all[i].default) def = all[i];
+  for (i = 0; i < all.length && !def; i++) if (/^(samantha|paulina|m[oó]nica|luciana|am[eé]lie|thomas|anna|alice|tingting|kyoko|yuna|lekha)/.test(first(all[i]))) def = all[i];
+  for (i = 0; i < all.length && !def; i++) if (all[i].localService !== false) def = all[i];
+  return { known: true, v: def || all[0], male: false, has: true };
+}
+function voiceMissing() { var f = findVoice(S.lang); return f.known && !f.has; }
+var talkTimer = null, spkWatch = null, spkId = 0;
 function setTalking(on) {
   var ms = document.querySelectorAll(".mascot");
   for (var i = 0; i < ms.length; i++) ms[i].classList.toggle("talking", on);
 }
-function speak(text, queue) {
+function rateNow() { return S.s.quiet ? 0.75 : 0.9; }
+function mkUtt(text, v) {
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = v ? v.lang : langInfo(S.lang).voices[0];
+  if (v) u.voice = v;
+  u.rate = rateNow(); u.pitch = 1.0; u.volume = S.s.quiet ? 0.8 : 1.0;
+  return u;
+}
+function speak(text, queue, forceVoice) {
   if (!text) return;
   if (!S.s.voice || !synth) return;
-  var f = findVoice(S.lang);
-  if (f.known && !f.v) return; /* no voice for this language: text stays on screen */
+  var f = forceVoice ? { known: true, v: forceVoice, has: true } : findVoice(S.lang);
+  if (f.known && !f.has) return; /* no voice for this language: text stays on screen */
   try {
     if (!queue) synth.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = f.v ? f.v.lang : langInfo(S.lang).voices[0];
-    if (f.v) u.voice = f.v;
-    u.rate = S.s.quiet ? 0.72 : 0.88; u.pitch = f.male ? 1.0 : 0.85; u.volume = S.s.quiet ? 0.7 : 0.9;
-    u.onstart = function () { setTalking(true); };
-    u.onend = u.onerror = function () { setTalking(false); };
-    synth.speak(u);
+    if (synth.paused) synth.resume(); /* iOS: synth can get stuck paused */
+    var id = ++spkId, started = false, retried = false;
+    var send = function (v) {
+      var u = mkUtt(text, v);
+      u.onstart = function () { started = true; clearTimeout(spkWatch); setTalking(true); };
+      u.onend = function () { setTalking(false); };
+      u.onerror = function (e) { setTalking(false); var er = e && e.error;
+        if (!started && !retried && v && er !== "interrupted" && er !== "canceled" && id === spkId) { badVoice[vKey(v)] = 1; retry(); } };
+      synth.speak(u);
+      return u;
+    };
+    var retry = function () { retried = true; clearTimeout(spkWatch); try { synth.cancel(); if (synth.paused) synth.resume(); send(null); } catch (e) {} };
+    send(f.v);
+    if (!queue && f.v) { clearTimeout(spkWatch);
+      spkWatch = setTimeout(function () { if (id === spkId && !started && !retried && !synth.speaking) retry(); }, 1500); }
     clearTimeout(talkTimer); setTalking(true);
     talkTimer = setTimeout(function () { setTalking(false); }, Math.min(6000, 600 + text.length * 70));
   } catch (e) {}
 }
 function say(text, queue) { setBubble(text); speak(text, queue); }
 function setBubble(text) { V.bubble = text; var b = document.getElementById("bubbleText"); if (b) b.textContent = text; }
-if (synth) { try { synth.getVoices(); synth.addEventListener("voiceschanged", function () { var n = document.getElementById("vnote"); if (n) n.hidden = !voiceMissing(); }); } catch (e) {} }
+if (synth) { try { synth.getVoices(); synth.addEventListener("voiceschanged", function () { var n = document.getElementById("vnote"); if (n) n.hidden = !voiceMissing();
+  if (V.screen === "settings" && typeof fillVoicePicker === "function") fillVoicePicker(); }); } catch (e) {} }
 
 /* ---------- audio (Web Audio, soft) ---------- */
 var AC = null, master = null, musicGain = null, musicTimer = null, musicStep = 0, musicNext = 0;
@@ -1664,9 +1736,19 @@ document.addEventListener("visibilitychange", function () {
   if (document.hidden) { setMusic(false); if (synth) try { synth.cancel(); } catch (e) {} }
   else if (S.s.music) setMusic(true);
 });
-/* unlock audio on first touch (iOS) */
-function unlock() { if (S.s.music) setMusic(true); else if (S.s.sfx) ac(); }
-document.addEventListener("pointerdown", unlock, { once: true });
+/* unlock audio + speech inside the first real user gesture (iOS needs touchend/click, not pointerdown) */
+var unlocked = false;
+function unlock() {
+  if (unlocked) return; unlocked = true;
+  try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {} /* Safari 17+: play even with the silent switch */
+  var a = ac();
+  if (a) { try { var buf = a.createBuffer(1, 1, 22050), src = a.createBufferSource(); src.buffer = buf; src.connect(a.destination); src.start(0); } catch (e) {} }
+  if (synth) { try { synth.cancel(); if (synth.paused) synth.resume(); var u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = langInfo(S.lang).voices[0]; synth.speak(u); } catch (e) {} }
+  if (S.s.music) setMusic(true);
+  ["touchend", "click", "keydown"].forEach(function (ev) { document.removeEventListener(ev, unlock, true); });
+}
+["touchend", "click", "keydown"].forEach(function (ev) { document.addEventListener(ev, unlock, true); });
+document.addEventListener("pointerdown", function () { if (AC && AC.state !== "running") try { AC.resume(); } catch (e) {} }, true);
 
 /* ---------- motion ---------- */
 var RM = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
@@ -2652,6 +2734,7 @@ function renderSettings() {
   var h = "<h2>🔒 " + esc(t("parents")) + '</h2><div class="rows">';
   rows.forEach(function (r) { h += '<button type="button" class="row" role="switch" data-set="' + r[0] + '" aria-checked="' + !!S.s[r[0]] + '"><span>' + r[1] + " " + esc(labels[r[0]]) + '</span><span class="sw2" aria-hidden="true"></span></button>'; });
   h += '</div><p class="note">🤫 ' + esc(t("quietHint")) + '</p><label class="namebox"><span>👦👧 ' + esc(t("childName")) + '</span><input id="nameIn" type="text" maxlength="24" autocomplete="off" autocapitalize="words" placeholder="' + esc(t("childNamePh")) + '" value="' + esc(S.name || "") + '"></label>';
+  h += '<h2>🗣️ ' + esc(t("pvoice")) + '</h2><div class="rows vlist" id="vlist"></div>';
   h += '<button type="button" class="big" id="repBtn">📊 ' + esc(t("report")) + "</button>";
   h += "<h2>🌐 " + esc(t("language")) + "</h2>" + langButtons("langgrid") +
     '<button type="button" class="big danger" id="rst">🗑️ ' + esc(t("reset")) + '</button><button type="button" class="big primary" id="bk">' + esc(t("back")) + "</button>";
@@ -2677,6 +2760,28 @@ function renderSettings() {
   ni.addEventListener("input", function () { S.name = ni.value.replace(/[<>]/g, "").trim().slice(0, 24); save(); });
   ni.addEventListener("keydown", function (e) { if (e.key === "Enter") ni.blur(); });
   document.getElementById("repBtn").addEventListener("click", function () { sfx("tap"); renderReport(); });
+  fillVoicePicker();
+}
+/* parent voice picker: the device's natural voices for the current language */
+function fillVoicePicker() {
+  var box = document.getElementById("vlist"); if (!box) return;
+  var list = langVoices(S.lang).list, cur = (S.vpick && S.vpick[S.lang]) || "";
+  var opts = [{ key: "", label: t("vAuto"), v: null }].concat(list.map(function (v) {
+    return { key: vKey(v), label: String(v.name || "").replace(/\s*\(.*\)\s*$/, "") + " · " + v.lang + (isHQ(v) ? " ⭐" : "") + (maleRank(v) >= 0 ? " 👨" : ""), v: v }; }));
+  if (cur && !opts.some(function (o) { return o.key === cur; })) cur = "";
+  var h = "";
+  opts.forEach(function (o, i) {
+    h += '<div class="vrow"><button type="button" class="row vsel" role="radio" data-vi="' + i + '" aria-checked="' + (o.key === cur) + '"><span>' + (o.key === cur ? "🔘 " : "⚪ ") + esc(o.label) + '</span></button>' +
+      '<button type="button" class="vtry" data-vt="' + i + '">▶️ ' + esc(t("vTry")) + "</button></div>";
+  });
+  box.innerHTML = h;
+  var test = function (o) { speak(t("vTest"), false, o.v || null); };
+  box.querySelectorAll("[data-vi]").forEach(function (b) { b.addEventListener("click", function () {
+    var o = opts[+b.getAttribute("data-vi")]; if (!S.vpick) S.vpick = {};
+    if (o.key) S.vpick[S.lang] = o.key; else delete S.vpick[S.lang];
+    save(); fillVoicePicker(); test(o.v ? o : { v: findVoice(S.lang).v }); }); });
+  box.querySelectorAll("[data-vt]").forEach(function (b) { b.addEventListener("click", function () {
+    var o = opts[+b.getAttribute("data-vt")]; test(o.v ? o : { v: findVoice(S.lang).v }); }); });
 }
 
 /* ---------- boot ---------- */
@@ -2710,6 +2815,17 @@ function boot() {
   });
   route();
   window.addEventListener("hashchange", route);
+  showStart();
+}
+/* iOS only allows sound after a tap: start with one big friendly button */
+function showStart() {
+  if (navigator.webdriver || /HeadlessChrome/.test(navigator.userAgent) || /[?&]nostart/.test(location.search)) return;
+  var ov = document.createElement("div"); ov.className = "startov"; ov.setAttribute("role", "dialog");
+  ov.innerHTML = '<button type="button" class="startbtn" id="startBtn">' + '<span class="sm">' + mascotSVG() + '</span>' + '<span class="st">▶️ ' + esc(t("tapStart")) + "</span></button>";
+  document.body.appendChild(ov);
+  document.getElementById("startBtn").addEventListener("click", function () {
+    unlock(); ov.remove(); sfx("tap"); speak(V.bubble || helloText());
+  });
 }
 /* deep links for testing: #emociones, #colores/learn, #stickers, #ajustes */
 function route() {
