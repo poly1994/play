@@ -1,0 +1,49 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+    integrations:
+      app_store_connect: Codemagic
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.oscarrapalo.aprendojugando
+      vars:
+        BUNDLE_ID: com.oscarrapalo.aprendojugando
+        XCODE_PROJECT: ios/AprendoJugando/AprendoJugando.xcodeproj
+        XCODE_SCHEME: AprendoJugando
+        APP_STORE_APPLE_ID: 6835252502
+      xcode: latest
+    scripts:
+      - name: Generate Xcode project
+        script: |
+          brew install xcodegen
+          cd ios/AprendoJugando
+          xcodegen generate
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Increment build number
+        script: |
+          #!/bin/sh
+          set -e
+          cd "$CM_BUILD_DIR/ios/AprendoJugando"
+          # First upload has no App Store build yet; treat a missing/non-numeric
+          # result as 0 so the new build number becomes 1.
+          LATEST=$(app-store-connect get-latest-app-store-build-number 6835252502) || LATEST=0
+          case "$LATEST" in
+            ''|*[!0-9]*) LATEST=0 ;;
+          esac
+          agvtool new-version -all $((LATEST + 1))
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --project ios/AprendoJugando/AprendoJugando.xcodeproj \
+            --scheme AprendoJugando
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: false
+        submit_to_app_store: false
