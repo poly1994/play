@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="theme-color" content="#F3EEE6" />
 <title>Aprendo Jugando</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2255%22 r=%2240%22 fill=%22%23DDB892%22/%3E%3C/svg%3E" />
 <style>
 :root{
   --bg:#F3EEE6;--card:#FFFCF7;--ink:#4A4453;--ink-soft:#6E6878;--line:#E4DCD0;
@@ -331,6 +332,84 @@ h3{font-size:1.1rem;font-weight:800;color:var(--ink-soft)}
 .vrow .vsel{flex:1;text-align:start}
 .vtry{border:0;border-radius:18px;padding:0 14px;font-weight:800;font-size:1rem;background:var(--card);box-shadow:var(--shadow);cursor:pointer;color:var(--ink);min-height:56px}
 
+/* illustrated kid faces */
+.face .vsvg.kid{width:1.9em;height:1.9em}.choices.n4 .face .vsvg.kid{width:2em;height:2em}
+.svgi.kid{width:1.7em;height:1.7em}.fbtn .svgi.kid{width:1.5em;height:1.5em}.gtitle .svgi.kid,.ric .svgi.kid{width:1.25em;height:1.25em}
+.acard .svgi.kid{width:1.9em;height:1.9em}
+
+/* ---------- v3 stage 5 ---------- */
+.modes.m3{grid-template-columns:1fr 1fr 1fr}
+.modes.m3 button{font-size:1rem;padding:0 6px}
+.learnbox .bigi,.repbox .bigi,.fambox .bigi{font-size:7rem;line-height:1.1}
+.learnbox .lname.sm{font-size:1.3rem;font-weight:800}
+.repbox .lname{font-size:2.3rem}
+.repbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.repbtns .big{min-height:72px;font-size:1.15rem}
+.repbtns .said{background:#F3E5B5}
+.micb.rec{background:#C9574A;border-color:#C9574A;animation:micpulse 1.2s ease-in-out infinite}
+@keyframes micpulse{0%,100%{box-shadow:0 0 0 0 rgba(201,87,74,.45)}50%{box-shadow:0 0 0 14px rgba(201,87,74,0)}}
+body.calm .micb.rec{animation:none}
+/* Primero / Después */
+.fbboard{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.fbarr{align-self:center;font-size:2rem}
+.fbslot{position:relative;border:3px dashed var(--line);background:var(--card);border-radius:26px;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 6px;cursor:pointer;font:inherit;color:var(--ink)}
+.fbslot.sel{border:3px solid var(--ink)}
+.fbslot .fbh{font-size:1.3rem;font-weight:900;background:var(--sun);border-radius:99px;padding:2px 14px}
+.fbslot[data-slot="1"] .fbh{background:var(--mint)}
+.fbslot .emo{font-size:4.6rem;line-height:1}
+.fbslot .cl{font-size:1.25rem;font-weight:800;text-align:center}
+.fbslot .fbq{font-size:3.5rem;font-weight:900;color:var(--line)}
+.fbslot.done{opacity:.55}
+.fbslot .ck{position:absolute;top:8px;right:10px;font-size:2rem;color:var(--ok)}
+.fbgrid .acard{min-height:104px}
+.stripbtns .big[disabled]{opacity:.4}
+/* Reloj visual */
+.tmwrap{display:flex;justify-content:center;padding:6px 0}
+.tmdial{position:relative;width:min(72vw,300px);aspect-ratio:1;border-radius:50%;background:#fff;border:10px solid var(--card);box-shadow:var(--shadow)}
+.tmpie{position:absolute;inset:6px;border-radius:50%;background:conic-gradient(#E58C7A 360deg,transparent 0)}
+.tmface{position:absolute;inset:32%;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.tmface b{font-size:clamp(1.4rem,7vw,2.2rem);font-weight:900;font-variant-numeric:tabular-nums}
+.tmdial.ring{animation:tmring 1.6s ease-in-out 3}
+@keyframes tmring{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.tmpick{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tmpick .big{min-height:64px;font-size:1.4rem;padding:0}
+.tmpick small{font-size:.75rem;display:block}
+/* Pedir */
+.reqgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reqb{border:0;border-radius:28px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:inherit;color:var(--ink);box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+.reqb .emo{font-size:4.4rem;line-height:1}
+.reqb .cl{font-size:1.5rem;font-weight:900}
+.reqb.c0{background:var(--sky)}.reqb.c1{background:var(--mint)}.reqb.c2{background:var(--sun)}.reqb.c3{background:var(--rose)}.reqb.c4{background:var(--lilac);grid-column:1 / -1;min-height:120px}
+.reqb.on{outline:5px solid var(--ink);transform:scale(1.03)}
+body.calm .reqb.on{transform:none}
+/* Mi familia */
+.famimg{display:block;border-radius:22px;overflow:hidden;background:#EEE6DA}
+.famimg img{display:block;width:100%;height:100%;object-fit:cover}
+.famimg.lg{width:min(70vw,280px);aspect-ratio:1}
+.famimg.th{width:64px;height:64px;border-radius:14px;flex:none}
+.famopts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.famopts.n3 .famopt:last-child{grid-column:1 / -1;justify-self:center;width:50%}
+.famopt{border:4px solid transparent;border-radius:26px;padding:0;background:none;cursor:pointer;aspect-ratio:1}
+.famopt .famimg{width:100%;height:100%}
+.famopt.ok{border-color:var(--ok)}
+.famopt.shake{animation:shake .45s ease}
+.famadd{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px}
+.famprev img{max-width:160px;max-height:160px;border-radius:16px;display:block;margin:0 auto}
+.famlist{display:flex;flex-direction:column;gap:8px}
+.famrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px}
+.famrow b{flex:1;font-size:1.2rem}
+.famrow .big{min-height:52px;font-size:1rem;padding:0 12px}
+/* Cuentos */
+.sthead{display:flex;justify-content:space-between;align-items:center;font-size:1.15rem}
+.sthead .cnt{font-weight:800;color:var(--ink-soft)}
+.stpage{background:var(--card);border:1px solid var(--line);border-radius:30px;overflow:hidden;cursor:pointer}
+.stscene{display:flex;justify-content:center;align-items:center;gap:14px;min-height:190px;font-size:5.2rem;line-height:1}
+.stscene.s0{background:var(--sky)}.stscene.s1{background:var(--mint)}.stscene.s2{background:var(--sun)}.stscene.s3{background:var(--rose)}
+.sttext{margin:0;padding:16px 18px 20px;font-size:1.45rem;font-weight:800;line-height:1.4;text-align:center}
+#fbDone{white-space:nowrap;font-size:1.05rem}
+.repbtns .said:last-child:nth-child(odd){grid-column:1 / -1}
+.fbslot .ck{top:auto;bottom:8px}
+[dir="rtl"] .fbarr{transform:scaleX(-1)}
 </style>
 </head>
 <body>
@@ -345,6 +424,7 @@ h3{font-size:1.1rem;font-weight:800;color:var(--ink-soft)}
   </header>
   <main id="screen"></main>
 </div>
+<script>window.AJ_AUDIO_BASE="audio/";window.AJ_AUDIO_LANGS="es en pt fr de it zh ja ko ar";</script>
 <script>
 var LANGS = [
   { code: "es", name: "Español", flag: "🇪🇸", voices: ["es-MX", "es-US", "es-419", "es-ES", "es"] },
@@ -1003,20 +1083,55 @@ Object.keys(TR6).forEach(function (l) { Object.assign(TR[l], TR6[l]); });
 
 /* v3.1 voice UI text */
 var TR7 = {
-es: { tapStart: "Toca para empezar", pvoice: "Voz de Poly", vAuto: "Automática (recomendada)", vTry: "Probar", vTest: "¡Hola! Soy Poly. ¿Jugamos?" },
-en: { tapStart: "Tap to start", pvoice: "Poly's voice", vAuto: "Automatic (recommended)", vTry: "Try", vTest: "Hi! I'm Poly. Let's play!" },
-pt: { tapStart: "Toque para começar", pvoice: "Voz do Poly", vAuto: "Automática (recomendada)", vTry: "Testar", vTest: "Oi! Eu sou o Poly. Vamos brincar?" },
-fr: { tapStart: "Touche pour commencer", pvoice: "Voix de Poly", vAuto: "Automatique (conseillée)", vTry: "Essayer", vTest: "Salut ! Je suis Poly. On joue ?" },
-de: { tapStart: "Tippe zum Starten", pvoice: "Polys Stimme", vAuto: "Automatisch (empfohlen)", vTry: "Testen", vTest: "Hallo! Ich bin Poly. Spielen wir?" },
-it: { tapStart: "Tocca per iniziare", pvoice: "Voce di Poly", vAuto: "Automatica (consigliata)", vTry: "Prova", vTest: "Ciao! Sono Poly. Giochiamo?" },
-zh: { tapStart: "点一下开始", pvoice: "Poly的声音", vAuto: "自动（推荐）", vTry: "试听", vTest: "你好！我是Poly。一起玩吧！" },
-ja: { tapStart: "タッチして はじめよう", pvoice: "Polyの こえ", vAuto: "じどう（おすすめ）", vTry: "きいてみる", vTest: "こんにちは！ポリーだよ。あそぼう！" },
-ko: { tapStart: "눌러서 시작해요", pvoice: "Poly 목소리", vAuto: "자동 (추천)", vTry: "들어보기", vTest: "안녕! 나는 폴리야. 같이 놀자!" },
-ar: { tapStart: "المس للبدء", pvoice: "صوت بولي", vAuto: "تلقائي (مستحسن)", vTry: "جرّب", vTest: "مرحبًا! أنا بولي. هيا نلعب!" },
-hi: { tapStart: "शुरू करने के लिए छुओ", pvoice: "पॉली की आवाज़", vAuto: "अपने आप (सुझाई गई)", vTry: "सुनो", vTest: "नमस्ते! मैं पॉली हूँ। चलो खेलें!" },
-tl: { tapStart: "Pindutin para magsimula", pvoice: "Boses ni Poly", vAuto: "Awtomatiko (inirerekomenda)", vTry: "Subukan", vTest: "Hi! Ako si Poly. Maglaro tayo!" }
+es: { vRec: "Voz natural de Poly (recomendada)", tapStart: "Toca para empezar", pvoice: "Voz de Poly", vAuto: "Automática (recomendada)", vTry: "Probar", vTest: "¡Hola! Soy Poly. ¿Jugamos?" },
+en: { vRec: "Poly's natural voice (recommended)", tapStart: "Tap to start", pvoice: "Poly's voice", vAuto: "Automatic (recommended)", vTry: "Try", vTest: "Hi! I'm Poly. Let's play!" },
+pt: { vRec: "Voz natural do Poly (recomendada)", tapStart: "Toque para começar", pvoice: "Voz do Poly", vAuto: "Automática (recomendada)", vTry: "Testar", vTest: "Oi! Eu sou o Poly. Vamos brincar?" },
+fr: { vRec: "Voix naturelle de Poly (conseillée)", tapStart: "Touche pour commencer", pvoice: "Voix de Poly", vAuto: "Automatique (conseillée)", vTry: "Essayer", vTest: "Salut ! Je suis Poly. On joue ?" },
+de: { vRec: "Polys natürliche Stimme (empfohlen)", tapStart: "Tippe zum Starten", pvoice: "Polys Stimme", vAuto: "Automatisch (empfohlen)", vTry: "Testen", vTest: "Hallo! Ich bin Poly. Spielen wir?" },
+it: { vRec: "Voce naturale di Poly (consigliata)", tapStart: "Tocca per iniziare", pvoice: "Voce di Poly", vAuto: "Automatica (consigliata)", vTry: "Prova", vTest: "Ciao! Sono Poly. Giochiamo?" },
+zh: { vRec: "Poly的自然声音（推荐）", tapStart: "点一下开始", pvoice: "Poly的声音", vAuto: "自动（推荐）", vTry: "试听", vTest: "你好！我是Poly。一起玩吧！" },
+ja: { vRec: "Polyの しぜんな こえ（おすすめ）", tapStart: "タッチして はじめよう", pvoice: "Polyの こえ", vAuto: "じどう（おすすめ）", vTry: "きいてみる", vTest: "こんにちは！ポリーだよ。あそぼう！" },
+ko: { vRec: "Poly의 자연스러운 목소리 (추천)", tapStart: "눌러서 시작해요", pvoice: "Poly 목소리", vAuto: "자동 (추천)", vTry: "들어보기", vTest: "안녕! 나는 폴리야. 같이 놀자!" },
+ar: { vRec: "صوت بولي الطبيعي (مستحسن)", tapStart: "المس للبدء", pvoice: "صوت بولي", vAuto: "تلقائي (مستحسن)", vTry: "جرّب", vTest: "مرحبًا! أنا بولي. هيا نلعب!" },
+hi: { vRec: "Poly की असली आवाज़ (सुझाई गई)", tapStart: "शुरू करने के लिए छुओ", pvoice: "पॉली की आवाज़", vAuto: "अपने आप (सुझाई गई)", vTry: "सुनो", vTest: "नमस्ते! मैं पॉली हूँ। चलो खेलें!" },
+tl: { vRec: "Natural na boses ni Poly (inirerekomenda)", tapStart: "Pindutin para magsimula", pvoice: "Boses ni Poly", vAuto: "Awtomatiko (inirerekomenda)", vTry: "Subukan", vTest: "Hi! Ako si Poly. Maglaro tayo!" }
 };
 Object.keys(TR7).forEach(function (l) { Object.assign(TR[l], TR7[l]); });
+
+/* shared by the app (inlined) and the clip generator: how spoken text maps to clip files */
+var CLIPCORE = (function () {
+  var P_END = /[.!?。！？।…]/, P_ALL = /[¡¿!?.,;:。！？、，،؟।…"“”«»()\[\]–—]/g;
+  function norm(s) { return String(s || "").normalize("NFC").toLowerCase().replace(P_ALL, " ").replace(/\s+/g, " ").trim(); }
+  function hash(s) { var h = 0x811c9dc5; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return ("0000000" + h.toString(16)).slice(-8); }
+  function key(s) { return hash(norm(s)); }
+  function sentences(s) { var m = String(s).match(/[^.!?。！？।…]+[.!?。！？।…]*\s*|[.!?。！？।…]+\s*/g) || []; return m.map(function (x) { return x.trim(); }).filter(function (x) { return norm(x); }); }
+  function parts(s) { return String(s).split(/[,:;、，،]\s*/).map(function (x) { return x.trim(); }).filter(function (x) { return norm(x); }); }
+  /* split around a dynamic name (spoken by device TTS) */
+  function aroundName(s, name) {
+    if (!name || String(s).indexOf(name) < 0) return [{ t: s }];
+    var out = [], bits = String(s).split(name);
+    for (var i = 0; i < bits.length; i++) { if (norm(bits[i])) out.push({ t: bits[i].trim() }); if (i < bits.length - 1) out.push({ t: name, name: true }); }
+    return out;
+  }
+  /* text -> list of {t, k(clip key) | tts:true} */
+  function plan(text, has, name) {
+    var out = [];
+    if (!(name && String(text).indexOf(name) >= 0) && has(key(text))) return [{ t: text, k: key(text) }];
+    sentences(text).forEach(function (s1) {
+      if (!(name && s1.indexOf(name) >= 0) && has(key(s1))) { out.push({ t: s1, k: key(s1) }); return; }
+      parts(s1).forEach(function (s2) {
+        aroundName(s2, name).forEach(function (p) {
+          if (p.name) out.push({ t: p.t, tts: true });
+          else if (has(key(p.t))) out.push({ t: p.t, k: key(p.t) });
+          else out.push({ t: p.t, tts: true });
+        });
+      });
+    });
+    return out;
+  }
+  return { norm: norm, key: key, sentences: sentences, parts: parts, aroundName: aroundName, plan: plan };
+})();
+if (typeof module !== "undefined") module.exports = CLIPCORE;
 
 /* v3 stage 2 data. Row = [icon, es, en, pt, fr, de, it, zh, ja, ko, ar, hi, tl]; "label|spoken" when the spoken form differs. icon "svg:name" = drawn icon. */
 var LO = ["es", "en", "pt", "fr", "de", "it", "zh", "ja", "ko", "ar", "hi", "tl"];
@@ -1027,71 +1142,98 @@ var AAC_ST = [
     T: ["Quiero {x}", "I want {x}", "Quero {x}", "Je veux {x}", "Ich möchte {x}", "Voglio {x}", "我要{x}", "{x}が ほしい", "{x} 주세요", "أريد {x}", "मुझे {x} चाहिए", "Gusto ko ng {x}"] },
   { id: "nowant", ic: "🙅",
     L: ["No quiero", "No, thanks", "Não quero", "Non merci", "Nein danke", "No grazie", "我不要", "いらない", "싫어요", "لا أريد", "नहीं चाहिए", "Ayoko"],
-    T: ["No quiero {x}", "No {l}, thank you", "Não quero {x}", "{l} ? Non merci", "{l}? Nein danke", "{l}? No grazie", "我不要{x}", "{x}は いらない", "{x} 싫어요", "لا أريد {x}", "मुझे {x} नहीं चाहिए", "Ayoko ng {x}"] },
+    T: ["No quiero {x}", "No {p}, thank you", "Não quero {x}", "{l} ? Non merci", "{l}? Nein danke", "{l}? No grazie", "我不要{x}", "{x}は いらない", "{x} 싫어요", "لا أريد {x}", "मुझे {x} नहीं चाहिए", "Ayoko ng {x}"] },
   { id: "more", ic: "➕",
     L: ["Más", "More", "Mais", "Encore", "Mehr", "Ancora", "还要", "もっと", "더", "المزيد", "और", "Dagdag"],
-    T: ["Más {l}, por favor", "More {l}, please", "Mais {x}, por favor", "Encore {x}, s'il te plaît", "Mehr {l}, bitte", "Ancora {x}, per favore", "还要{x}", "もっと {x}", "{x} 더 주세요", "المزيد من {x} من فضلك", "और {x} चाहिए", "Dagdag na {x}, pakiusap"] }
+    T: ["Más {p}, por favor", "More {p}, please", "Mais {x}, por favor", "Encore {x}, s'il te plaît", "Mehr {p}, bitte", "Ancora {x}, per favore", "还要{x}", "もっと {x}", "{x} 더 주세요", "المزيد من {x} من فضلك", "और {x} चाहिए", "Dagdag na {x}, pakiusap"] },
+  { id: "where", ic: "🔎",
+    L: ["¿Dónde está?", "Where is it?", "Cadê?", "C'est où ?", "Wo ist es?", "Dov'è?", "在哪里？", "どこ？", "어디 있어요?", "أين هو؟", "कहाँ है?", "Nasaan?"],
+    T: ["", "", "", "", "", "", "", "", "", "", "", ""] }
 ];
 var AAC_FOOD = [
   ["💧", "agua", "water", "água", "eau|de l'eau", "Wasser", "acqua|dell'acqua", "水", "みず", "물", "ماء", "पानी", "tubig"],
   ["🥛", "leche", "milk", "leite", "lait|du lait", "Milch", "latte|del latte", "牛奶", "ぎゅうにゅう", "우유", "حليب", "दूध", "gatas"],
   ["🧃", "jugo", "juice", "suco", "jus|du jus", "Saft", "succo|del succo", "果汁", "ジュース", "주스", "عصير", "जूस", "juice"],
-  ["🍪", "galleta|una galleta", "cookie|a cookie", "biscoito|um biscoito", "biscuit|un biscuit", "Keks|einen Keks", "biscotto|un biscotto", "饼干", "クッキー", "쿠키", "بسكويت", "बिस्कुट", "biskwit"],
+  ["🍪", "galleta|una galleta|galletas", "cookie|a cookie|cookies", "biscoito|um biscoito", "biscuit|un biscuit", "Keks|einen Keks|Kekse", "biscotto|un biscotto", "饼干", "クッキー", "쿠키", "بسكويت", "बिस्कुट", "biskwit"],
   ["🥣", "cereal", "cereal", "cereal", "céréales|des céréales", "Müsli", "cereali|i cereali", "麦片", "シリアル", "시리얼", "حبوب الإفطار", "सीरियल", "cereal"],
   ["🍞", "pan", "bread", "pão", "pain|du pain", "Brot", "pane|del pane", "面包", "パン", "빵", "خبز", "ब्रेड", "tinapay"],
-  ["🥚", "huevo|un huevo", "egg|an egg", "ovo|um ovo", "œuf|un œuf", "Ei|ein Ei", "uovo|un uovo", "鸡蛋", "たまご", "달걀", "بيضة", "अंडा", "itlog"],
+  ["🥚", "huevo|un huevo|huevos", "egg|an egg|eggs", "ovo|um ovo", "œuf|un œuf", "Ei|ein Ei|Eier", "uovo|un uovo", "鸡蛋", "たまご", "달걀", "بيضة", "अंडा", "itlog"],
   ["🍚", "arroz", "rice", "arroz", "riz|du riz", "Reis", "riso|del riso", "米饭", "ごはん", "밥", "أرز", "चावल", "kanin"],
   ["🍗", "pollo", "chicken", "frango", "poulet|du poulet", "Hähnchen", "pollo|del pollo", "鸡肉", "チキン", "치킨", "دجاج", "चिकन", "manok"],
   ["🧀", "queso", "cheese", "queijo", "fromage|du fromage", "Käse", "formaggio|del formaggio", "奶酪", "チーズ", "치즈", "جبن", "पनीर", "keso"],
   ["🍲", "sopa", "soup", "sopa", "soupe|de la soupe", "Suppe", "zuppa|della zuppa", "汤", "スープ", "수프", "شوربة", "सूप", "sopas"],
   ["🍕", "pizza", "pizza", "pizza", "pizza|de la pizza", "Pizza", "pizza|della pizza", "披萨", "ピザ", "피자", "بيتزا", "पिज़्ज़ा", "pizza"],
   ["svg:yogurt", "yogur", "yogurt", "iogurte", "yaourt|un yaourt", "Joghurt", "yogurt|uno yogurt", "酸奶", "ヨーグルト", "요거트", "زبادي", "दही", "yogurt"],
-  ["🍎", "manzana|una manzana", "apple|an apple", "maçã|uma maçã", "pomme|une pomme", "Apfel|einen Apfel", "mela|una mela", "苹果", "りんご", "사과", "تفاحة", "सेब", "mansanas"],
-  ["🍌", "plátano|un plátano", "banana|a banana", "banana|uma banana", "banane|une banane", "Banane|eine Banane", "banana|una banana", "香蕉", "バナナ", "바나나", "موزة", "केला", "saging"]
+  ["🍎", "manzana|una manzana|manzanas", "apple|an apple|apples", "maçã|uma maçã", "pomme|une pomme", "Apfel|einen Apfel|Äpfel", "mela|una mela", "苹果", "りんご", "사과", "تفاحة", "सेब", "mansanas"],
+  ["🍌", "plátano|un plátano|plátanos", "banana|a banana|bananas", "banana|uma banana", "banane|une banane", "Banane|eine Banane|Bananen", "banana|una banana", "香蕉", "バナナ", "바나나", "موزة", "केला", "saging"]
 ];
 var AAC_THINGS = [
-  ["🧸", "juguete|mi juguete", "toy|my toy", "brinquedo|meu brinquedo", "jouet|mon jouet", "Spielzeug|mein Spielzeug", "giocattolo|il mio giocattolo", "玩具", "おもちゃ", "장난감", "لعبتي", "खिलौना", "laruan"],
-  ["⚽", "pelota|la pelota", "ball|the ball", "bola|a bola", "ballon|le ballon", "Ball|den Ball", "palla|la palla", "球", "ボール", "공", "الكرة", "गेंद", "bola"],
-  ["📱", "tablet|la tablet", "tablet|the tablet", "tablet|o tablet", "tablette|la tablette", "Tablet|das Tablet", "tablet|il tablet", "平板", "タブレット", "태블릿", "الجهاز اللوحي", "टैबलेट", "tablet"],
+  ["🧸", "juguete|mi juguete|juguetes", "toy|my toy|toys", "brinquedo|meu brinquedo", "jouet|mon jouet", "Spielzeug|mein Spielzeug", "giocattolo|il mio giocattolo", "玩具", "おもちゃ", "장난감", "لعبتي", "खिलौना", "laruan"],
+  ["⚽", "pelota|la pelota|pelotas", "ball|the ball|balls", "bola|a bola", "ballon|le ballon", "Ball|den Ball", "palla|la palla", "球", "ボール", "공", "الكرة", "गेंद", "bola"],
+  ["📱", "tablet|la tablet|tablet", "tablet|the tablet|tablet", "tablet|o tablet", "tablette|la tablette", "Tablet|das Tablet", "tablet|il tablet", "平板", "タブレット", "태블릿", "الجهاز اللوحي", "टैबलेट", "tablet"],
   ["🎵", "música", "music", "música", "musique|de la musique", "Musik", "musica|la musica", "音乐", "おんがく", "음악", "موسيقى", "संगीत", "musika"],
-  ["📖", "libro|un libro", "book|a book", "livro|um livro", "livre|un livre", "Buch|ein Buch", "libro|un libro", "书", "ほん", "책", "كتاب", "किताब", "libro"],
-  ["📺", "tele|la tele", "TV", "TV|a TV", "télé|la télé", "Fernsehen", "TV|la TV", "电视", "テレビ", "티비", "التلفاز", "टीवी", "TV"],
-  ["🤗", "abrazo|un abrazo", "hug|a hug", "abraço|um abraço", "câlin|un câlin", "Umarmung|eine Umarmung", "abbraccio|un abbraccio", "抱抱", "ぎゅっ", "안아", "عناق", "झप्पी", "yakap"],
+  ["📖", "libro|un libro|libros", "book|a book|books", "livro|um livro", "livre|un livre", "Buch|ein Buch|Bücher", "libro|un libro", "书", "ほん", "책", "كتاب", "किताब", "libro"],
+  ["📺", "tele|la tele", "TV|the TV|TV", "TV|a TV", "télé|la télé", "Fernsehen", "TV|la TV", "电视", "テレビ", "티비", "التلفاز", "टीवी", "TV"],
+  ["🤗", "abrazo|un abrazo|abrazos", "hug|a hug|hugs", "abraço|um abraço", "câlin|un câlin", "Umarmung|eine Umarmung|Umarmungen", "abbraccio|un abbraccio", "抱抱", "ぎゅっ", "안아", "عناق", "झप्पी", "yakap"],
   ["👩", "mamá", "Mom", "mamãe", "maman", "Mama", "mamma", "妈妈", "ママ", "엄마", "ماما", "मम्मी", "nanay"],
-  ["👨", "papá", "Dad", "papai", "papa", "Papa", "papà", "爸爸", "パパ", "아빠", "بابا", "पापा", "tatay"]
+  ["👨", "papá", "Dad", "papai", "papa", "Papa", "papà", "爸爸", "パパ", "아빠", "بابا", "पापा", "tatay"],
+  ["👟", "zapatos|mis zapatos", "shoes|my shoes", "sapatos|meus sapatos", "chaussures|mes chaussures", "Schuhe|meine Schuhe", "scarpe|le mie scarpe", "鞋子", "くつ", "신발", "حذائي", "जूते", "sapatos"]
 ];
+/* "Where is...?" full sentences (agreement differs per object), by AAC_THINGS index */
+var AAC_WHERE = {
+  0: ["¿Dónde están mis juguetes?", "Where are my toys?", "Cadê meus brinquedos?", "Où sont mes jouets ?", "Wo sind meine Spielsachen?", "Dove sono i miei giocattoli?", "我的玩具在哪里？", "おもちゃは どこ？", "내 장난감 어디 있어요?", "أين ألعابي؟", "मेरे खिलौने कहाँ हैं?", "Nasaan ang mga laruan ko?"],
+  1: ["¿Dónde está mi pelota?", "Where is my ball?", "Cadê minha bola?", "Où est mon ballon ?", "Wo ist mein Ball?", "Dov'è la mia palla?", "我的球在哪里？", "ボールは どこ？", "내 공 어디 있어요?", "أين كرتي؟", "मेरी गेंद कहाँ है?", "Nasaan ang bola ko?"],
+  2: ["¿Dónde está mi tablet?", "Where is my tablet?", "Cadê meu tablet?", "Où est ma tablette ?", "Wo ist mein Tablet?", "Dov'è il mio tablet?", "我的平板在哪里？", "タブレットは どこ？", "내 태블릿 어디 있어요?", "أين جهازي اللوحي؟", "मेरा टैबलेट कहाँ है?", "Nasaan ang tablet ko?"],
+  4: ["¿Dónde está mi libro?", "Where is my book?", "Cadê meu livro?", "Où est mon livre ?", "Wo ist mein Buch?", "Dov'è il mio libro?", "我的书在哪里？", "ほんは どこ？", "내 책 어디 있어요?", "أين كتابي؟", "मेरी किताब कहाँ है?", "Nasaan ang libro ko?"],
+  7: ["¿Dónde está mamá?", "Where is Mommy?", "Cadê a mamãe?", "Où est maman ?", "Wo ist Mama?", "Dov'è la mamma?", "妈妈在哪里？", "ママは どこ？", "엄마 어디 있어요?", "أين ماما؟", "मम्मी कहाँ हैं?", "Nasaan si Nanay?"],
+  8: ["¿Dónde está papá?", "Where is Daddy?", "Cadê o papai?", "Où est papa ?", "Wo ist Papa?", "Dov'è il papà?", "爸爸在哪里？", "パパは どこ？", "아빠 어디 있어요?", "أين بابا؟", "पापा कहाँ हैं?", "Nasaan si Tatay?"],
+  9: ["¿Dónde están mis zapatos?", "Where are my shoes?", "Cadê meus sapatos?", "Où sont mes chaussures ?", "Wo sind meine Schuhe?", "Dove sono le mie scarpe?", "我的鞋子在哪里？", "くつは どこ？", "내 신발 어디 있어요?", "أين حذائي؟", "मेरे जूते कहाँ हैं?", "Nasaan ang sapatos ko?"]
+};
 var AAC_FEEL = [
-  ["😋", "Tengo hambre", "I'm hungry", "Estou com fome", "J'ai faim", "Ich habe Hunger", "Ho fame", "我饿了", "おなかが すいた", "배고파요", "أنا جائع", "मुझे भूख लगी है", "Gutom ako"],
-  ["🥤", "Tengo sed", "I'm thirsty", "Estou com sede", "J'ai soif", "Ich habe Durst", "Ho sete", "我渴了", "のどが かわいた", "목말라요", "أنا عطشان", "मुझे प्यास लगी है", "Nauuhaw ako"],
-  ["😴", "Tengo sueño", "I'm sleepy", "Estou com sono", "J'ai sommeil", "Ich bin schläfrig", "Ho sonno", "我困了", "ねむい", "졸려요", "أنا نعسان", "मुझे नींद आ रही है", "Inaantok ako"],
-  ["😩", "Estoy cansado", "I'm tired", "Estou cansado", "Je suis fatigué", "Ich bin müde", "Sono stanco", "我累了", "つかれた", "피곤해요", "أنا متعب", "मैं थक गया हूँ", "Pagod ako"],
-  ["🥱", "Estoy bostezando", "I'm yawning", "Estou bocejando", "Je bâille", "Ich gähne", "Sto sbadigliando", "我在打哈欠", "あくびが でる", "하품이 나요", "أنا أتثاءب", "मुझे उबासी आ रही है", "Naghihikab ako"],
-  ["😊", "Estoy feliz", "I'm happy", "Estou feliz", "Je suis content", "Ich bin froh", "Sono felice", "我很开心", "うれしい", "기뻐요", "أنا سعيد", "मैं खुश हूँ", "Masaya ako"],
-  ["😢", "Estoy triste", "I'm sad", "Estou triste", "Je suis triste", "Ich bin traurig", "Sono triste", "我很难过", "かなしい", "슬퍼요", "أنا حزين", "मैं उदास हूँ", "Malungkot ako"],
-  ["😠", "Estoy enojado", "I'm angry", "Estou bravo", "Je suis fâché", "Ich bin wütend", "Sono arrabbiato", "我生气了", "おこってる", "화나요", "أنا غاضب", "मुझे गुस्सा आ रहा है", "Galit ako"],
-  ["😨", "Tengo miedo", "I'm scared", "Estou com medo", "J'ai peur", "Ich habe Angst", "Ho paura", "我害怕", "こわい", "무서워요", "أنا خائف", "मुझे डर लग रहा है", "Natatakot ako"],
-  ["🤕", "Me duele", "It hurts", "Está doendo", "J'ai mal", "Es tut weh", "Mi fa male", "我疼", "いたい", "아파요", "يؤلمني", "दर्द हो रहा है", "Masakit"],
-  ["🤒", "Estoy enfermo", "I'm sick", "Estou doente", "Je suis malade", "Ich bin krank", "Sono malato", "我生病了", "ぐあいが わるい", "몸이 안 좋아요", "أنا مريض", "मैं बीमार हूँ", "May sakit ako"],
-  ["🥶", "Tengo frío", "I'm cold", "Estou com frio", "J'ai froid", "Mir ist kalt", "Ho freddo", "我冷", "さむい", "추워요", "أشعر بالبرد", "मुझे ठंड लग रही है", "Nilalamig ako"],
-  ["🥵", "Tengo calor", "I'm hot", "Estou com calor", "J'ai chaud", "Mir ist heiß", "Ho caldo", "我热", "あつい", "더워요", "أشعر بالحر", "मुझे गर्मी लग रही है", "Naiinitan ako"],
-  ["😐", "Estoy aburrido", "I'm bored", "Estou entediado", "Je m'ennuie", "Mir ist langweilig", "Mi annoio", "我好无聊", "たいくつ", "심심해요", "أشعر بالملل", "मैं ऊब गया हूँ", "Naiinip ako"]
+  ["svg:kid_hungry", "Tengo hambre", "I'm hungry", "Estou com fome", "J'ai faim", "Ich habe Hunger", "Ho fame", "我饿了", "おなかが すいた", "배고파요", "أنا جائع", "मुझे भूख लगी है", "Gutom ako"],
+  ["svg:kid_thirsty", "Tengo sed", "I'm thirsty", "Estou com sede", "J'ai soif", "Ich habe Durst", "Ho sete", "我渴了", "のどが かわいた", "목말라요", "أنا عطشان", "मुझे प्यास लगी है", "Nauuhaw ako"],
+  ["svg:kid_sleepy", "Tengo sueño", "I'm sleepy", "Estou com sono", "J'ai sommeil", "Ich bin schläfrig", "Ho sonno", "我困了", "ねむい", "졸려요", "أنا نعسان", "मुझे नींद आ रही है", "Inaantok ako"],
+  ["svg:kid_tired", "Estoy cansado", "I'm tired", "Estou cansado", "Je suis fatigué", "Ich bin müde", "Sono stanco", "我累了", "つかれた", "피곤해요", "أنا متعب", "मैं थक गया हूँ", "Pagod ako"],
+  ["svg:kid_yawning", "Estoy bostezando", "I'm yawning", "Estou bocejando", "Je bâille", "Ich gähne", "Sto sbadigliando", "我在打哈欠", "あくびが でる", "하품이 나요", "أنا أتثاءب", "मुझे उबासी आ रही है", "Naghihikab ako"],
+  ["svg:kid_happy", "Estoy feliz", "I'm happy", "Estou feliz", "Je suis content", "Ich bin froh", "Sono felice", "我很开心", "うれしい", "기뻐요", "أنا سعيد", "मैं खुश हूँ", "Masaya ako"],
+  ["svg:kid_sad", "Estoy triste", "I'm sad", "Estou triste", "Je suis triste", "Ich bin traurig", "Sono triste", "我很难过", "かなしい", "슬퍼요", "أنا حزين", "मैं उदास हूँ", "Malungkot ako"],
+  ["svg:kid_angry", "Estoy enojado", "I'm angry", "Estou bravo", "Je suis fâché", "Ich bin wütend", "Sono arrabbiato", "我生气了", "おこってる", "화나요", "أنا غاضب", "मुझे गुस्सा आ रहा है", "Galit ako"],
+  ["svg:kid_scared", "Tengo miedo", "I'm scared", "Estou com medo", "J'ai peur", "Ich habe Angst", "Ho paura", "我害怕", "こわい", "무서워요", "أنا خائف", "मुझे डर लग रहा है", "Natatakot ako"],
+  ["svg:kid_hurt", "Me duele", "It hurts", "Está doendo", "J'ai mal", "Es tut weh", "Mi fa male", "我疼", "いたい", "아파요", "يؤلمني", "दर्द हो रहा है", "Masakit"],
+  ["svg:kid_sick", "Estoy enfermo", "I'm sick", "Estou doente", "Je suis malade", "Ich bin krank", "Sono malato", "我生病了", "ぐあいが わるい", "몸이 안 좋아요", "أنا مريض", "मैं बीमार हूँ", "May sakit ako"],
+  ["svg:kid_cold", "Tengo frío", "I'm cold", "Estou com frio", "J'ai froid", "Mir ist kalt", "Ho freddo", "我冷", "さむい", "추워요", "أشعر بالبرد", "मुझे ठंड लग रही है", "Nilalamig ako"],
+  ["svg:kid_hot", "Tengo calor", "I'm hot", "Estou com calor", "J'ai chaud", "Mir ist heiß", "Ho caldo", "我热", "あつい", "더워요", "أشعر بالحر", "मुझे गर्मी लग रही है", "Naiinitan ako"],
+  ["svg:kid_bored", "Estoy aburrido", "I'm bored", "Estou entediado", "Je m'ennuie", "Mir ist langweilig", "Mi annoio", "我好无聊", "たいくつ", "심심해요", "أشعر بالملل", "मैं ऊब गया हूँ", "Naiinip ako"],
+  ["svg:kid_hurt", "Me lastimé", "I'm hurt", "Eu me machuquei", "Je me suis fait mal", "Ich habe mich verletzt", "Mi sono fatto male", "我受伤了", "けがした", "다쳤어요", "تأذيت", "मुझे चोट लगी है", "Nasaktan ako"]
 ];
 var AAC_NEED = [
-  ["🚽", "Quiero ir al baño", "I need the bathroom", "Quero ir ao banheiro", "Je veux aller aux toilettes", "Ich muss aufs Klo", "Devo andare in bagno", "我要上厕所", "トイレに いきたい", "화장실 가고 싶어요", "أريد الذهاب إلى الحمام", "मुझे बाथरूम जाना है", "Gusto kong mag-CR"],
+  ["🚽", "Quiero ir al baño", "I need to go to the bathroom", "Quero ir ao banheiro", "Je veux aller aux toilettes", "Ich muss aufs Klo", "Devo andare in bagno", "我要上厕所", "トイレに いきたい", "화장실 가고 싶어요", "أريد الذهاب إلى الحمام", "मुझे बाथरूम जाना है", "Gusto kong mag-CR"],
   ["🤝", "Ayúdame, por favor", "Help me, please", "Me ajuda, por favor", "Aide-moi, s'il te plaît", "Hilf mir bitte", "Aiutami, per favore", "请帮帮我", "てつだって", "도와주세요", "ساعدني من فضلك", "मेरी मदद करो", "Tulungan mo ako"],
   ["🙉", "Hay mucho ruido", "It's too loud", "Está muito barulho", "C'est trop fort", "Es ist zu laut", "C'è troppo rumore", "太吵了", "うるさい", "너무 시끄러워요", "الصوت عالٍ جدًا", "बहुत शोर है", "Masyadong maingay"],
   ["🧘", "Necesito un descanso", "I need a break", "Preciso de uma pausa", "J'ai besoin d'une pause", "Ich brauche eine Pause", "Ho bisogno di una pausa", "我需要休息", "やすみたい", "쉬고 싶어요", "أحتاج استراحة", "मुझे थोड़ा आराम चाहिए", "Kailangan ko ng pahinga"],
   ["🛏️", "Quiero dormir", "I want to sleep", "Quero dormir", "Je veux dormir", "Ich will schlafen", "Voglio dormire", "我想睡觉", "ねたい", "자고 싶어요", "أريد أن أنام", "मुझे सोना है", "Gusto kong matulog"],
   ["🧩", "Quiero jugar", "I want to play", "Quero brincar", "Je veux jouer", "Ich will spielen", "Voglio giocare", "我想玩", "あそびたい", "놀고 싶어요", "أريد أن ألعب", "मुझे खेलना है", "Gusto kong maglaro"],
-  ["🧼", "Quiero lavarme las manos", "I want to wash my hands", "Quero lavar as mãos", "Je veux me laver les mains", "Ich will Hände waschen", "Voglio lavarmi le mani", "我想洗手", "てを あらいたい", "손 씻고 싶어요", "أريد غسل يدي", "मुझे हाथ धोने हैं", "Gusto kong maghugas ng kamay"]
+  ["🧼", "Quiero lavarme las manos", "I want to wash my hands", "Quero lavar as mãos", "Je veux me laver les mains", "Ich will Hände waschen", "Voglio lavarmi le mani", "我想洗手", "てを あらいたい", "손 씻고 싶어요", "أريد غسل يدي", "मुझे हाथ धोने हैं", "Gusto kong maghugas ng kamay"],
+  ["🌳", "Quiero ir afuera", "I want to go outside", "Quero ir lá fora", "Je veux aller dehors", "Ich will nach draußen", "Voglio andare fuori", "我想出去", "そとに いきたい", "밖에 나가고 싶어요", "أريد الخروج", "मुझे बाहर जाना है", "Gusto kong lumabas"],
+  ["🏠", "Quiero ir a casa", "I want to go home", "Quero ir para casa", "Je veux rentrer à la maison", "Ich will nach Hause", "Voglio andare a casa", "我想回家", "おうちに かえりたい", "집에 가고 싶어요", "أريد العودة إلى البيت", "मुझे घर जाना है", "Gusto kong umuwi"],
+  ["👩", "Quiero a mamá", "I want Mommy", "Quero a mamãe", "Je veux maman", "Ich will zu Mama", "Voglio la mamma", "我要妈妈", "ママが いい", "엄마한테 갈래요", "أريد ماما", "मुझे मम्मी चाहिए", "Gusto ko si Nanay"],
+  ["👨", "Quiero a papá", "I want Daddy", "Quero o papai", "Je veux papa", "Ich will zu Papa", "Voglio il papà", "我要爸爸", "パパが いい", "아빠한테 갈래요", "أريد بابا", "मुझे पापा चाहिए", "Gusto ko si Tatay"]
 ];
 var AAC_BASIC = [
   ["👍", "Sí", "Yes", "Sim", "Oui", "Ja", "Sì", "是", "はい", "네", "نعم", "हाँ", "Oo"],
   ["👎", "No", "No", "Não", "Non", "Nein", "No", "不", "いいえ", "아니요", "لا", "नहीं", "Hindi"],
   ["🙏", "Por favor", "Please", "Por favor", "S'il te plaît", "Bitte", "Per favore", "请", "おねがい", "부탁해요", "من فضلك", "कृपया", "Pakiusap"],
   ["💛", "Gracias", "Thank you", "Obrigado", "Merci", "Danke", "Grazie", "谢谢", "ありがとう", "고마워요", "شكرًا", "धन्यवाद", "Salamat"],
-  ["✅", "Ya terminé", "I'm done", "Terminei", "J'ai fini", "Fertig", "Ho finito", "我好了", "おわった", "다 했어요", "انتهيت", "हो गया", "Tapos na ako"],
-  ["👋", "Hola", "Hello", "Oi", "Bonjour", "Hallo", "Ciao", "你好", "こんにちは", "안녕하세요", "مرحبًا", "नमस्ते", "Kumusta"]
+  ["✅", "Ya terminé", "All done", "Terminei", "J'ai fini", "Fertig", "Ho finito", "我好了", "おわった", "다 했어요", "انتهيت", "हो गया", "Tapos na ako"],
+  ["👋", "Hola", "Hello", "Oi", "Bonjour", "Hallo", "Ciao", "你好", "こんにちは", "안녕하세요", "مرحبًا", "नमस्ते", "Kumusta"],
+  ["🤲", "Más, por favor", "More, please", "Mais, por favor", "Encore, s'il te plaît", "Mehr, bitte", "Ancora, per favore", "还要，谢谢", "もっと ちょうだい", "더 주세요", "المزيد من فضلك", "और दो, कृपया", "Dagdag pa, pakiusap"],
+  ["👀", "¡Mira!", "Look!", "Olha!", "Regarde !", "Schau mal!", "Guarda!", "你看！", "みて！", "봐요!", "انظر!", "देखो!", "Tingnan mo!"],
+  ["☝️", "Me toca a mí", "My turn", "Minha vez", "À moi", "Ich bin dran", "Tocca a me", "轮到我了", "わたしの ばん", "내 차례예요", "دوري", "मेरी बारी", "Ako naman"],
+  ["👉", "Te toca a ti", "Your turn", "Sua vez", "À toi", "Du bist dran", "Tocca a te", "轮到你了", "あなたの ばん", "네 차례야", "دورك", "तुम्हारी बारी", "Ikaw naman"],
+  ["🎲", "¡Vamos a jugar!", "Let's play!", "Vamos brincar!", "On joue !", "Lass uns spielen!", "Giochiamo!", "我们一起玩吧！", "あそぼう！", "같이 놀자!", "هيا نلعب!", "चलो खेलें!", "Maglaro tayo!"],
+  ["🫴", "Dámelo, por favor", "Give it to me, please", "Me dá, por favor", "Donne-le-moi, s'il te plaît", "Gib es mir, bitte", "Dammelo, per favore", "请给我", "ちょうだい", "주세요", "أعطني إياه من فضلك", "मुझे दो, कृपया", "Pakibigay sa akin"],
+  ["📦", "Ábrelo, por favor", "Open it, please", "Abre, por favor", "Ouvre-le, s'il te plaît", "Mach es bitte auf", "Aprilo, per favore", "请打开", "あけて", "열어 주세요", "افتحه من فضلك", "इसे खोलो, कृपया", "Pakibukas"],
+  ["❤️", "Te quiero", "I love you", "Eu te amo", "Je t'aime", "Ich hab dich lieb", "Ti voglio bene", "我爱你", "だいすき", "사랑해요", "أحبك", "मुझे तुमसे प्यार है", "Mahal kita"]
 ];
 /* routines: 0 toilet, 1 teeth, 2 hands (same order as report R) */
 var RUT_IC = ["🚽", "🪥", "🧼"];
@@ -1145,6 +1287,147 @@ var SVGI = {
   flush: '<rect x="28" y="12" width="44" height="26" rx="5" fill="#E9EEF2" stroke="#9AA7B2" stroke-width="3"/><rect x="58" y="18" width="10" height="5" rx="2" fill="#7A8794"/><path d="M22 46 h56 a28 22 0 0 1 -28 30 a28 22 0 0 1 -28 -30z" fill="#F4F7F9" stroke="#9AA7B2" stroke-width="3"/><rect x="38" y="74" width="24" height="16" fill="#E9EEF2" stroke="#9AA7B2" stroke-width="3"/><path d="M36 54 q14 12 28 0" stroke="#5A9FD6" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M80 14 q8 6 0 12 M86 10 q12 10 0 20" stroke="#5A9FD6" stroke-width="3" fill="none" stroke-linecap="round"/>'
 };
 function svgIcon(name) { return '<svg viewBox="0 0 100 100" aria-hidden="true">' + (SVGI[name] || "") + "</svg>"; }
+
+/* Illustrated children's faces for feelings and states (replaces yellow emoji).
+   Each expression is drawn on a real-looking kid (diverse skin tones and hair) with big,
+   exaggerated features so look-alikes (sad/crying, tired/sleepy/sleeping, scared/surprised) differ. */
+var KID_LOOKS = [
+  { s: "#F5D0B0", sd: "#E3B08C", h: "#6B4226", st: "short" },
+  { s: "#C98B5A", sd: "#AD7043", h: "#24160F", st: "pig" },
+  { s: "#8A5A3C", sd: "#6E452C", h: "#17100C", st: "puffs" },
+  { s: "#EDC296", sd: "#D6A473", h: "#D9A93F", st: "bangs" },
+  { s: "#6A4129", sd: "#52311F", h: "#130C08", st: "buzz" },
+  { s: "#F2C6A0", sd: "#DDA77C", h: "#A3512B", st: "curly" }
+];
+function kidHairBack(L) {
+  if (L.st === "bangs") return '<path d="M17 58 Q12 18 50 15 Q88 18 83 58 L86 84 Q76 88 70 76 L30 76 Q24 88 14 84Z" fill="' + L.h + '"/>';
+  if (L.st === "pig") return '<circle cx="15" cy="44" r="10" fill="' + L.h + '"/><circle cx="85" cy="44" r="10" fill="' + L.h + '"/><circle cx="15" cy="44" r="3" fill="#E06B8B" transform="translate(6 -6)"/><circle cx="85" cy="44" r="3" fill="#E06B8B" transform="translate(-6 -6)"/>';
+  if (L.st === "puffs") return '<circle cx="27" cy="26" r="14" fill="' + L.h + '"/><circle cx="73" cy="26" r="14" fill="' + L.h + '"/>';
+  return "";
+}
+function kidHairFront(L) {
+  var h = L.h;
+  if (L.st === "short") return '<path d="M20 52 Q18 20 50 19 Q82 20 80 52 Q76 38 66 34 Q58 40 46 34 Q34 40 24 40Z" fill="' + h + '"/>';
+  if (L.st === "pig") return '<path d="M20 52 Q19 20 50 20 Q81 20 80 52 Q74 34 50 33 Q26 34 20 52Z" fill="' + h + '"/><path d="M50 21 V33" stroke="' + L.sd + '" stroke-width="1.5"/>';
+  if (L.st === "puffs") return '<path d="M21 50 Q20 24 50 23 Q80 24 79 50 Q72 34 50 33 Q28 34 21 50Z" fill="' + h + '"/>';
+  if (L.st === "bangs") return '<path d="M20 54 Q18 20 50 18 Q82 20 80 54 L76 42 Q70 34 62 40 Q56 33 48 40 Q40 33 32 40 Q26 36 24 44Z" fill="' + h + '"/>';
+  if (L.st === "buzz") return '<path d="M21 48 Q21 21 50 21 Q79 21 79 48 Q72 32 50 31 Q28 32 21 48Z" fill="' + h + '" opacity=".92"/>';
+  return '<g fill="' + h + '"><circle cx="26" cy="40" r="8"/><circle cx="34" cy="29" r="9"/><circle cx="46" cy="24" r="9"/><circle cx="58" cy="24" r="9"/><circle cx="68" cy="30" r="9"/><circle cx="75" cy="41" r="8"/></g>';
+}
+var KD = "#3B2A22";
+function kEyes(type) {
+  var o = "", xs = [39, 61];
+  xs.forEach(function (x, k) {
+    var m = k ? -1 : 1; /* mirror for inner/outer */
+    if (type === "open" || type === "down" || type === "up" || type === "side") {
+      var dx = type === "side" ? 2.5 : 0, dy = type === "down" ? 1.6 : type === "up" ? -2 : 0;
+      o += '<ellipse cx="' + x + '" cy="52" rx="5.2" ry="6.2" fill="#fff"/><circle cx="' + (x + dx) + '" cy="' + (52.5 + dy) + '" r="3.4" fill="' + KD + '"/><circle cx="' + (x + dx + 1.2) + '" cy="' + (51 + dy) + '" r="1.2" fill="#fff"/>';
+    } else if (type === "wide") {
+      o += '<ellipse cx="' + x + '" cy="51" rx="7" ry="8.2" fill="#fff" stroke="' + KD + '" stroke-width="1.2"/><circle cx="' + x + '" cy="51" r="2.4" fill="' + KD + '"/>';
+    } else if (type === "joy") { /* ^ ^ */
+      o += '<path d="M' + (x - 6) + ' 54 Q' + x + ' 45 ' + (x + 6) + ' 54" stroke="' + KD + '" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    } else if (type === "closed") { /* relaxed closed */
+      o += '<path d="M' + (x - 6) + ' 52 Q' + x + ' 57 ' + (x + 6) + ' 52" stroke="' + KD + '" stroke-width="2.6" fill="none" stroke-linecap="round"/>';
+    } else if (type === "squeeze") { /* > < */
+      o += '<path d="M' + (x - 5 * m) + ' 47 L' + (x + 4 * m) + ' 52 L' + (x - 5 * m) + ' 57" stroke="' + KD + '" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+    } else if (type === "half" || type === "heavy") {
+      var lid = type === "heavy" ? 53.5 : 51;
+      o += '<ellipse cx="' + x + '" cy="53" rx="5.2" ry="5.4" fill="#fff"/><circle cx="' + x + '" cy="55" r="3.2" fill="' + KD + '"/>' +
+        '<path d="M' + (x - 6.5) + ' 46 H' + (x + 6.5) + ' V' + lid + ' Q' + x + ' ' + (lid + 1.5) + ' ' + (x - 6.5) + ' ' + lid + 'Z" fill="var(--kskin)"/>' +
+        '<path d="M' + (x - 6) + ' ' + lid + ' Q' + x + ' ' + (lid + 1.5) + ' ' + (x + 6) + ' ' + lid + '" stroke="' + KD + '" stroke-width="2.2" fill="none" stroke-linecap="round"/>';
+    } else if (type === "angry") {
+      o += '<ellipse cx="' + x + '" cy="53" rx="5.2" ry="5.6" fill="#fff"/><circle cx="' + x + '" cy="54" r="3.3" fill="' + KD + '"/>' +
+        '<path d="M' + (x - 7 * m) + ' 45 L' + (x + 7 * m) + ' 51 L' + (x + 7 * m) + ' 45Z" fill="var(--kskin)"/>';
+    }
+  });
+  return o;
+}
+function kBrows(type) {
+  var p = { up: ["M32 41 Q39 37 45 40", "M55 40 Q61 37 68 41"], high: ["M31 36 Q39 30 46 35", "M54 35 Q61 30 69 36"],
+    sad: ["M32 44 L45 38", "M55 38 L68 44"], worry: ["M31 40 L45 33", "M55 33 L69 40"], angry: ["M31 38 L46 45", "M54 45 L69 38"],
+    flat: ["M33 42 H45", "M55 42 H67"] }[type];
+  if (!p) return "";
+  return '<path d="' + p[0] + " " + p[1].replace("M", "M") + '" stroke="' + KD + '" stroke-width="' + (type === "angry" ? 4 : 3) + '" fill="none" stroke-linecap="round"/>';
+}
+function kMouth(type) {
+  var d = KD, tg = "#E8707E";
+  switch (type) {
+    case "grin": return '<path d="M36 64 Q50 82 64 64Z" fill="' + d + '"/><path d="M38 65 H62 L60 68 H40Z" fill="#fff"/><path d="M43 74 Q50 70 57 74 Q50 78 43 74Z" fill="' + tg + '"/>';
+    case "laugh": return '<path d="M33 62 Q50 88 67 62Z" fill="' + d + '"/><path d="M35 63 H65 L62 67 H38Z" fill="#fff"/><path d="M41 77 Q50 71 59 77 Q50 83 41 77Z" fill="' + tg + '"/>';
+    case "smile": return '<path d="M41 67 Q50 74 59 67" stroke="' + d + '" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    case "frown": return '<path d="M39 74 Q50 63 61 74" stroke="' + d + '" stroke-width="3.4" fill="none" stroke-linecap="round"/>';
+    case "wail": return '<path d="M36 78 Q50 58 64 78 Q50 72 36 78Z" fill="' + d + '"/><path d="M43 76 Q50 72 57 76" stroke="' + tg + '" stroke-width="3" fill="none"/>';
+    case "teeth": return '<rect x="37" y="65" width="26" height="10" rx="3" fill="#fff" stroke="' + d + '" stroke-width="2.4"/><path d="M37 70 H63 M44 65 V75 M50 65 V75 M56 65 V75" stroke="' + d + '" stroke-width="1.4"/>';
+    case "wavy": return '<path d="M37 71 Q41 66 45 71 T53 71 T61 71" stroke="' + d + '" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    case "O": return '<ellipse cx="50" cy="71" rx="4.5" ry="4.5" fill="' + d + '"/>';
+    case "bigO": return '<ellipse cx="50" cy="71" rx="7" ry="9" fill="' + d + '"/><ellipse cx="50" cy="75" rx="4" ry="2.5" fill="' + tg + '"/>';
+    case "yawn": return '<ellipse cx="50" cy="72" rx="10" ry="12" fill="' + d + '"/><ellipse cx="50" cy="78" rx="6" ry="4" fill="' + tg + '"/>';
+    case "flat": return '<path d="M42 70 H60" stroke="' + d + '" stroke-width="3" stroke-linecap="round"/>';
+    case "flatside": return '<path d="M46 71 Q53 69 60 68" stroke="' + d + '" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    case "lick": return '<path d="M39 66 Q50 75 61 66" stroke="' + d + '" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M53 70 Q58 68 61 66 Q63 72 57 74 Q53 74 53 70Z" fill="' + tg + '" stroke="' + d + '" stroke-width="1.2"/>';
+    case "pant": return '<path d="M39 66 Q50 76 61 66Z" fill="' + d + '"/><path d="M44 69 H56 V77 Q50 82 44 77Z" fill="' + tg + '" stroke="' + d + '" stroke-width="1.4"/>';
+    case "chatter": return '<rect x="37" y="65" width="26" height="9" rx="3" fill="#fff" stroke="' + d + '" stroke-width="2.2"/><path d="M38 70 L41 67 L44 72 L47 67 L50 72 L53 67 L56 72 L59 67 L62 70" stroke="' + d + '" stroke-width="1.4" fill="none"/>';
+    case "grimace": return '<path d="M35 72 Q50 62 65 72 L63 76 Q50 70 37 76Z" fill="#fff" stroke="' + d + '" stroke-width="2.4" stroke-linejoin="round"/>';
+    case "chew": return '<path d="M43 70 Q50 74 57 70" stroke="' + d + '" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    case "smallsmile": return '<path d="M45 69 Q50 72 55 69" stroke="' + d + '" stroke-width="2.6" fill="none" stroke-linecap="round"/>';
+  }
+  return "";
+}
+var KX = {
+  blush: '<ellipse cx="31" cy="63" rx="5" ry="3" fill="#F08A8A" opacity=".55"/><ellipse cx="69" cy="63" rx="5" ry="3" fill="#F08A8A" opacity=".55"/>',
+  tear: '<path d="M62 58 Q59 64 62 67 Q65 64 62 58Z" fill="#5BB6F0"/>',
+  joytears: '<path d="M28 52 Q24 56 26 59 Q29 57 28 52Z" fill="#5BB6F0"/><path d="M72 52 Q76 56 74 59 Q71 57 72 52Z" fill="#5BB6F0"/>',
+  streams: '<path d="M35 57 Q33 70 34 84" stroke="#5BB6F0" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/><path d="M65 57 Q67 70 66 84" stroke="#5BB6F0" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/>',
+  sweat: '<path d="M78 34 Q73 42 77 46 Q82 42 78 34Z" fill="#7CC7F2" stroke="#4A9BD0" stroke-width="1"/>',
+  sweats: '<path d="M78 32 Q73 40 77 44 Q82 40 78 32Z" fill="#7CC7F2"/><path d="M22 36 Q18 43 21 46 Q25 43 22 36Z" fill="#7CC7F2"/><path d="M84 54 Q81 59 83 61 Q86 59 84 54Z" fill="#7CC7F2"/>',
+  red: '<circle cx="50" cy="54" r="30" fill="#FF3B30" opacity=".22"/>',
+  blue: '<circle cx="50" cy="54" r="30" fill="#4AA3F0" opacity=".28"/>',
+  green: '<circle cx="50" cy="54" r="30" fill="#7DBF4E" opacity=".35"/>',
+  pale: '<circle cx="50" cy="54" r="30" fill="#FFFFFF" opacity=".25"/>',
+  anger: '<g stroke="#E0332B" stroke-width="3" stroke-linecap="round"><path d="M74 22 l4 4 M82 22 l-4 4 M74 30 l4 -4 M82 30 l-4 -4"/></g>',
+  shiver: '<g stroke="#4A9BD0" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M10 48 q3 4 0 8 q-3 4 0 8"/><path d="M90 48 q3 4 0 8 q-3 4 0 8"/></g>',
+  snow: '<g stroke="#7FC4F5" stroke-width="2" stroke-linecap="round"><path d="M12 18 v10 M7 23 h10 M8.5 19.5 l7 7 M15.5 19.5 l-7 7"/><path d="M86 12 v8 M82 16 h8"/></g>',
+  heat: '<g stroke="#F08A2B" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M34 12 q-3 3 0 6 q3 3 0 6"/><path d="M50 8 q-3 3 0 6 q3 3 0 6"/><path d="M66 12 q-3 3 0 6 q3 3 0 6"/></g>',
+  z: '<text x="74" y="30" font-size="15" font-weight="800" fill="#6F7FD8" font-family="Arial,sans-serif">z</text>',
+  zzz: '<g fill="#6F7FD8" font-family="Arial,sans-serif" font-weight="800"><text x="68" y="34" font-size="12">z</text><text x="76" y="24" font-size="16">Z</text><text x="85" y="12" font-size="20">Z</text></g>',
+  circles: '<path d="M33 60 Q39 63 45 60 M55 60 Q61 63 67 60" stroke="#8C6BAF" stroke-width="2.4" fill="none" opacity=".6" stroke-linecap="round"/>',
+  drool: '<path d="M57 72 Q55 79 57 82 Q60 79 57 72Z" fill="#9AD3F5"/>',
+  thinkFood: '<g><circle cx="16" cy="30" r="2.5" fill="#fff" stroke="#BBB"/><circle cx="12" cy="21" r="4" fill="#fff" stroke="#BBB"/><circle cx="14" cy="9" r="9" fill="#fff" stroke="#BBB" stroke-width="1.4"/><circle cx="14" cy="10" r="5" fill="#E2463F"/><path d="M14 5 q1 -3 3 -3" stroke="#5B8C3A" stroke-width="1.6" fill="none"/></g>',
+  thinkWater: '<g><circle cx="16" cy="30" r="2.5" fill="#fff" stroke="#BBB"/><circle cx="12" cy="21" r="4" fill="#fff" stroke="#BBB"/><circle cx="14" cy="9" r="9" fill="#fff" stroke="#BBB" stroke-width="1.4"/><path d="M14 3 Q9 10 11 13 Q14 16 17 13 Q19 10 14 3Z" fill="#3E9BE0"/></g>',
+  dots: '<g fill="#8A8A8A"><circle cx="74" cy="22" r="2.6"/><circle cx="81" cy="22" r="2.6"/><circle cx="88" cy="22" r="2.6"/></g>',
+  thermo: '<g transform="rotate(-25 58 70)"><rect x="56" y="64" width="26" height="5" rx="2.5" fill="#fff" stroke="#8A8A8A" stroke-width="1.2"/><circle cx="57" cy="66.5" r="3.4" fill="#E2463F"/><rect x="58" y="65.5" width="12" height="2" fill="#E2463F"/></g>',
+  bandage: '<g transform="rotate(-18 50 34)"><rect x="34" y="30" width="32" height="10" rx="4" fill="#F2C9A0" stroke="#C99A6C" stroke-width="1.2"/><rect x="45" y="30" width="10" height="10" fill="#E8B686"/><g fill="#C99A6C"><circle cx="38" cy="35" r=".9"/><circle cx="62" cy="35" r=".9"/></g></g>',
+  rednose: '<circle cx="50" cy="61" r="3.6" fill="#E86A6A"/>',
+  leaf: '<g fill="#7DBF7A"><path d="M14 22 Q20 10 30 14 Q24 24 14 22Z"/><path d="M86 22 Q80 10 70 14 Q76 24 86 22Z"/></g>',
+  spoon: '<g><path d="M70 92 L58 72" stroke="#A7A7B2" stroke-width="4" stroke-linecap="round"/><ellipse cx="56" cy="70" rx="7" ry="5" fill="#C8C8D2" transform="rotate(-55 56 70)"/><circle cx="55" cy="69" r="3" fill="#F2B84B"/></g>',
+  cheeks: '<circle cx="33" cy="66" r="6" fill="var(--kskin)" stroke="#D99C77" stroke-width="1"/><circle cx="67" cy="66" r="6" fill="var(--kskin)" stroke="#D99C77" stroke-width="1"/>',
+  hand: '<path d="M60 92 Q58 80 64 76 Q70 74 74 78 L78 90Z" fill="var(--kskin)" stroke="#C9926B" stroke-width="1.4"/>'
+};
+/* expression -> [eyes, brows, mouth, extras..., look index, tilt] */
+var KID_EXPR = {
+  happy: ["open", "up", "grin", ["blush"], 0], laughing: ["joy", "up", "laugh", ["blush", "joytears"], 3],
+  sad: ["down", "sad", "frown", ["tear"], 1], crying: ["squeeze", "sad", "wail", ["streams"], 5],
+  angry: ["angry", "angry", "teeth", ["red", "anger"], 2], scared: ["wide", "worry", "wavy", ["pale", "sweat", "shiver"], 4],
+  surprised: ["wide", "high", "bigO", [], 3], calm: ["closed", "flat", "smile", ["blush", "leaf"], 1],
+  tired: ["half", "sad", "wavy", ["circles", "sweat"], 5], sleepy: ["heavy", "flat", "smallsmile", ["z"], 0, -10],
+  sleeping: ["closed", "", "O", ["zzz"], 2, -14], yawning: ["squeeze", "flat", "yawn", ["hand", "tear"], 4],
+  hungry: ["up", "up", "lick", ["drool", "thinkFood"], 1], thirsty: ["half", "sad", "pant", ["sweat", "thinkWater"], 3],
+  bored: ["side", "flat", "flatside", ["dots"], 5, 6], sick: ["half", "sad", "flat", ["green", "thermo", "sweat"], 2],
+  hurt: ["squeeze", "sad", "grimace", ["bandage", "tear"], 0], cold: ["down", "sad", "chatter", ["blue", "rednose", "shiver", "snow"], 4],
+  hot: ["half", "sad", "pant", ["red", "sweats", "heat"], 1], eating: ["joy", "up", "chew", ["cheeks", "spoon"], 5]
+};
+function kidFace(expr, look) {
+  var e = KID_EXPR[expr] || KID_EXPR.happy, L = KID_LOOKS[(look != null ? look : e[4]) % KID_LOOKS.length], tilt = e[5] || 0;
+  var x = e[3].map(function (k) { return KX[k] || ""; });
+  var under = x.filter(function (s, i) { return ["red", "blue", "green", "pale"].indexOf(e[3][i]) >= 0; }).join("");
+  var over = x.filter(function (s, i) { return ["red", "blue", "green", "pale"].indexOf(e[3][i]) < 0; }).join("");
+  return ('<g transform="translate(50 54) scale(1.12) translate(-50 -54)' + (tilt ? ' rotate(' + tilt + ' 50 56)' : "") + '">' + "<g>" + kidHairBack(L) +
+    '<circle cx="20" cy="57" r="6" fill="' + L.s + '"/><circle cx="80" cy="57" r="6" fill="' + L.s + '"/>' +
+    '<circle cx="50" cy="54" r="30" fill="' + L.s + '"/>' + under + kidHairFront(L) +
+    '<path d="M48 58 Q50 61 52 58" stroke="' + L.sd + '" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+    kEyes(e[0]) + kBrows(e[1]) + kMouth(e[2]) + "</g>" + over + "</g>").replace(/var\(--kskin\)/g, L.s);
+}
+Object.keys(KID_EXPR).forEach(function (k) { SVGI["kid_" + k] = kidFace(k); });
 
 Object.assign(SVGI, {
   table: '<rect x="8" y="34" width="84" height="12" rx="4" fill="#B08A64"/><rect x="16" y="46" width="8" height="40" rx="3" fill="#8A6542"/><rect x="76" y="46" width="8" height="40" rx="3" fill="#8A6542"/><rect x="40" y="22" width="20" height="12" rx="3" fill="#E393A6"/>',
@@ -1343,30 +1626,30 @@ var V_CLOTH = [
 
 /* v3 stage 4 data: [icon, es, en, pt, fr, de, it, zh, ja, ko, ar, hi, tl] */
 var V_ACT = [
-  ["😋","comiendo","eating","comendo","manger","essen","mangiare","在吃饭","たべている","먹고 있어요","يأكل","खा रहा है","kumakain"],
+  ["svg:kid_eating","comiendo","eating","comendo","manger","essen","mangiare","在吃饭","たべている","먹고 있어요","يأكل","खा रहा है","kumakain"],
   ["🥤","bebiendo","drinking","bebendo","boire","trinken","bere","在喝水","のんでいる","마시고 있어요","يشرب","पी रहा है","umiinom"],
-  ["😴","durmiendo","sleeping","dormindo","dormir","schlafen","dormire","在睡觉","ねている","자고 있어요","ينام","सो रहा है","natutulog"],
+  ["svg:kid_sleeping","durmiendo","sleeping","dormindo","dormir","schlafen","dormire","在睡觉","ねている","자고 있어요","ينام","सो रहा है","natutulog"],
   ["🏃","corriendo","running","correndo","courir","rennen","correre","在跑步","はしっている","달리고 있어요","يركض","दौड़ रहा है","tumatakbo"],
   ["🤸","saltando","jumping","pulando","sauter","springen","saltare","在跳","とんでいる","점프하고 있어요","يقفز","कूद रहा है","tumatalon"],
   ["🏊","nadando","swimming","nadando","nager","schwimmen","nuotare","在游泳","およいでいる","수영하고 있어요","يسبح","तैर रहा है","lumalangoy"],
   ["📖","leyendo","reading","lendo","lire","lesen","leggere","在看书","よんでいる","읽고 있어요","يقرأ","पढ़ रहा है","nagbabasa"],
   ["🎤","cantando","singing","cantando","chanter","singen","cantare","在唱歌","うたっている","노래하고 있어요","يغني","गा रहा है","kumakanta"],
   ["💃","bailando","dancing","dançando","danser","tanzen","ballare","在跳舞","おどっている","춤추고 있어요","يرقص","नाच रहा है","sumasayaw"],
-  ["😭","llorando","crying","chorando","pleurer","weinen","piangere","在哭","ないている","울고 있어요","يبكي","रो रहा है","umiiyak"],
-  ["😂","riendo","laughing","rindo","rire","lachen","ridere","在笑","わらっている","웃고 있어요","يضحك","हँस रहा है","tumatawa"],
+  ["svg:kid_crying","llorando","crying","chorando","pleurer","weinen","piangere","在哭","ないている","울고 있어요","يبكي","रो रहा है","umiiyak"],
+  ["svg:kid_laughing","riendo","laughing","rindo","rire","lachen","ridere","在笑","わらっている","웃고 있어요","يضحك","हँस रहा है","tumatawa"],
   ["⚽","jugando","playing","brincando","jouer","spielen","giocare","在玩","あそんでいる","놀고 있어요","يلعب","खेल रहा है","naglalaro"],
   ["🧑‍🍳","cocinando","cooking","cozinhando","cuisiner","kochen","cucinare","在做饭","りょうりしている","요리하고 있어요","يطبخ","खाना बना रहा है","nagluluto"],
   ["🚶","caminando","walking","andando","marcher","gehen","camminare","在走路","あるいている","걷고 있어요","يمشي","चल रहा है","naglalakad"],
   ["🛀","bañándose","taking a bath","tomando banho","prendre un bain","baden","fare il bagno","在洗澡","おふろに はいっている","목욕하고 있어요","يستحم","नहा रहा है","naliligo"],
   ["🚴","andando en bici","riding a bike","andando de bicicleta","faire du vélo","Rad fahren","andare in bici","在骑车","じてんしゃに のっている","자전거 타고 있어요","يركب الدراجة","साइकिल चला रहा है","nagbibisikleta"],
-  ["🥱","bostezando","yawning","bocejando","bâiller","gähnen","sbadigliare","在打哈欠","あくびしている","하품하고 있어요","يتثاءب","जम्हाई ले रहा है","humihikab"],
-  ["😪","tiene sueño","sleepy","com sono","avoir sommeil","schläfrig","assonnato","困了","ねむい","졸려요","نعسان","नींद आ रही है","inaantok"],
-  ["😩","cansado","tired","cansado","fatigué","müde","stanco","累了","つかれた","피곤해요","متعب","थका हुआ","pagod"],
-  ["🤤","tiene hambre","hungry","com fome","avoir faim","hungrig","affamato","饿了","おなかが すいた","배고파요","جائع","भूख लगी है","gutom"],
-  ["svg:thirsty","tiene sed","thirsty","com sede","avoir soif","durstig","assetato","渴了","のどが かわいた","목말라요","عطشان","प्यास लगी है","nauuhaw"],
-  ["😑","aburrido","bored","entediado","s'ennuyer","gelangweilt","annoiato","无聊","たいくつ","심심해요","يشعر بالملل","ऊब गया है","naiinip"],
-  ["😨","asustado","scared","com medo","avoir peur","ängstlich","spaventato","害怕","こわい","무서워요","خائف","डरा हुआ","takot"],
-  ["🤒","enfermo","sick","doente","malade","krank","malato","生病了","びょうき","아파요","مريض","बीमार","may sakit"]
+  ["svg:kid_yawning","bostezando","yawning","bocejando","bâiller","gähnen","sbadigliare","在打哈欠","あくびしている","하품하고 있어요","يتثاءب","जम्हाई ले रहा है","humihikab"],
+  ["svg:kid_sleepy","tiene sueño","sleepy","com sono","avoir sommeil","schläfrig","assonnato","困了","ねむい","졸려요","نعسان","नींद आ रही है","inaantok"],
+  ["svg:kid_tired","cansado","tired","cansado","fatigué","müde","stanco","累了","つかれた","피곤해요","متعب","थका हुआ","pagod"],
+  ["svg:kid_hungry","tiene hambre","hungry","com fome","avoir faim","hungrig","affamato","饿了","おなかが すいた","배고파요","جائع","भूख लगी है","gutom"],
+  ["svg:kid_thirsty","tiene sed","thirsty","com sede","avoir soif","durstig","assetato","渴了","のどが かわいた","목말라요","عطشان","प्यास लगी है","nauuhaw"],
+  ["svg:kid_bored","aburrido","bored","entediado","s'ennuyer","gelangweilt","annoiato","无聊","たいくつ","심심해요","يشعر بالملل","ऊब गया है","naiinip"],
+  ["svg:kid_scared","asustado","scared","com medo","avoir peur","ängstlich","spaventato","害怕","こわい","무서워요","خائف","डरा हुआ","takot"],
+  ["svg:kid_sick","enfermo","sick","doente","malade","krank","malato","生病了","びょうき","아파요","مريض","बीमार","may sakit"]
 ];
 var SIM_ACT = [[2, 16, 17, 18], [9, 22], [0, 19], [1, 20], [10, 11]];
 var V_WX = [
@@ -1377,8 +1660,8 @@ var V_WX = [
   ["🌬️","viento","wind","vento","vent","Wind","vento","刮风","かぜ|風","바람","رياح","हवा","hangin"],
   ["⛈️","tormenta","storm","tempestade","orage","Gewitter","temporale","打雷","かみなり","폭풍","عاصفة","तूफ़ान","bagyo"],
   ["🌈","arcoíris","rainbow","arco-íris","arc-en-ciel","Regenbogen","arcobaleno","彩虹","にじ|虹","무지개","قوس قزح","इंद्रधनुष","bahaghari"],
-  ["🥵","calor","hot","calor","chaud","heiß","caldo","热","あつい","더워요","حار","गर्मी","mainit"],
-  ["🥶","frío","cold","frio","froid","kalt","freddo","冷","さむい","추워요","بارد","ठंड","malamig"],
+  ["svg:kid_hot","calor","hot","calor","chaud","heiß","caldo","热","あつい","더워요","حار","गर्मी","mainit"],
+  ["svg:kid_cold","frío","cold","frio","froid","kalt","freddo","冷","さむい","추워요","بارد","ठंड","malamig"],
   ["🌫️","niebla","fog","neblina","brouillard","Nebel","nebbia","雾","きり|霧","안개","ضباب","कोहरा","hamog"],
   ["🌸","primavera","spring","primavera","printemps","Frühling","primavera","春天","はる|春","봄","الربيع","वसंत","tagsibol"],
   ["🏖️","verano","summer","verão","été","Sommer","estate","夏天","なつ|夏","여름","الصيف","गर्मी का मौसम","tag-init"],
@@ -1411,8 +1694,8 @@ var V_OPP = [
   ["🧊","frío","cold","frio","froid","kalt","freddo","冷","つめたい","차가워요","بارد","ठंडा","malamig"],
   ["☀️","día","day","dia","jour","Tag","giorno","白天","ひる","낮","نهار","दिन","araw"],
   ["🌙","noche","night","noite","nuit","Nacht","notte","晚上","よる","밤","ليل","रात","gabi"],
-  ["😀","feliz","happy","feliz","content","fröhlich","felice","开心","うれしい","기뻐요","سعيد","खुश","masaya"],
-  ["😢","triste","sad","triste","triste","traurig","triste","难过","かなしい","슬퍼요","حزين","उदास","malungkot"],
+  ["svg:kid_happy","feliz","happy","feliz","content","fröhlich","felice","开心","うれしい","기뻐요","سعيد","खुश","masaya"],
+  ["svg:kid_sad","triste","sad","triste","triste","traurig","triste","难过","かなしい","슬퍼요","حزين","उदास","malungkot"],
   ["🐇","rápido","fast","rápido","rapide","schnell","veloce","快","はやい","빨라요","سريع","तेज़","mabilis"],
   ["🐢","lento","slow","devagar","lent","langsam","lento","慢","おそい","느려요","بطيء","धीमा","mabagal"],
   ["⬆️","arriba","up","em cima","en haut","oben","su","上","うえ","위","فوق","ऊपर","itaas"],
@@ -1476,7 +1759,7 @@ var V_DAY = [
   ["🛁","bañarse","bath","tomar banho","le bain","baden","il bagnetto","洗澡","おふろ","목욕","الاستحمام","नहाना","maligo"],
   ["🍲","cenar","dinner","jantar","dîner","Abendessen","cena","吃晚饭","ばんごはん","저녁 먹기","العشاء","रात का खाना","hapunan"],
   ["svg:pajamas","ponerse la pijama","pajamas on","pôr o pijama","mettre le pyjama","Schlafanzug an","mettere il pigiama","换睡衣","パジャマ","잠옷 입기","ارتداء البيجامة","पजामा पहनना","magpajama"],
-  ["😴","dormir","sleep","dormir","dormir","schlafen","dormire","睡觉","ねる","잠자기","النوم","सोना","matulog"]
+  ["svg:kid_sleeping","dormir","sleep","dormir","dormir","schlafen","dormire","睡觉","ねる","잠자기","النوم","सोना","matulog"]
 ];
 /* safety: [icon, ...names], SAFE_OK[i] = 1 safe, 0 careful */
 var V_SAFE = [
@@ -1496,11 +1779,185 @@ var V_SAFE = [
 ];
 var SAFE_OK = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1];
 
+/* v3 stage 5 (Repetir conmigo, Primero/Después, Reloj, Pedir, Mi familia con fotos, Cuentos). Order: es en pt fr de it zh ja ko ar hi tl */
+var TR8_KEYS = ["g_rep", "g_fb", "g_timer", "g_req", "g_myfam", "g_story", "sec_plan",
+  "repIntro", "repYourTurn", "repListen", "repRec", "repStop", "repMine", "repSaid", "repGood", "repHearYou", "repLv1", "repLv2", "repLv3", "repPriv", "repNoMic", "repPractice",
+  "fbFirst", "fbThen", "fbNow", "fbHelp", "fbDone",
+  "tmPick", "tmStart", "tmStart1", "tmLeft1", "tmEnd", "tmPause", "tmGo", "tmUnit",
+  "reqIntro",
+  "famEmpty", "famLook", "famWhere", "famAdd", "famName", "famSave", "famDel", "famPriv", "famManage", "famNeed2", "famPhotoBtn",
+  "stPick", "stEnd", "stAgain", "stOther"];
+var TR8_ROWS = {
+g_rep: ["Repetir conmigo", "Say it with me", "Repita comigo", "Répète avec moi", "Sprich mit mir", "Ripeti con me", "跟我说", "いっしょに いおう", "따라 말해요", "ردّد معي", "मेरे साथ बोलो", "Ulitin mo"],
+g_fb: ["Primero / Después", "First / Then", "Primeiro / Depois", "D'abord / Ensuite", "Zuerst / Dann", "Prima / Poi", "先 / 再", "さいしょ / つぎ", "먼저 / 다음", "أولًا / ثم", "पहले / फिर", "Una / Pagkatapos"],
+g_timer: ["Reloj visual", "Visual timer", "Relógio visual", "Minuteur", "Zeituhr", "Timer visivo", "计时器", "タイマー", "타이머", "المؤقت", "टाइमर", "Timer"],
+g_req: ["Pedir", "Ask for", "Pedir", "Demander", "Bitten", "Chiedere", "我要", "おねがい", "요청하기", "أطلب", "माँगो", "Humingi"],
+g_myfam: ["Mi familia", "My family", "Minha família", "Ma famille", "Meine Familie", "La mia famiglia", "我的家人", "わたしの かぞく", "우리 가족", "عائلتي", "मेरा परिवार", "Aking pamilya"],
+g_story: ["Cuentos", "Stories", "Histórias", "Histoires", "Geschichten", "Storie", "小故事", "おはなし", "이야기", "قصص", "कहानियाँ", "Mga kuwento"],
+sec_plan: ["Organizo mi día", "Plan my day", "Organizo meu dia", "J'organise ma journée", "Meinen Tag planen", "Organizzo la giornata", "安排我的一天", "いちにちの よてい", "하루 계획", "أنظّم يومي", "अपना दिन", "Plano ng araw ko"],
+repIntro: ["Escucha y repite conmigo.", "Listen and say it with me.", "Escute e repita comigo.", "Écoute et répète avec moi.", "Hör zu und sprich mit mir.", "Ascolta e ripeti con me.", "听一听，跟我说。", "きいて、いっしょに いってね。", "잘 듣고 따라 말해요.", "استمع وردّد معي.", "सुनो और मेरे साथ बोलो।", "Makinig at ulitin mo."],
+repYourTurn: ["Ahora tú.", "Your turn.", "Agora você.", "À toi.", "Jetzt du.", "Ora tocca a te.", "现在你说。", "こんどは きみの ばん。", "이제 네 차례야.", "دورك الآن.", "अब तुम्हारी बारी।", "Ikaw naman."],
+repListen: ["Escuchar", "Listen", "Ouvir", "Écouter", "Hören", "Ascolta", "听", "きく", "듣기", "استمع", "सुनो", "Makinig"],
+repRec: ["Grabar mi voz", "Record my voice", "Gravar minha voz", "Enregistrer ma voix", "Stimme aufnehmen", "Registra la mia voce", "录我的声音", "こえを ろくおん", "내 목소리 녹음", "سجّل صوتي", "मेरी आवाज़ रिकॉर्ड करो", "I-record ang boses ko"],
+repStop: ["Parar", "Stop", "Parar", "Arrêter", "Stopp", "Ferma", "停", "とめる", "멈춤", "توقف", "रोको", "Itigil"],
+repMine: ["Mi voz", "My voice", "Minha voz", "Ma voix", "Meine Stimme", "La mia voce", "我的声音", "わたしの こえ", "내 목소리", "صوتي", "मेरी आवाज़", "Boses ko"],
+repSaid: ["¡Lo dije!", "I said it!", "Eu falei!", "Je l'ai dit !", "Ich hab's gesagt!", "L'ho detto!", "我说了！", "いえたよ！", "말했어요!", "قلتها!", "मैंने बोल दिया!", "Nasabi ko!"],
+repGood: ["¡Muy bien! Lo dijiste.", "Great job! You said it.", "Muito bem! Você falou.", "Bravo ! Tu l'as dit.", "Super! Du hast es gesagt.", "Bravissimo! L'hai detto.", "真棒！你说出来了。", "すごい！いえたね。", "잘했어! 말했구나.", "أحسنت! لقد قلتها.", "बहुत बढ़िया! तुमने बोल दिया।", "Magaling! Nasabi mo."],
+repHearYou: ["Escucha tu voz.", "Listen to your voice.", "Escute sua voz.", "Écoute ta voix.", "Hör deine Stimme.", "Ascolta la tua voce.", "听听你的声音。", "きみの こえを きいてみよう。", "네 목소리를 들어 봐.", "استمع إلى صوتك.", "अपनी आवाज़ सुनो।", "Pakinggan ang boses mo."],
+repLv1: ["Palabras", "Words", "Palavras", "Mots", "Wörter", "Parole", "词语", "ことば", "낱말", "كلمات", "शब्द", "Mga salita"],
+repLv2: ["2 palabras", "2 words", "2 palavras", "2 mots", "2 Wörter", "2 parole", "两个词", "2つの ことば", "두 낱말", "كلمتان", "2 शब्द", "2 salita"],
+repLv3: ["Frases", "Sentences", "Frases", "Phrases", "Sätze", "Frasi", "句子", "ぶん", "문장", "جمل", "वाक्य", "Mga pangungusap"],
+repPriv: ["Tu voz se queda en este teléfono. No se sube a ningún lado.", "Your voice stays on this phone. It is never uploaded.", "Sua voz fica neste telefone. Nunca é enviada.", "Ta voix reste sur ce téléphone. Elle n'est jamais envoyée.", "Deine Stimme bleibt auf diesem Handy. Sie wird nie hochgeladen.", "La tua voce resta su questo telefono. Non viene mai caricata.", "你的声音只留在这部手机上，不会上传。", "こえは この でんわだけに のこります。アップロードは しません。", "목소리는 이 휴대폰에만 있어요. 업로드되지 않아요.", "يبقى صوتك على هذا الهاتف ولا يُرفع أبدًا.", "तुम्हारी आवाज़ इसी फ़ोन में रहती है। कभी अपलोड नहीं होती।", "Nasa teleponong ito lang ang boses mo. Hindi ito ina-upload."],
+repNoMic: ["Sin micrófono: toca «¡Lo dije!» cuando lo diga.", "No microphone: tap “I said it!” after he says it.", "Sem microfone: toque em “Eu falei!” quando ele falar.", "Sans micro : touche « Je l'ai dit ! » quand il l'a dit.", "Kein Mikrofon: Tippe auf „Ich hab's gesagt!“, wenn er es gesagt hat.", "Senza microfono: tocca “L'ho detto!” quando lo dice.", "没有麦克风：孩子说完后点“我说了！”。", "マイクが ないときは、いえたら「いえたよ！」を おしてね。", "마이크가 없으면 말한 뒤 ‘말했어요!’를 눌러요.", "بدون ميكروفون: المس «قلتها!» بعد أن يقولها.", "माइक नहीं है: बोलने के बाद “मैंने बोल दिया!” दबाएँ।", "Walang mikropono: pindutin ang “Nasabi ko!” pagkasabi niya."],
+repPractice: ["Practicó decir", "Practiced saying", "Praticou falar", "A pratiqué", "Geübt", "Ha praticato", "练习说", "れんしゅうした ことば", "연습한 말", "تدرّب على قول", "बोलने का अभ्यास", "Nagsanay sabihin"],
+fbFirst: ["Primero", "First", "Primeiro", "D'abord", "Zuerst", "Prima", "先", "まず", "먼저", "أولًا", "पहले", "Una"],
+fbThen: ["Después", "Then", "Depois", "Ensuite", "Dann", "Poi", "然后", "つぎに", "다음에", "ثم", "फिर", "Pagkatapos"],
+fbNow: ["Ahora", "Now", "Agora", "Maintenant", "Jetzt", "Adesso", "现在", "こんどは", "이제", "الآن", "अब", "Ngayon"],
+fbHelp: ["Elige qué va primero y qué va después.", "Choose what comes first and what comes next.", "Escolha o que vem primeiro e o que vem depois.", "Choisis ce qu'on fait d'abord et ensuite.", "Wähle, was zuerst kommt und was danach.", "Scegli cosa viene prima e cosa dopo.", "选一选先做什么，再做什么。", "まず なにを して、つぎに なにを するか えらんでね。", "먼저 할 것과 다음에 할 것을 골라요.", "اختر ماذا نفعل أولًا وماذا بعد ذلك.", "चुनो पहले क्या करना है और फिर क्या।", "Piliin kung ano ang una at ano ang susunod."],
+fbDone: ["Hecho", "Done", "Feito", "Fini", "Erledigt", "Fatto", "完成", "できた", "다 했어요", "تم", "हो गया", "Tapos"],
+tmPick: ["¿Cuántos minutos?", "How many minutes?", "Quantos minutos?", "Combien de minutes ?", "Wie viele Minuten?", "Quanti minuti?", "几分钟？", "なんぷん？", "몇 분?", "كم دقيقة؟", "कितने मिनट?", "Ilang minuto?"],
+tmStart: ["Tenemos {n} minutos.", "We have {n} minutes.", "Temos {n} minutos.", "On a {n} minutes.", "Wir haben {n} Minuten.", "Abbiamo {n} minuti.", "我们有{n}分钟。", "{n}分 だよ。", "{n}분 있어요.", "لدينا {n} دقائق.", "हमारे पास {n} मिनट हैं।", "May {n} minuto tayo."],
+tmStart1: ["Tenemos 1 minuto.", "We have 1 minute.", "Temos 1 minuto.", "On a 1 minute.", "Wir haben 1 Minute.", "Abbiamo 1 minuto.", "我们有1分钟。", "1分 だよ。", "1분 있어요.", "لدينا دقيقة واحدة.", "हमारे पास 1 मिनट है।", "May 1 minuto tayo."],
+tmLeft1: ["Falta un minuto.", "One more minute.", "Falta um minuto.", "Encore une minute.", "Noch eine Minute.", "Manca un minuto.", "还有一分钟。", "あと 1分 だよ。", "1분 남았어요.", "بقيت دقيقة واحدة.", "एक मिनट बचा है।", "Isang minuto na lang."],
+tmEnd: ["¡Se acabó el tiempo!", "Time is up!", "Acabou o tempo!", "C'est l'heure !", "Die Zeit ist um!", "Tempo scaduto!", "时间到了！", "じかん だよ！", "시간이 다 됐어요!", "انتهى الوقت!", "समय पूरा हुआ!", "Tapos na ang oras!"],
+tmPause: ["Pausa", "Pause", "Pausar", "Pause", "Pause", "Pausa", "暂停", "とめる", "일시정지", "إيقاف مؤقت", "रोकें", "I-pause"],
+tmGo: ["Seguir", "Resume", "Continuar", "Reprendre", "Weiter", "Riprendi", "继续", "つづける", "계속", "استئناف", "जारी रखें", "Ituloy"],
+tmUnit: ["min", "min", "min", "min", "Min.", "min", "分钟", "分", "분", "دقيقة", "मिनट", "min"],
+reqIntro: ["¿Qué necesitas? Toca un botón.", "What do you need? Tap a button.", "Do que você precisa? Toque um botão.", "De quoi as-tu besoin ? Touche un bouton.", "Was brauchst du? Tippe auf einen Knopf.", "Di cosa hai bisogno? Tocca un pulsante.", "你需要什么？点一个按钮。", "なにが ほしい？ボタンを おしてね。", "뭐가 필요해? 버튼을 눌러.", "ماذا تحتاج؟ المس زرًا.", "तुम्हें क्या चाहिए? एक बटन दबाओ।", "Ano ang kailangan mo? Pindutin ang isang button."],
+famEmpty: ["Pide a papá o mamá que agreguen fotos de la familia.", "Ask Mom or Dad to add family photos.", "Peça para o papai ou a mamãe colocar fotos da família.", "Demande à papa ou maman d'ajouter des photos de la famille.", "Bitte Mama oder Papa, Familienfotos hinzuzufügen.", "Chiedi a mamma o papà di aggiungere le foto della famiglia.", "请爸爸妈妈加上家人的照片。", "パパか ママに かぞくの しゃしんを いれて もらおう。", "엄마나 아빠에게 가족 사진을 넣어 달라고 해요.", "اطلب من بابا أو ماما إضافة صور العائلة.", "मम्मी या पापा से परिवार की फ़ोटो जोड़ने को कहो।", "Hilingin kay Nanay o Tatay na magdagdag ng mga litrato ng pamilya."],
+famLook: ["¡Mira! Es {x}.", "Look! It's {x}.", "Olha! É {x}.", "Regarde ! C'est {x}.", "Schau! Das ist {x}.", "Guarda! È {x}.", "看！这是{x}。", "みて！{x}だよ。", "봐요! {x}.", "انظر! {x}.", "देखो! ये {x} हैं।", "Tingnan mo! Si {x}."],
+famWhere: ["¿Dónde está {x}?", "Where is {x}?", "Onde está {x}?", "Où est {x} ?", "Wo ist {x}?", "Dov'è {x}?", "{x}在哪里？", "{x}は どこ？", "{x} 어디 있어요?", "أين {x}؟", "{x} कहाँ हैं?", "Nasaan si {x}?"],
+famAdd: ["Agregar foto", "Add photo", "Adicionar foto", "Ajouter une photo", "Foto hinzufügen", "Aggiungi foto", "添加照片", "しゃしんを ついか", "사진 추가", "إضافة صورة", "फ़ोटो जोड़ें", "Magdagdag ng litrato"],
+famName: ["Nombre (ej.: Mamá, Abuela)", "Name (e.g. Mom, Grandma)", "Nome (ex.: Mamãe, Vovó)", "Nom (ex. : Maman, Mamie)", "Name (z. B. Mama, Oma)", "Nome (es.: Mamma, Nonna)", "名字（例如：妈妈、奶奶）", "なまえ（れい：ママ、おばあちゃん）", "이름 (예: 엄마, 할머니)", "الاسم (مثلًا: ماما، جدتي)", "नाम (जैसे: मम्मी, दादी)", "Pangalan (hal.: Nanay, Lola)"],
+famSave: ["Guardar", "Save", "Salvar", "Enregistrer", "Speichern", "Salva", "保存", "ほぞん", "저장", "حفظ", "सहेजें", "I-save"],
+famDel: ["Borrar", "Delete", "Apagar", "Supprimer", "Löschen", "Elimina", "删除", "けす", "삭제", "حذف", "हटाएँ", "Burahin"],
+famPriv: ["Las fotos se quedan solo en este teléfono. No se suben a internet.", "Photos stay only on this phone. They are never uploaded.", "As fotos ficam só neste telefone. Nunca vão para a internet.", "Les photos restent sur ce téléphone. Elles ne sont jamais envoyées.", "Die Fotos bleiben nur auf diesem Handy. Sie werden nie hochgeladen.", "Le foto restano solo su questo telefono. Non vengono mai caricate.", "照片只保存在这部手机上，不会上传。", "しゃしんは この でんわだけに のこります。アップロードは しません。", "사진은 이 휴대폰에만 저장돼요. 업로드되지 않아요.", "تبقى الصور على هذا الهاتف فقط ولا تُرفع أبدًا.", "फ़ोटो सिर्फ़ इसी फ़ोन में रहती हैं। कभी अपलोड नहीं होतीं।", "Nasa teleponong ito lang ang mga litrato. Hindi ito ina-upload."],
+famManage: ["Fotos de mi familia", "Family photos", "Fotos da família", "Photos de la famille", "Familienfotos", "Foto della famiglia", "家人照片", "かぞくの しゃしん", "가족 사진", "صور العائلة", "परिवार की फ़ोटो", "Mga litrato ng pamilya"],
+famNeed2: ["Agrega al menos 2 fotos para jugar.", "Add at least 2 photos to play.", "Adicione pelo menos 2 fotos para jogar.", "Ajoute au moins 2 photos pour jouer.", "Füge mindestens 2 Fotos hinzu, um zu spielen.", "Aggiungi almeno 2 foto per giocare.", "至少加2张照片才能玩。", "あそぶには しゃしんが 2まい いります。", "놀려면 사진을 2장 이상 넣어요.", "أضف صورتين على الأقل للعب.", "खेलने के लिए कम से कम 2 फ़ोटो जोड़ें।", "Magdagdag ng kahit 2 litrato para makapaglaro."],
+famPhotoBtn: ["Elegir foto", "Choose photo", "Escolher foto", "Choisir une photo", "Foto wählen", "Scegli foto", "选择照片", "しゃしんを えらぶ", "사진 선택", "اختر صورة", "फ़ोटो चुनें", "Pumili ng litrato"],
+stPick: ["Elige un cuento.", "Pick a story.", "Escolha uma história.", "Choisis une histoire.", "Such dir eine Geschichte aus.", "Scegli una storia.", "选一个故事。", "おはなしを えらんでね。", "이야기를 골라요.", "اختر قصة.", "एक कहानी चुनो।", "Pumili ng kuwento."],
+stEnd: ["Fin.", "The end.", "Fim.", "Fin.", "Ende.", "Fine.", "讲完了。", "おしまい。", "끝.", "النهاية.", "समाप्त।", "Wakas."],
+stAgain: ["Otra vez", "Again", "De novo", "Encore", "Nochmal", "Ancora", "再来一次", "もう いちど", "다시", "مرة أخرى", "फिर से", "Ulit"],
+stOther: ["Otro cuento", "Another story", "Outra história", "Une autre histoire", "Andere Geschichte", "Un'altra storia", "换一个故事", "ほかの おはなし", "다른 이야기", "قصة أخرى", "दूसरी कहानी", "Ibang kuwento"]
+};
+/* Arabic dual for 2 minutes */
+var TR8_EXTRA = { ar: { tmStart2: "لدينا دقيقتان." } };
+LO.forEach(function (l, li) { TR8_KEYS.forEach(function (k) { TR[l][k] = TR8_ROWS[k][li]; }); Object.assign(TR[l], (TR8_EXTRA[l] || {})); });
+
+/* Repetir conmigo: level 1 words, level 2 two-word phrases, level 3 short sentences */
+var REP = [[
+  ["💧", "agua", "water", "água", "eau", "Wasser", "acqua", "水", "みず", "물", "ماء", "पानी", "tubig"],
+  ["👩", "mamá", "Mom", "mamãe", "maman", "Mama", "mamma", "妈妈", "ママ", "엄마", "ماما", "मम्मी", "Nanay"],
+  ["👨", "papá", "Dad", "papai", "papa", "Papa", "papà", "爸爸", "パパ", "아빠", "بابا", "पापा", "Tatay"],
+  ["🍪", "galleta", "cookie", "biscoito", "biscuit", "Keks", "biscotto", "饼干", "クッキー", "쿠키", "بسكويت", "बिस्कुट", "biskwit"],
+  ["⚽", "pelota", "ball", "bola", "ballon", "Ball", "palla", "球", "ボール", "공", "كرة", "गेंद", "bola"],
+  ["🐶", "perro", "dog", "cachorro", "chien", "Hund", "cane", "狗", "いぬ", "강아지", "كلب", "कुत्ता", "aso"],
+  ["🐱", "gato", "cat", "gato", "chat", "Katze", "gatto", "猫", "ねこ", "고양이", "قطة", "बिल्ली", "pusa"],
+  ["🚗", "carro", "car", "carro", "voiture", "Auto", "macchina", "汽车", "くるま", "자동차", "سيارة", "गाड़ी", "kotse"],
+  ["🥛", "leche", "milk", "leite", "lait", "Milch", "latte", "牛奶", "ぎゅうにゅう", "우유", "حليب", "दूध", "gatas"],
+  ["🍎", "manzana", "apple", "maçã", "pomme", "Apfel", "mela", "苹果", "りんご", "사과", "تفاحة", "सेब", "mansanas"],
+  ["👋", "hola", "hi", "oi", "salut", "hallo", "ciao", "你好", "こんにちは", "안녕", "مرحبًا", "नमस्ते", "kumusta"],
+  ["🙏", "gracias", "thank you", "obrigado", "merci", "danke", "grazie", "谢谢", "ありがとう", "고마워요", "شكرًا", "धन्यवाद", "salamat"],
+  ["➕", "más", "more", "mais", "encore", "mehr", "ancora", "还要", "もっと", "더", "المزيد", "और", "dagdag"],
+  ["🤝", "ayuda", "help", "ajuda", "aide", "Hilfe", "aiuto", "帮忙", "たすけて", "도와줘요", "مساعدة", "मदद", "tulong"],
+  ["🏠", "casa", "home", "casa", "maison", "Haus", "casa", "家", "いえ", "집", "بيت", "घर", "bahay"],
+  ["👟", "zapatos", "shoes", "sapatos", "chaussures", "Schuhe", "scarpe", "鞋子", "くつ", "신발", "حذاء", "जूते", "sapatos"]
+], [
+  ["💧", "más agua", "more water", "mais água", "encore de l'eau", "mehr Wasser", "ancora acqua", "还要水", "もっと みず", "물 더", "المزيد من الماء", "और पानी", "tubig pa"],
+  ["👩", "hola, mamá", "hi, Mom", "oi, mamãe", "salut, maman", "hallo, Mama", "ciao, mamma", "妈妈好", "ママ、おはよう", "엄마 안녕", "مرحبًا ماما", "नमस्ते मम्मी", "hi, Nanay"],
+  ["👨", "adiós, papá", "bye, Dad", "tchau, papai", "au revoir, papa", "tschüss, Papa", "ciao, papà", "爸爸再见", "パパ、バイバイ", "아빠 잘 가", "مع السلامة بابا", "बाय पापा", "paalam, Tatay"],
+  ["⚽", "mi pelota", "my ball", "minha bola", "mon ballon", "mein Ball", "la mia palla", "我的球", "ぼくの ボール", "내 공", "كرتي", "मेरी गेंद", "bola ko"],
+  ["🐶", "perro grande", "big dog", "cachorro grande", "grand chien", "großer Hund", "cane grande", "大狗", "おおきい いぬ", "큰 강아지", "كلب كبير", "बड़ा कुत्ता", "malaking aso"],
+  ["🚗", "carro rojo", "red car", "carro vermelho", "voiture rouge", "rotes Auto", "macchina rossa", "红色的车", "あかい くるま", "빨간 자동차", "سيارة حمراء", "लाल गाड़ी", "pulang kotse"],
+  ["✋", "ya terminé", "all done", "já acabei", "j'ai fini", "bin fertig", "ho finito", "做完了", "おわったよ", "다 했어요", "انتهيت الآن", "हो गया", "tapos na"],
+  ["❤️", "te quiero", "I love you", "te amo", "je t'aime", "hab dich lieb", "ti voglio bene", "我爱你", "だいすき", "사랑해요", "أحبك", "आपसे प्यार है", "mahal kita"],
+  ["🙏", "gracias, mamá", "thanks, Mom", "obrigado, mamãe", "merci, maman", "danke, Mama", "grazie, mamma", "谢谢妈妈", "ママ、ありがとう", "엄마 고마워요", "شكرًا ماما", "धन्यवाद मम्मी", "salamat, Nanay"],
+  ["👟", "mis zapatos", "my shoes", "meus sapatos", "mes chaussures", "meine Schuhe", "le mie scarpe", "我的鞋", "ぼくの くつ", "내 신발", "حذائي", "मेरे जूते", "sapatos ko"],
+  ["🍎", "manzana roja", "red apple", "maçã vermelha", "pomme rouge", "roter Apfel", "mela rossa", "红苹果", "あかい りんご", "빨간 사과", "تفاحة حمراء", "लाल सेब", "pulang mansanas"]
+], [
+  ["🍪", "Quiero una galleta.", "I want a cookie.", "Quero um biscoito.", "Je veux un biscuit.", "Ich möchte einen Keks.", "Voglio un biscotto.", "我要饼干。", "クッキーが ほしい。", "쿠키 주세요.", "أريد بسكويتة.", "मुझे बिस्कुट चाहिए।", "Gusto ko ng biskwit."],
+  ["💧", "Quiero tomar agua.", "I want some water.", "Quero beber água.", "Je veux de l'eau.", "Ich will Wasser trinken.", "Voglio dell'acqua.", "我要喝水。", "みずが のみたい。", "물 마시고 싶어요.", "أريد أن أشرب ماءً.", "मुझे पानी पीना है।", "Gusto kong uminom ng tubig."],
+  ["🛝", "Vamos al parque.", "Let's go to the park.", "Vamos ao parque.", "On va au parc.", "Gehen wir in den Park.", "Andiamo al parco.", "我们去公园。", "こうえんに いこう。", "공원에 가요.", "هيا إلى الحديقة.", "चलो पार्क चलें।", "Tara sa parke."],
+  ["🧸", "Me gusta jugar.", "I like to play.", "Eu gosto de brincar.", "J'aime jouer.", "Ich spiele gern.", "Mi piace giocare.", "我喜欢玩。", "あそぶのが すき。", "노는 게 좋아요.", "أحب اللعب.", "मुझे खेलना पसंद है।", "Gusto kong maglaro."],
+  ["🚪", "Abre la puerta.", "Open the door.", "Abra a porta.", "Ouvre la porte.", "Mach die Tür auf.", "Apri la porta.", "请开门。", "ドアを あけて。", "문 열어 주세요.", "افتح الباب.", "दरवाज़ा खोलो।", "Buksan ang pinto."],
+  ["⚽", "Dame la pelota.", "Give me the ball.", "Me dá a bola.", "Donne-moi le ballon.", "Gib mir den Ball.", "Dammi la palla.", "把球给我。", "ボールを ちょうだい。", "공 주세요.", "أعطني الكرة.", "मुझे गेंद दो।", "Pahingi ng bola."],
+  ["❤️", "Te quiero, mamá.", "I love you, Mom.", "Eu te amo, mamãe.", "Je t'aime, maman.", "Ich hab dich lieb, Mama.", "Ti voglio bene, mamma.", "妈妈，我爱你。", "ママ、だいすき。", "엄마, 사랑해요.", "أحبك يا ماما.", "मम्मी, आपसे प्यार है।", "Mahal kita, Nanay."],
+  ["🚽", "Quiero ir al baño.", "I need the bathroom.", "Quero ir ao banheiro.", "Je veux aller aux toilettes.", "Ich muss aufs Klo.", "Devo andare in bagno.", "我要上厕所。", "トイレに いきたい。", "화장실 가고 싶어요.", "أريد الذهاب إلى الحمام.", "मुझे बाथरूम जाना है।", "Gusto kong pumunta sa banyo."],
+  ["🐶", "El perro corre.", "The dog runs.", "O cachorro corre.", "Le chien court.", "Der Hund rennt.", "Il cane corre.", "小狗在跑。", "いぬが はしる。", "강아지가 달려요.", "الكلب يركض.", "कुत्ता दौड़ता है।", "Tumatakbo ang aso."],
+  ["🤝", "Ayúdame, por favor.", "Help me, please.", "Me ajuda, por favor.", "Aide-moi, s'il te plaît.", "Hilf mir bitte.", "Aiutami, per favore.", "请帮帮我。", "てつだって ください。", "도와주세요.", "ساعدني من فضلك.", "मेरी मदद करो।", "Tulungan mo ako, pakiusap."]
+]];
+
+/* Primero / Después picture cards */
+var FB = [
+  ["🚽", "baño", "bathroom", "banheiro", "toilettes", "Klo", "bagno", "上厕所", "トイレ", "화장실", "الحمام", "बाथरूम", "banyo"],
+  ["🧼", "lavar manos", "wash hands", "lavar as mãos", "laver les mains", "Hände waschen", "lavare le mani", "洗手", "てあらい", "손 씻기", "غسل اليدين", "हाथ धोना", "maghugas ng kamay"],
+  ["🪥", "cepillar dientes", "brush teeth", "escovar os dentes", "brosser les dents", "Zähne putzen", "lavare i denti", "刷牙", "はみがき", "양치질", "تنظيف الأسنان", "ब्रश करना", "magsipilyo"],
+  ["🍽️", "comer", "eat", "comer", "manger", "essen", "mangiare", "吃饭", "ごはん", "밥 먹기", "الأكل", "खाना", "kumain"],
+  ["👕", "vestirse", "get dressed", "se vestir", "s'habiller", "anziehen", "vestirsi", "穿衣服", "きがえ", "옷 입기", "ارتداء الملابس", "कपड़े पहनना", "magbihis"],
+  ["👟", "zapatos", "shoes", "sapatos", "chaussures", "Schuhe", "scarpe", "穿鞋", "くつ", "신발 신기", "الحذاء", "जूते", "sapatos"],
+  ["🛁", "bañarse", "bath", "banho", "bain", "baden", "bagnetto", "洗澡", "おふろ", "목욕", "الاستحمام", "नहाना", "maligo"],
+  ["📚", "tarea", "homework", "lição de casa", "devoirs", "Hausaufgaben", "compiti", "写作业", "しゅくだい", "숙제", "الواجب", "होमवर्क", "takdang-aralin"],
+  ["🏫", "escuela", "school", "escola", "école", "Schule", "scuola", "上学", "がっこう", "학교", "المدرسة", "स्कूल", "paaralan"],
+  ["🚗", "carro", "car", "carro", "voiture", "Auto", "macchina", "坐车", "くるま", "차 타기", "السيارة", "गाड़ी", "kotse"],
+  ["📱", "tablet", "tablet", "tablet", "tablette", "Tablet", "tablet", "平板", "タブレット", "태블릿", "الجهاز اللوحي", "टैबलेट", "tablet"],
+  ["🛝", "parque", "park", "parque", "parc", "Spielplatz", "parco", "公园", "こうえん", "놀이터", "الحديقة", "पार्क", "parke"],
+  ["🧸", "jugar", "play", "brincar", "jouer", "spielen", "giocare", "玩", "あそぶ", "놀기", "اللعب", "खेलना", "maglaro"],
+  ["📺", "tele", "TV", "TV", "télé", "Fernsehen", "TV", "看电视", "テレビ", "TV 보기", "التلفاز", "टीवी", "TV"],
+  ["📖", "cuento", "story", "história", "histoire", "Geschichte", "storia", "讲故事", "えほん", "동화책", "قصة", "कहानी", "kuwento"],
+  ["🍬", "premio", "treat", "prêmio", "récompense", "Belohnung", "premio", "奖励", "ごほうび", "간식", "مكافأة", "इनाम", "premyo"],
+  ["😴", "dormir", "sleep", "dormir", "dormir", "schlafen", "dormire", "睡觉", "ねる", "잠자기", "النوم", "सोना", "matulog"],
+  ["🎵", "música", "music", "música", "musique", "Musik", "musica", "听音乐", "おんがく", "음악", "الموسيقى", "संगीत", "musika"]
+];
+
+/* big request buttons: [icon, label x12], REQ_SAY: full sentence x12 */
+var REQ = [
+  ["🚽", "Baño", "Bathroom", "Banheiro", "Toilettes", "Klo", "Bagno", "厕所", "トイレ", "화장실", "الحمام", "बाथरूम", "Banyo"],
+  ["💧", "Agua", "Water", "Água", "Eau", "Wasser", "Acqua", "水", "みず", "물", "ماء", "पानी", "Tubig"],
+  ["🍽️", "Comida", "Food", "Comida", "Manger", "Essen", "Cibo", "吃饭", "ごはん", "밥", "طعام", "खाना", "Pagkain"],
+  ["🤝", "Ayuda", "Help", "Ajuda", "Aide", "Hilfe", "Aiuto", "帮忙", "たすけて", "도와줘요", "مساعدة", "मदद", "Tulong"],
+  ["🛋️", "Descanso", "Break", "Pausa", "Pause", "Pause", "Pausa", "休息", "きゅうけい", "쉬기", "استراحة", "आराम", "Pahinga"]
+];
+var REQ_SAY = [
+  ["Quiero ir al baño, por favor.", "I need to go to the bathroom, please.", "Quero ir ao banheiro, por favor.", "Je veux aller aux toilettes, s'il te plaît.", "Ich muss bitte aufs Klo.", "Devo andare in bagno, per favore.", "我要上厕所。", "トイレに いきたいです。", "화장실 가고 싶어요.", "أريد الذهاب إلى الحمام، من فضلك.", "मुझे बाथरूम जाना है।", "Gusto kong pumunta sa banyo, pakiusap."],
+  ["Quiero agua, por favor.", "I want water, please.", "Quero água, por favor.", "Je veux de l'eau, s'il te plaît.", "Ich möchte bitte Wasser.", "Voglio dell'acqua, per favore.", "我要喝水。", "おみずを ください。", "물 주세요.", "أريد ماءً، من فضلك.", "मुझे पानी चाहिए।", "Gusto ko ng tubig, pakiusap."],
+  ["Tengo hambre. Quiero comer.", "I'm hungry. I want to eat.", "Estou com fome. Quero comer.", "J'ai faim. Je veux manger.", "Ich habe Hunger. Ich möchte essen.", "Ho fame. Voglio mangiare.", "我饿了。我想吃饭。", "おなかが すいた。ごはんが たべたい。", "배고파요. 밥 먹고 싶어요.", "أنا جائع. أريد أن آكل.", "मुझे भूख लगी है। मुझे खाना है।", "Gutom na ako. Gusto kong kumain."],
+  ["Necesito ayuda, por favor.", "I need help, please.", "Preciso de ajuda, por favor.", "J'ai besoin d'aide, s'il te plaît.", "Ich brauche bitte Hilfe.", "Ho bisogno di aiuto, per favore.", "请帮帮我。", "てつだって ください。", "도와주세요.", "أحتاج مساعدة، من فضلك.", "मुझे मदद चाहिए।", "Kailangan ko ng tulong, pakiusap."],
+  ["Necesito un descanso.", "I need a break.", "Preciso de uma pausa.", "J'ai besoin d'une pause.", "Ich brauche eine Pause.", "Ho bisogno di una pausa.", "我需要休息一下。", "ちょっと やすみたい。", "좀 쉬고 싶어요.", "أحتاج إلى استراحة.", "मुझे थोड़ा आराम चाहिए।", "Kailangan ko ng pahinga."]
+];
+
+/* Cuentos cortos (social stories): { ic, t: title x12, p: [{ v: scene emoji, s: text x12 }] } */
+var STORIES = [
+{ id: "doctor", ic: "🩺", t: ["Voy al doctor", "Going to the doctor", "Vou ao médico", "Je vais chez le médecin", "Ich gehe zum Arzt", "Vado dal dottore", "我去看医生", "おいしゃさんに いく", "병원에 가요", "أذهب إلى الطبيب", "डॉक्टर के पास जाना", "Pupunta ako sa doktor"], p: [
+  { v: "🚗 🏥", s: ["Hoy voy al doctor. Mamá o papá van conmigo.", "Today I go to the doctor. Mom or Dad comes with me.", "Hoje eu vou ao médico. Mamãe ou papai vai comigo.", "Aujourd'hui, je vais chez le médecin. Maman ou papa vient avec moi.", "Heute gehe ich zum Arzt. Mama oder Papa kommt mit.", "Oggi vado dal dottore. Mamma o papà viene con me.", "今天我去看医生。爸爸或妈妈陪我去。", "きょうは おいしゃさんに いきます。ママか パパが いっしょです。", "오늘은 병원에 가요. 엄마나 아빠가 같이 가요.", "اليوم أذهب إلى الطبيب. ماما أو بابا يذهب معي.", "आज मैं डॉक्टर के पास जाता हूँ। मम्मी या पापा मेरे साथ आते हैं।", "Ngayon, pupunta ako sa doktor. Kasama ko si Nanay o si Tatay."] },
+  { v: "🪑 📖", s: ["Espero mi turno. Puedo mirar un libro.", "I wait for my turn. I can look at a book.", "Espero a minha vez. Posso olhar um livro.", "J'attends mon tour. Je peux regarder un livre.", "Ich warte, bis ich dran bin. Ich kann ein Buch anschauen.", "Aspetto il mio turno. Posso guardare un libro.", "我等着轮到我。我可以看书。", "じゅんばんを まちます。えほんを みても いいです。", "내 차례를 기다려요. 책을 봐도 돼요.", "أنتظر دوري. يمكنني أن أنظر في كتاب.", "मैं अपनी बारी का इंतज़ार करता हूँ। मैं किताब देख सकता हूँ।", "Hinihintay ko ang turn ko. Puwede akong tumingin sa libro."] },
+  { v: "👩‍⚕️ 🩺", s: ["La doctora escucha mi corazón. Me quedo quieto. No duele.", "The doctor listens to my heart. I stay still. It does not hurt.", "A médica escuta meu coração. Eu fico paradinho. Não dói.", "La médecin écoute mon cœur. Je reste immobile. Ça ne fait pas mal.", "Die Ärztin hört mein Herz ab. Ich halte still. Es tut nicht weh.", "La dottoressa ascolta il mio cuore. Sto fermo. Non fa male.", "医生听我的心跳。我不乱动。不疼。", "おいしゃさんが むねの おとを ききます。じっと します。いたくないよ。", "의사 선생님이 내 심장 소리를 들어요. 가만히 있어요. 안 아파요.", "الطبيبة تسمع قلبي. أبقى ساكنًا. لا يؤلم.", "डॉक्टर मेरी धड़कन सुनती हैं। मैं चुपचाप रहता हूँ। दर्द नहीं होता।", "Pinakikinggan ng doktor ang puso ko. Hindi ako gagalaw. Hindi ito masakit."] },
+  { v: "🌟 🏠", s: ["¡Terminé! Lo hice muy bien. Ahora vamos a casa.", "All done! I did a great job. Now we go home.", "Acabou! Eu fui muito bem. Agora vamos para casa.", "C'est fini ! J'ai été très fort. Maintenant, on rentre à la maison.", "Fertig! Das habe ich toll gemacht. Jetzt gehen wir nach Hause.", "Finito! Sono stato bravissimo. Adesso andiamo a casa.", "看完了！我做得很好。现在我们回家。", "おわり！よく がんばったね。おうちに かえろう。", "끝났어요! 정말 잘했어요. 이제 집에 가요.", "انتهيت! أحسنت كثيرًا. الآن نعود إلى البيت.", "हो गया! मैंने बहुत अच्छा किया। अब हम घर चलते हैं।", "Tapos na! Ang galing ko. Uuwi na kami."] } ] },
+{ id: "pelo", ic: "💇", t: ["Me corto el pelo", "Getting a haircut", "Vou cortar o cabelo", "Je vais chez le coiffeur", "Ich gehe zum Friseur", "Taglio i capelli", "我去理发", "かみを きる", "머리를 잘라요", "أقص شعري", "बाल कटवाना", "Magpapagupit ako"], p: [
+  { v: "💈 🪑", s: ["Voy a cortarme el pelo. Me siento en una silla grande.", "I am getting a haircut. I sit in a big chair.", "Vou cortar o cabelo. Eu sento numa cadeira grande.", "Je vais me faire couper les cheveux. Je m'assois sur un grand fauteuil.", "Ich bekomme die Haare geschnitten. Ich sitze auf einem großen Stuhl.", "Vado a tagliare i capelli. Mi siedo su una sedia grande.", "我要去理发。我坐在大椅子上。", "かみを きりに いきます。おおきな いすに すわります。", "머리를 자르러 가요. 큰 의자에 앉아요.", "سأقص شعري. أجلس على كرسي كبير.", "मैं बाल कटवाने जाता हूँ। मैं बड़ी कुर्सी पर बैठता हूँ।", "Magpapagupit ako. Uupo ako sa malaking upuan."] },
+  { v: "🧥 🙂", s: ["Me ponen una capa. Así el pelo no me pica.", "They put a cape on me. Then my hair does not itch.", "Colocam uma capa em mim. Assim o cabelo não coça.", "On me met une cape. Comme ça, les cheveux ne grattent pas.", "Ich bekomme einen Umhang. Dann juckt es nicht.", "Mi mettono una mantellina. Così i capelli non pizzicano.", "他们给我围上围布。这样头发不会痒。", "ケープを つけます。かみが ちくちく しません。", "망토를 둘러요. 그러면 머리카락이 따갑지 않아요.", "يضعون لي رداءً. هكذا لا يحكّني الشعر.", "मुझे एक कपड़ा ओढ़ाते हैं। इससे बाल नहीं चुभते।", "Lalagyan nila ako ng kapa. Para hindi makati ang buhok."] },
+  { v: "✂️ 🎧", s: ["Las tijeras hacen ruido. Si es muy fuerte, me tapo los oídos.", "The scissors make a sound. If it is too loud, I can cover my ears.", "A tesoura faz barulho. Se for muito alto, eu tapo os ouvidos.", "Les ciseaux font du bruit. Si c'est trop fort, je me bouche les oreilles.", "Die Schere macht Geräusche. Wenn es zu laut ist, halte ich mir die Ohren zu.", "Le forbici fanno rumore. Se è troppo forte, mi copro le orecchie.", "剪刀会发出声音。如果太吵，我可以捂住耳朵。", "はさみの おとが します。うるさかったら みみを ふさいで いいよ。", "가위 소리가 나요. 너무 시끄러우면 귀를 막아도 돼요.", "المقص يصدر صوتًا. إذا كان عاليًا جدًا، أغطي أذنيّ.", "कैंची की आवाज़ आती है। अगर बहुत तेज़ लगे, तो मैं कान ढक सकता हूँ।", "Tumutunog ang gunting. Kung masyadong malakas, puwede kong takpan ang tainga ko."] },
+  { v: "🪞 😊", s: ["¡Listo! Me miro en el espejo. ¡Me veo muy bien!", "All done! I look in the mirror. I look great!", "Pronto! Eu me olho no espelho. Fiquei muito bem!", "Fini ! Je me regarde dans le miroir. Je suis très beau !", "Fertig! Ich schaue in den Spiegel. Ich sehe toll aus!", "Fatto! Mi guardo allo specchio. Sto benissimo!", "好了！我照照镜子。我真好看！", "できた！かがみを みます。かっこいいね！", "다 됐어요! 거울을 봐요. 멋있어요!", "انتهيت! أنظر في المرآة. أبدو رائعًا!", "हो गया! मैं शीशे में देखता हूँ। मैं बहुत अच्छा लग रहा हूँ!", "Tapos na! Tumingin ako sa salamin. Ang ganda ng itsura ko!"] } ] },
+{ id: "tienda", ic: "🛒", t: ["Vamos a la tienda", "Going to the store", "Vamos ao mercado", "On va au magasin", "Wir gehen einkaufen", "Andiamo al negozio", "我们去商店", "おみせに いく", "가게에 가요", "نذهب إلى المتجر", "दुकान जाना", "Pupunta kami sa tindahan"], p: [
+  { v: "🛒 🤝", s: ["Vamos a la tienda. Voy de la mano o en el carrito.", "We go to the store. I hold hands or ride in the cart.", "Vamos ao mercado. Eu vou de mãos dadas ou no carrinho.", "On va au magasin. Je donne la main ou je monte dans le chariot.", "Wir gehen einkaufen. Ich halte die Hand oder sitze im Einkaufswagen.", "Andiamo al negozio. Do la mano o salgo sul carrello.", "我们去商店。我牵着手，或者坐在购物车里。", "おみせに いきます。てを つなぐか、カートに のります。", "가게에 가요. 손을 잡거나 카트에 타요.", "نذهب إلى المتجر. أمسك اليد أو أركب في العربة.", "हम दुकान जाते हैं। मैं हाथ पकड़ता हूँ या ट्रॉली में बैठता हूँ।", "Pupunta kami sa tindahan. Hahawak ako sa kamay o sasakay sa cart."] },
+  { v: "🍎 🥛 🍞", s: ["Buscamos la comida de la lista. Yo ayudo a poner las cosas.", "We look for the food on our list. I help put things in.", "Procuramos a comida da lista. Eu ajudo a colocar as coisas.", "On cherche les aliments de la liste. J'aide à mettre les choses.", "Wir suchen das Essen von der Liste. Ich helfe beim Einpacken.", "Cerchiamo il cibo della lista. Io aiuto a mettere le cose.", "我们找清单上的食物。我帮忙放东西。", "リストの たべものを さがします。いれるのを てつだいます。", "목록에 있는 음식을 찾아요. 내가 물건 넣는 걸 도와요.", "نبحث عن الطعام في القائمة. أساعد في وضع الأشياء.", "हम सूची का सामान ढूँढते हैं। मैं चीज़ें रखने में मदद करता हूँ।", "Hinahanap namin ang pagkain sa listahan. Tumutulong akong maglagay ng mga bagay."] },
+  { v: "🍭 ✋", s: ["Veo dulces. A veces la respuesta es no. Respiro y espero.", "I see candy. Sometimes the answer is no. I breathe and wait.", "Vejo doces. Às vezes a resposta é não. Eu respiro e espero.", "Je vois des bonbons. Parfois, la réponse est non. Je respire et j'attends.", "Ich sehe Süßigkeiten. Manchmal heißt es nein. Ich atme und warte.", "Vedo le caramelle. A volte la risposta è no. Respiro e aspetto.", "我看到糖果。有时候答案是不行。我深呼吸，等一等。", "おかしが あります。だめな ときも あります。しんこきゅうして まちます。", "사탕이 보여요. 안 된다고 할 때도 있어요. 숨을 쉬고 기다려요.", "أرى الحلوى. أحيانًا يكون الجواب لا. أتنفس وأنتظر.", "मुझे टॉफ़ी दिखती है। कभी-कभी जवाब ना होता है। मैं साँस लेता हूँ और रुकता हूँ।", "May nakikita akong kendi. Minsan, hindi ang sagot. Hihinga ako at maghihintay."] },
+  { v: "💳 🏠", s: ["Pagamos en la caja. ¡Lo hice muy bien! Vamos a casa.", "We pay at the checkout. I did a great job! We go home.", "Pagamos no caixa. Eu fui muito bem! Vamos para casa.", "On paie à la caisse. J'ai été très sage ! On rentre.", "Wir bezahlen an der Kasse. Das habe ich toll gemacht! Wir gehen nach Hause.", "Paghiamo alla cassa. Sono stato bravissimo! Andiamo a casa.", "我们在收银台付钱。我做得很好！我们回家。", "レジで おかねを はらいます。よく がんばったね！おうちに かえろう。", "계산대에서 돈을 내요. 정말 잘했어요! 집에 가요.", "ندفع عند الصندوق. أحسنت كثيرًا! نعود إلى البيت.", "हम काउंटर पर पैसे देते हैं। मैंने बहुत अच्छा किया! हम घर चलते हैं।", "Magbabayad kami sa kahera. Ang galing ko! Uuwi na kami."] } ] },
+{ id: "escuela", ic: "🏫", t: ["Voy a la escuela", "Going to school", "Vou para a escola", "Je vais à l'école", "Ich gehe zur Schule", "Vado a scuola", "我去上学", "がっこうに いく", "학교에 가요", "أذهب إلى المدرسة", "स्कूल जाना", "Papasok ako sa paaralan"], p: [
+  { v: "🎒 🚌", s: ["Me pongo la mochila. Voy a la escuela.", "I put on my backpack. I go to school.", "Coloco a mochila. Vou para a escola.", "Je mets mon sac à dos. Je vais à l'école.", "Ich setze meinen Rucksack auf. Ich gehe zur Schule.", "Metto lo zaino. Vado a scuola.", "我背上书包。我去上学。", "リュックを せおいます。がっこうに いきます。", "가방을 메요. 학교에 가요.", "ألبس حقيبتي. أذهب إلى المدرسة.", "मैं बस्ता पहनता हूँ। मैं स्कूल जाता हूँ।", "Isinusuot ko ang bag ko. Papasok ako sa paaralan."] },
+  { v: "👩‍🏫 👋", s: ["Saludo a mi maestra. Le digo: hola.", "I say hi to my teacher. I say: hello.", "Eu cumprimento a professora. Digo: oi.", "Je dis bonjour à ma maîtresse.", "Ich begrüße meine Lehrerin. Ich sage: Hallo.", "Saluto la maestra. Dico: ciao.", "我和老师打招呼。我说：老师好。", "せんせいに あいさつします。おはよう ございます。", "선생님께 인사해요. 안녕하세요.", "أسلّم على معلمتي. أقول: مرحبًا.", "मैं अपनी टीचर को नमस्ते कहता हूँ।", "Binabati ko ang guro ko. Sasabihin ko: magandang umaga."] },
+  { v: "✏️ 🧩", s: ["Trabajo y juego con mis amigos. Si necesito ayuda, levanto la mano.", "I work and play with my friends. If I need help, I raise my hand.", "Eu trabalho e brinco com meus amigos. Se preciso de ajuda, levanto a mão.", "Je travaille et je joue avec mes amis. Si j'ai besoin d'aide, je lève la main.", "Ich lerne und spiele mit meinen Freunden. Wenn ich Hilfe brauche, melde ich mich.", "Lavoro e gioco con i miei amici. Se ho bisogno di aiuto, alzo la mano.", "我和朋友一起学习、玩耍。需要帮忙时，我就举手。", "ともだちと べんきょうして あそびます。こまったら てを あげます。", "친구들과 공부하고 놀아요. 도움이 필요하면 손을 들어요.", "أتعلم وألعب مع أصدقائي. إذا احتجت مساعدة، أرفع يدي.", "मैं दोस्तों के साथ पढ़ता और खेलता हूँ। मदद चाहिए तो हाथ उठाता हूँ।", "Nag-aaral at naglalaro ako kasama ang mga kaibigan ko. Kung kailangan ko ng tulong, magtataas ako ng kamay."] },
+  { v: "🤗 🏠", s: ["Al final, mamá o papá viene por mí. ¡Qué buen día!", "At the end, Mom or Dad picks me up. What a good day!", "No fim, mamãe ou papai vem me buscar. Que dia bom!", "À la fin, maman ou papa vient me chercher. Quelle belle journée !", "Am Ende holt mich Mama oder Papa ab. Was für ein schöner Tag!", "Alla fine, mamma o papà viene a prendermi. Che bella giornata!", "放学了，爸爸或妈妈来接我。今天真开心！", "さいごに ママか パパが むかえに きます。たのしい いちにち だったね！", "끝나면 엄마나 아빠가 데리러 와요. 정말 좋은 하루예요!", "في النهاية، تأتي ماما أو يأتي بابا ليأخذني. يا له من يوم جميل!", "आख़िर में मम्मी या पापा मुझे लेने आते हैं। कितना अच्छा दिन था!", "Sa dulo, susunduin ako ni Nanay o ni Tatay. Ang saya ng araw!"] } ] },
+{ id: "bano", ic: "🚽", t: ["Voy al baño", "Going to the bathroom", "Vou ao banheiro", "Je vais aux toilettes", "Ich gehe aufs Klo", "Vado in bagno", "我去上厕所", "トイレに いく", "화장실에 가요", "أذهب إلى الحمام", "बाथरूम जाना", "Pupunta ako sa banyo"], p: [
+  { v: "🚽 🗣️", s: ["Siento ganas de ir al baño. Le digo a mamá o papá: baño.", "I feel I need to go. I tell Mom or Dad: bathroom.", "Sinto vontade de ir ao banheiro. Digo para a mamãe ou o papai: banheiro.", "J'ai envie d'aller aux toilettes. Je dis à maman ou papa : toilettes.", "Ich muss mal. Ich sage Mama oder Papa: Klo.", "Mi scappa. Dico a mamma o papà: bagno.", "我想上厕所。我告诉爸爸或妈妈：厕所。", "トイレに いきたく なりました。ママか パパに「トイレ」と いいます。", "화장실에 가고 싶어요. 엄마나 아빠에게 말해요: 화장실.", "أشعر أنني أريد الحمام. أقول لماما أو بابا: حمام.", "मुझे बाथरूम जाना है। मैं मम्मी या पापा से कहता हूँ: बाथरूम।", "Naiihi ako. Sasabihin ko kay Nanay o Tatay: banyo."] },
+  { v: "👖 🚽", s: ["Me bajo el pantalón y me siento en el inodoro.", "I pull down my pants and sit on the toilet.", "Abaixo a calça e sento no vaso.", "Je baisse mon pantalon et je m'assois sur les toilettes.", "Ich ziehe die Hose runter und setze mich aufs Klo.", "Abbasso i pantaloni e mi siedo sul water.", "我脱下裤子，坐在马桶上。", "ズボンを おろして、べんきに すわります。", "바지를 내리고 변기에 앉아요.", "أنزل بنطالي وأجلس على المرحاض.", "मैं पैंट नीचे करता हूँ और टॉयलेट पर बैठता हूँ।", "Ibababa ko ang pantalon ko at uupo sa inidoro."] },
+  { v: "🧻 🚽", s: ["Hago pipí o popó. Me limpio con papel y jalo la cadena.", "I go pee or poop. I wipe with paper and flush.", "Faço xixi ou cocô. Limpo com papel e dou descarga.", "Je fais pipi ou caca. Je m'essuie avec du papier et je tire la chasse.", "Ich mache Pipi oder Kacka. Ich wische mich ab und spüle.", "Faccio la pipì o la cacca. Mi pulisco con la carta e tiro lo sciacquone.", "我尿尿或拉便便。用纸擦干净，再冲水。", "おしっこか うんちを します。かみで ふいて、みずを ながします。", "쉬나 응가를 해요. 휴지로 닦고 물을 내려요.", "أتبول أو أتبرز. أمسح بالمناديل وأشد السيفون.", "मैं सू-सू या पॉटी करता हूँ। काग़ज़ से साफ़ करता हूँ और फ़्लश करता हूँ।", "Iihi o dudumi ako. Magpupunas ako ng tisyu at magfa-flush."] },
+  { v: "🧼 🌟", s: ["Me lavo las manos con jabón. ¡Lo hice yo solo!", "I wash my hands with soap. I did it myself!", "Lavo as mãos com sabonete. Eu consegui sozinho!", "Je me lave les mains avec du savon. J'ai réussi tout seul !", "Ich wasche meine Hände mit Seife. Ich habe es allein geschafft!", "Mi lavo le mani con il sapone. Ce l'ho fatta da solo!", "我用肥皂洗手。我自己做到了！", "せっけんで てを あらいます。ひとりで できたよ！", "비누로 손을 씻어요. 혼자서 해냈어요!", "أغسل يديّ بالصابون. فعلتها وحدي!", "मैं साबुन से हाथ धोता हूँ। मैंने ख़ुद किया!", "Naghuhugas ako ng kamay gamit ang sabon. Kaya ko na mag-isa!"] } ] }
+];
 (function () {
 "use strict";
 var KEY = "aprendoJugandoV2";
 var NEED = 5, NEED_MEM = 2, STARS_PER_STICKER = 3;
-var EMO = ["😊", "😢", "😠", "😨", "😲", "😌"];
+var EMO = ["svg:kid_happy", "svg:kid_sad", "svg:kid_angry", "svg:kid_scared", "svg:kid_surprised", "svg:kid_calm"];
 var COL = ["#D86A6A", "#5A8FBF", "#E8C84A", "#6BA56B", "#E8964F", "#8B7BB8", "#EEA0B6", "#8A6542"];
 var SHA = ["circulo", "cuadrado", "triangulo", "estrella", "corazon", "rectangulo"];
 var SHA_FILL = ["#7FA7C9", "#E3A27F", "#8FBF94", "#E6C35C", "#E393A6", "#A895C9"];
@@ -1508,7 +1965,7 @@ var ANI = ["🐮", "🐶", "🐱", "🦆", "🐑", "🐴", "🦁", "🐸"];
 var STK = ["🐰", "🐼", "🦊", "🐢", "🦋", "🍎", "🍌", "🍓", "🍇", "🍉", "🚗", "🚌", "🚂", "✈️", "⛵", "🦒", "🐘", "🐧", "🦉", "🐳"];
 var OBJ = ["🍎", "⭐", "🐟", "🎈", "🌸", "🐥", "🍓", "⚽"];
 var GAMES = [
-  { id: "emociones", k: "g_emo", ic: "😊", c: "c-peach", kind: "emo", n: 6 },
+  { id: "emociones", k: "g_emo", ic: "svg:kid_happy", c: "c-peach", kind: "emo", n: 6 },
   { id: "colores", k: "g_col", ic: "🎨", c: "c-mint", kind: "col", n: 8 },
   { id: "formas", k: "g_sha", ic: "🔷", c: "c-lilac", kind: "sha", n: 6 },
   { id: "numeros", k: "g_num", ic: "🔢", c: "c-sky", kind: "num", n: 10 },
@@ -1538,15 +1995,23 @@ var GAMES = [
   { id: "sonidos", k: "g_snd", ic: "👂", c: "c-rose", kind: "snd", data: V_SND, snd: true },
   { id: "familia", k: "g_fam", ic: "👨‍👩‍👧", c: "c-peach", kind: "voc", data: V_FAM, sim: SIM_FAM },
   { id: "midia", k: "g_day", ic: "🌅", c: "c-sun", kind: "day", data: V_DAY },
-  { id: "seguridad", k: "g_safe", ic: "⛑️", c: "c-mint", kind: "safe", data: V_SAFE }
+  { id: "seguridad", k: "g_safe", ic: "⛑️", c: "c-mint", kind: "safe", data: V_SAFE },
+  /* stage 5 */
+  { id: "pedir", k: "g_req", ic: "🙋", c: "c-sun", kind: "req", nolv: true },
+  { id: "repetir", k: "g_rep", ic: "🎤", c: "c-rose", kind: "rep" },
+  { id: "primero", k: "g_fb", ic: "1️⃣", c: "c-mint", kind: "fb", nolv: true },
+  { id: "reloj", k: "g_timer", ic: "⏳", c: "c-sky", kind: "timer", nolv: true },
+  { id: "cuentos", k: "g_story", ic: "📖", c: "c-lilac", kind: "story", nolv: true },
+  { id: "mifamilia", k: "g_myfam", ic: "📷", c: "c-peach", kind: "myfam", nolv: true }
 ];
 GAMES.forEach(function (g) { if (g.data) g.n = g.data.length; });
 var SECTIONS = [
-  { k: "sec_talk", ic: "🗣️", g: ["frases"] },
+  { k: "sec_talk", ic: "🗣️", g: ["pedir", "repetir", "frases"] },
+  { k: "sec_plan", ic: "🗓️", g: ["primero", "reloj", "cuentos"] },
   { k: "sec_num", ic: "🔢", g: ["numeros", "sumas", "restas", "multiplicar"] },
   { k: "sec_world", ic: "🌍", g: ["casa", "afuera", "inout", "donde", "clima", "animales", "vehiculos", "oficios"] },
   { k: "sec_things", ic: "🍎", g: ["frutas", "comida", "ropa"] },
-  { k: "sec_me", ic: "💛", g: ["emociones", "cuerpo", "acciones", "familia", "midia", "seguridad"] },
+  { k: "sec_me", ic: "💛", g: ["emociones", "mifamilia", "cuerpo", "acciones", "familia", "midia", "seguridad"] },
   { k: "sec_think", ic: "🧩", g: ["letras", "opuestos", "sonidos", "colores", "formas", "grupos", "memoria"] },
   { k: "sec_rout", ic: "🪥", g: ["rutinas"] },
   { k: "sec_calm", ic: "🌿", g: ["calma"] }
@@ -1581,10 +2046,11 @@ function t(k, vars) {
   return s;
 }
 function langInfo(code) { for (var i = 0; i < LANGS.length; i++) if (LANGS[i].code === code) return LANGS[i]; return LANGS[0]; }
+function icHTML(ic) { return String(ic).indexOf("svg:") === 0 ? '<span class="svgi' + (String(ic).indexOf("svg:kid_") === 0 ? " kid" : "") + '">' + svgIcon(ic.slice(4)) + "</span>" : ic; }
 function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 function applyLang() {
-  var li = langInfo(S.lang);
+  var li = langInfo(S.lang); loadClips(S.lang);
   document.documentElement.lang = li.voices[0];
   document.documentElement.dir = li.rtl ? "rtl" : "ltr";
   document.title = "Aprendo Jugando";
@@ -1657,7 +2123,10 @@ function mkUtt(text, v) {
 }
 function speak(text, queue, forceVoice) {
   if (!text) return;
-  if (!S.s.voice || !synth) return;
+  if (!S.s.voice) return;
+  if (!forceVoice && useClips() && speakClips(String(text), queue)) return;
+  if (!synth) return;
+  if (!queue) clipStop();
   var f = forceVoice ? { known: true, v: forceVoice, has: true } : findVoice(S.lang);
   if (f.known && !f.has) return; /* no voice for this language: text stays on screen */
   try {
@@ -1681,6 +2150,106 @@ function speak(text, queue, forceVoice) {
     talkTimer = setTimeout(function () { setTalking(false); }, Math.min(6000, 600 + text.length * 70));
   } catch (e) {}
 }
+
+/* ---------- recorded natural voice (neural TTS clips, bundled per language) ----------
+   Only active in the site/iOS build, which sets window.AJ_AUDIO_BASE. audio/<lang>.js holds the index
+   (AJ_PACK: clip key -> part, offset, length); audio/<lang>-N.bin are the clips back to back (plain MP3s).
+   Parts load in the background; a clip whose part is not here yet waits briefly, then the device voice
+   says it. Any text with no clip (e.g. the child's name) uses the device voice for just that piece. */
+var CLIP_BASE = window.AJ_AUDIO_BASE || "", CLIPS = {}, PACK = {}, clipReq = {}, clipEl = null, clipQ = [], clipTok = 0, clipBusy = false;
+window.AJ_PACK = function (lang, parts, idx) {
+  var m = {}; String(idx || "").split(" ").forEach(function (e) { var f = e.split(","); if (f.length === 4) m[f[0]] = [+f[1], parseInt(f[2], 36), parseInt(f[3], 36)]; });
+  CLIPS[lang] = m; PACK[lang] = { parts: parts, buf: [], wait: [], bad: 0, urls: {} };
+  setTimeout(function () { packPrefetch(lang); }, 600);
+};
+function loadClips(lang) {
+  if (!CLIP_BASE || CLIPS[lang] || clipReq[lang]) return;
+  if (window.AJ_AUDIO_LANGS && (" " + window.AJ_AUDIO_LANGS + " ").indexOf(" " + lang + " ") < 0) return; /* no recording: device voice */
+  clipReq[lang] = 1;
+  try { var sc = document.createElement("script"); sc.src = CLIP_BASE + lang + ".js"; sc.onerror = function () { clipReq[lang] = 0; }; document.head.appendChild(sc); } catch (e) {}
+  for (var o in PACK) if (o !== lang && o !== S.lang && PACK[o].buf.length) packDrop(o); /* keep memory small */
+}
+function packDrop(lang) {
+  var P = PACK[lang], cur = clipEl ? clipEl.src : "";
+  for (var u in P.urls) if (P.urls[u] !== cur) try { URL.revokeObjectURL(P.urls[u]); } catch (e) {}
+  P.urls = {}; P.buf = [];
+}
+/* XHR, not fetch: works over http(s) and from file:// inside the iOS app */
+function packPart(lang, i, cb) {
+  var P = PACK[lang]; if (!P) { if (cb) cb(false); return; }
+  if (P.buf[i]) { if (cb) cb(true); return; }
+  if (P.bad > 2 || i >= P.parts.length) { if (cb) cb(false); return; }
+  var q = P.wait[i]; if (q) { if (cb) q.push(cb); return; }
+  q = P.wait[i] = cb ? [cb] : [];
+  var done = function (ok) { P.wait[i] = null; if (!ok) P.bad++; q.forEach(function (f) { try { f(ok); } catch (e) {} }); };
+  try {
+    var x = new XMLHttpRequest(); x.open("GET", CLIP_BASE + P.parts[i], true); x.responseType = "arraybuffer";
+    x.onload = function () { var r = x.response; if ((x.status === 200 || x.status === 0) && r && r.byteLength) { P.buf[i] = r; done(true); } else done(false); };
+    x.onerror = x.ontimeout = function () { done(false); }; x.timeout = 60000; x.send();
+  } catch (e) { done(false); }
+}
+function packPrefetch(lang) {
+  var P = PACK[lang]; if (!P || lang !== S.lang) return;
+  for (var i = 0; i < P.parts.length; i++) if (!P.buf[i]) return packPart(lang, i, function (ok) { if (ok) setTimeout(function () { packPrefetch(lang); }, 50); });
+}
+/* clip key -> blob: URL, loading its part first if needed */
+function clipUrl(lang, k, cb) {
+  var P = PACK[lang], e = CLIPS[lang] && CLIPS[lang][k]; if (!P || !e) return cb(null);
+  if (P.urls[k]) return cb(P.urls[k]);
+  packPart(lang, e[0], function (ok) {
+    if (!ok || !P.buf[e[0]]) return cb(null);
+    try { P.urls[k] = URL.createObjectURL(new Blob([P.buf[e[0]].slice(e[1], e[1] + e[2])], { type: "audio/mpeg" })); } catch (er) { return cb(null); }
+    cb(P.urls[k]);
+  });
+}
+function useClips() { return !!(CLIP_BASE && CLIPS[S.lang] && PACK[S.lang] && PACK[S.lang].bad < 3 && !(S.vpick && S.vpick[S.lang])); }
+function clipHas(k) { var m = CLIPS[S.lang]; return !!(m && m[k]); }
+function clipAudio() {
+  if (!clipEl) { try { clipEl = new Audio(); clipEl.preload = "auto"; clipEl.setAttribute("playsinline", ""); } catch (e) { clipEl = null; } }
+  return clipEl;
+}
+function clipStop() {
+  clipTok++; clipQ = []; clipBusy = false;
+  if (clipEl) try { clipEl.pause(); clipEl.onended = clipEl.onerror = null; } catch (e) {}
+  setTalking(false);
+}
+function speakClips(text, queue) {
+  var plan = CLIPCORE.plan(text, clipHas, S.name || "");
+  if (!plan.some(function (p) { return p.k; })) return false; /* nothing recorded: use the device voice */
+  if (!queue) { clipStop(); if (synth) try { synth.cancel(); } catch (e) {} }
+  var lang = S.lang;
+  plan.forEach(function (p) { p.lang = lang; clipQ.push(p); });
+  if (!clipBusy) clipNext(clipTok);
+  return true;
+}
+function clipNext(tok) {
+  if (tok !== clipTok) return;
+  var p = clipQ.shift();
+  if (!p) { clipBusy = false; setTalking(false); return; }
+  clipBusy = true; setTalking(true);
+  var done = false, next = function (gap) { if (done) return; done = true; setTimeout(function () { clipNext(tok); }, gap); };
+  if (!p.k) return clipTts(p.t, next);
+  var waited = false, wt = setTimeout(function () { waited = true; if (tok === clipTok) clipTts(p.t, next); }, 3500);
+  clipUrl(p.lang, p.k, function (url) {
+    clearTimeout(wt); if (waited || tok !== clipTok) return;
+    var a = clipAudio(); if (!a || !url) return clipTts(p.t, next);
+    a.onended = function () { next(90); };
+    a.onerror = function () { clipTts(p.t, next); };
+    try {
+      a.src = url;
+      a.volume = S.s.quiet ? 0.8 : 1; a.defaultPlaybackRate = a.playbackRate = S.s.quiet ? 0.9 : 1;
+      var pr = a.play(); if (pr && pr.catch) pr.catch(function (e) { if (tok === clipTok && !(e && e.name === "AbortError")) clipTts(p.t, next); });
+    } catch (e) { clipTts(p.t, next); }
+  });
+}
+/* one piece through the device voice (names, anything not recorded), then continue the queue */
+function clipTts(text, next) {
+  if (!synth) return next(0);
+  var f = findVoice(S.lang); if (f.known && !f.has) return next(0);
+  var cb = function () { clearTimeout(w); next(60); }, w = setTimeout(cb, 1500 + String(text).length * 120);
+  try { var u = mkUtt(text, f.v); u.onend = cb; u.onerror = cb; if (synth.paused) synth.resume(); synth.speak(u); } catch (e) { cb(); }
+}
+function hush() { clipStop(); if (synth) try { synth.cancel(); } catch (e) {} }
 function say(text, queue) { setBubble(text); speak(text, queue); }
 function setBubble(text) { V.bubble = text; var b = document.getElementById("bubbleText"); if (b) b.textContent = text; }
 if (synth) { try { synth.getVoices(); synth.addEventListener("voiceschanged", function () { var n = document.getElementById("vnote"); if (n) n.hidden = !voiceMissing();
@@ -1733,7 +2302,7 @@ function setMusic(on) {
     if (musicTimer) { clearInterval(musicTimer); musicTimer = null; } }
 }
 document.addEventListener("visibilitychange", function () {
-  if (document.hidden) { setMusic(false); if (synth) try { synth.cancel(); } catch (e) {} }
+  if (document.hidden) { setMusic(false); hush(); }
   else if (S.s.music) setMusic(true);
 });
 /* unlock audio + speech inside the first real user gesture (iOS needs touchend/click, not pointerdown) */
@@ -1744,6 +2313,7 @@ function unlock() {
   var a = ac();
   if (a) { try { var buf = a.createBuffer(1, 1, 22050), src = a.createBufferSource(); src.buffer = buf; src.connect(a.destination); src.start(0); } catch (e) {} }
   if (synth) { try { synth.cancel(); if (synth.paused) synth.resume(); var u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = langInfo(S.lang).voices[0]; synth.speak(u); } catch (e) {} }
+  if (CLIP_BASE) { var ca = clipAudio(); if (ca) try { ca.muted = true; ca.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAABErAAABAAgAZGF0YQAAAAA="; var pp = ca.play(); var um = function () { ca.muted = false; }; if (pp && pp.then) pp.then(um, um); else um(); } catch (e) {} }
   if (S.s.music) setMusic(true);
   ["touchend", "click", "keydown"].forEach(function (ev) { document.removeEventListener(ev, unlock, true); });
 }
@@ -1798,7 +2368,7 @@ function shapeSVG(i) {
   return s + "</svg>";
 }
 function visual(kind, i) {
-  if (kind === "emo") return '<span class="face">' + EMO[i] + "</span>";
+  if (kind === "emo") return '<span class="face">' + vocIcon(EMO[i]) + "</span>";
   if (kind === "col") return '<span class="sw" style="background:' + COL[i] + '"></span>';
   if (kind === "sha") return '<span class="shape">' + shapeSVG(i) + "</span>";
   if (kind === "ani") return '<span class="face">' + ANI[i] + "</span>";
@@ -1852,7 +2422,7 @@ function bindLang(rerender) {
 
 /* ---------- home ---------- */
 function renderHome() {
-  V.screen = "home"; updHeader(); stopCalm();
+  V.screen = "home"; updHeader(); stopCalm(); s5Leave();
   V.bubble = helloText();
   var h = heroHTML(false) + langButtons("langs");
   SECTIONS.forEach(function (sec) {
@@ -1860,7 +2430,7 @@ function renderHome() {
     h += '<section class="sec"><h3 class="sech"><span aria-hidden="true">' + sec.ic + "</span> " + esc(t(sec.k)) + '</h3><div class="games">';
     gs.forEach(function (id) {
       var g = gameById(id), wide = gs.length === 1 || (gs.length % 2 === 1 && id === gs[gs.length - 1] && gs.length < 3);
-      h += '<button type="button" class="gcard ' + g.c + (wide ? " wide" : "") + '" data-game="' + g.id + '"><span class="ic" aria-hidden="true">' + g.ic + '</span><span class="nm">' + esc(t(g.k)) + "</span>" + (g.kind === "calm" ? "" : '<span class="lv">' + esc(t("level", { n: lv(g.id).level })) + "</span>") + "</button>";
+      h += '<button type="button" class="gcard ' + g.c + (wide ? " wide" : "") + '" data-game="' + g.id + '"><span class="ic" aria-hidden="true">' + icHTML(g.ic) + '</span><span class="nm">' + esc(t(g.k)) + "</span>" + (g.kind === "calm" || g.nolv ? "" : '<span class="lv">' + esc(t("level", { n: lv(g.id).level })) + "</span>") + "</button>";
     });
     h += "</div></section>";
   });
@@ -1879,7 +2449,7 @@ function dotsHTML(g) {
   return h + "</span>";
 }
 function topHTML(g) {
-  var h = '<div class="gtitle"><span class="nm">' + g.ic + " " + esc(t(g.k)) + '</span><span class="lvl" id="lvl">' + esc(t("level", { n: lv(g.id).level })) + " " + dotsHTML(g) + "</span></div>";
+  var h = '<div class="gtitle"><span class="nm">' + icHTML(g.ic) + " " + esc(t(g.k)) + '</span><span class="lvl" id="lvl">' + esc(t("level", { n: lv(g.id).level })) + " " + dotsHTML(g) + "</span></div>";
   if (g.snd) h += '<button type="button" class="vsnd" id="vsnd" aria-pressed="' + vsndOn() + '">' + (vsndOn() ? "🔊 " : "🔇 ") + esc(t("vehSnd")) + "</button>";
   if (g.kind !== "mem") h += '<div class="modes"><button type="button" data-mode="learn" aria-pressed="' + (V.mode === "learn") + '">' + (g.learnIc || "📖") + " " + esc(t(g.learnKey || "learn")) + '</button><button type="button" data-mode="play" aria-pressed="' + (V.mode === "play") + '">🎲 ' + esc(t("play")) + "</button></div>";
   return h;
@@ -1892,11 +2462,13 @@ function bindModes() {
 }
 function openGame(id, mode) {
   var g = gameById(id); if (!g) return renderHome();
+  s5Leave();
   V.game = g; V.mode = g.kind === "mem" ? "play" : mode; V.screen = "game"; V.li = 0; V.last = -1; updHeader(); logOpen(g);
   if (isMath(g.kind)) { V.lf = []; for (var fi = 0; fi < 8; fi++) V.lf.push(genMath(g.kind, lv(g.id).level)); }
   stopCalm();
   if (g.kind === "mem") return newMemory();
   if (g.kind === "calm") return renderCalm();
+  if (S5[g.kind]) return S5[g.kind](g);
   if (g.kind === "aac" && V.mode === "learn") return renderAacFree();
   if (g.kind === "rut" && V.mode === "learn") return renderRutPick();
   if (V.mode === "learn") return renderLearn();
@@ -2201,7 +2773,7 @@ function daysAgo(n) { var d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.g
 function dayLog() {
   var k = dkey();
   if (!LOG.days[k]) {
-    LOG.days[k] = { ms: 0, g: {}, w: {}, s: {}, r: {} };
+    LOG.days[k] = { ms: 0, g: {}, w: {}, s: {}, r: {}, p: {} };
     var ks = Object.keys(LOG.days).sort(); while (ks.length > 120) delete LOG.days[ks.shift()];
   }
   return LOG.days[k];
@@ -2210,14 +2782,14 @@ function gstat(id) { var d = dayLog(); if (!d.g[id]) d.g[id] = { ms: 0, ok: 0, b
 var lastAct = Date.now();
 function logAnswer(g, ok) { var s = gstat(g.id); if (ok) s.ok++; else s.bad++; s.lv = Math.max(s.lv || 1, lv(g.id).level); lastAct = Date.now(); saveLog(); }
 function logOpen(g) { gstat(g.id).n++; saveLog(); }
-function logCount(kind, key) { if (key == null || key === "") return; var d = dayLog(); d[kind][key] = (d[kind][key] || 0) + 1; saveLog(); }
+function logCount(kind, key) { if (key == null || key === "") return; var d = dayLog(); if (!d[kind]) d[kind] = {}; d[kind][key] = (d[kind][key] || 0) + 1; saveLog(); }
 document.addEventListener("pointerdown", function () { lastAct = Date.now(); }, true);
 setInterval(function () {
   if (document.hidden || V.screen !== "game" || !V.game || Date.now() - lastAct > 90000) return;
   dayLog().ms += 5000; gstat(V.game.id).ms += 5000; saveLog();
 }, 5000);
 function aggDays(keys) {
-  var o = { ms: 0, g: {}, w: {}, s: {}, r: {}, used: 0 };
+  var o = { ms: 0, g: {}, w: {}, s: {}, r: {}, p: {}, used: 0 };
   keys.forEach(function (k) {
     var d = LOG.days[k]; if (!d) return;
     var any = d.ms > 0; o.ms += d.ms || 0;
@@ -2226,7 +2798,7 @@ function aggDays(keys) {
       a.ms += s.ms || 0; a.ok += s.ok || 0; a.bad += s.bad || 0; a.n += s.n || 0; a.lv = Math.max(a.lv, s.lv || 1);
       if (s.ok || s.bad || s.n) any = true;
     });
-    ["w", "s", "r"].forEach(function (t2) { Object.keys(d[t2] || {}).forEach(function (x) { o[t2][x] = (o[t2][x] || 0) + d[t2][x]; any = true; }); });
+    ["w", "s", "r", "p"].forEach(function (t2) { Object.keys(d[t2] || {}).forEach(function (x) { o[t2][x] = (o[t2][x] || 0) + d[t2][x]; any = true; }); });
     if (any) o.used++;
   });
   return o;
@@ -2258,7 +2830,7 @@ function renderReport() {
     if (!p || (!pt && !p.ms)) badge = '<span class="badge new">' + esc(t("repNew")) + "</span>";
     else if ((pacc != null && tot >= 3 && pt >= 3 && a.ok / tot - pacc >= 0.05) || a.lv > (p.lv || 1)) badge = '<span class="badge up">📈 ' + esc(t("repImproving")) + "</span>";
     else badge = '<span class="badge">' + esc(t("repSteady")) + "</span>";
-    h += '<div class="rrow"><span class="ric" aria-hidden="true">' + g.ic + '</span><span class="rmain"><b>' + esc(t(g.k)) + "</b><small>" + esc(fmtMin(a.ms)) + " · ✅ " + a.ok + " · 🔁 " + a.bad + (acc != null ? " · " + esc(t("repAcc")) + " " + acc + "%" : "") + " · " + esc(t("level", { n: a.lv })) + "</small></span>" + badge + "</div>";
+    h += '<div class="rrow"><span class="ric" aria-hidden="true">' + icHTML(g.ic) + '</span><span class="rmain"><b>' + esc(t(g.k)) + "</b><small>" + esc(fmtMin(a.ms)) + " · ✅ " + a.ok + " · 🔁 " + a.bad + (acc != null ? " · " + esc(t("repAcc")) + " " + acc + "%" : "") + " · " + esc(t("level", { n: a.lv })) + "</small></span>" + badge + "</div>";
   });
   h += "</div><h3>🗣️ " + esc(t("repWords")) + "</h3>";
   var tw = topList(A.w, 10);
@@ -2266,6 +2838,9 @@ function renderReport() {
   h += "<h3>💬 " + esc(t("repSentences")) + "</h3>";
   var ts = topList(A.s, 5);
   h += ts.length ? '<div class="replist">' + ts.map(function (s) { return '<div class="rrow"><span class="rmain"><b>' + esc(s) + "</b></span><span class=\"badge\">×" + A.s[s] + "</span></div>"; }).join("") + "</div>" : '<p class="note">' + esc(t("repNoData")) + "</p>";
+  h += "<h3>🎤 " + esc(t("g_rep")) + " · " + esc(t("repPractice")) + "</h3>";
+  var tp = topList(A.p, 10);
+  h += tp.length ? '<div class="chips" id="repP">' + tp.map(function (w) { return "<span>" + esc(w) + " <small>×" + A.p[w] + "</small></span>"; }).join("") + "</div>" : '<p class="note">' + esc(t("repNoData")) + "</p>";
   h += "<h3>🪥 " + esc(t("repRoutines")) + '</h3><div class="replist">';
   var R = L().R || TR.es.R, RIC = ["🚽", "🪥", "🧼"];
   R.forEach(function (name, ri) {
@@ -2287,9 +2862,11 @@ function renderReport() {
 /* ---------- v3 stage 2: shared helpers ---------- */
 function lix() { var i = LO.indexOf(S.lang); return i < 0 ? 0 : i; }
 function rowText(row) { var s = row[1 + lix()] || row[1]; return s.split("|")[0]; }
+/* "label|spoken|plural": plural form for "More cookies" / "No cookies"; defaults to the label */
+function rowPlural(row) { var s = row[1 + lix()] || row[1]; var p = s.split("|"); return p[2] || p[0]; }
 function rowSpeech(row) { var s = row[1 + lix()] || row[1]; var p = s.split("|"); return p[1] || p[0]; }
 function icon(ic, cls) {
-  if (ic.indexOf("svg:") === 0) return '<span class="svgi ' + (cls || "") + '">' + svgIcon(ic.slice(4)) + "</span>";
+  if (ic.indexOf("svg:") === 0) return '<span class="svgi ' + (ic.indexOf("svg:kid_") === 0 ? "kid " : "") + (cls || "") + '">' + svgIcon(ic.slice(4)) + "</span>";
   return '<span class="emo ' + (cls || "") + '">' + ic + "</span>";
 }
 function helloText() { return S.name ? t("helloName", { x: S.name }) : t("hello"); }
@@ -2312,7 +2889,7 @@ var AAC_TABS = [
   { k: "tab_basic", ic: "⭐", cards: function () { return AAC_ST.map(function (s, i) { return { t: "s", i: i }; }).concat(AAC_BASIC.map(function (r, i) { return { t: "p", tab: "basic", i: i }; })); } },
   { k: "tab_food", ic: "🍎", cards: function () { return AAC_FOOD.map(function (r, i) { return { t: "o", tab: "food", i: i }; }); } },
   { k: "tab_things", ic: "🧸", cards: function () { return AAC_THINGS.map(function (r, i) { return { t: "o", tab: "things", i: i }; }); } },
-  { k: "tab_feel", ic: "😊", cards: function () { return AAC_FEEL.map(function (r, i) { return { t: "p", tab: "feel", i: i }; }); } },
+  { k: "tab_feel", ic: "svg:kid_happy", cards: function () { return AAC_FEEL.map(function (r, i) { return { t: "p", tab: "feel", i: i }; }); } },
   { k: "tab_need", ic: "🚽", cards: function () { return AAC_NEED.map(function (r, i) { return { t: "p", tab: "need", i: i }; }); } }
 ];
 var AAC_TBL = { food: AAC_FOOD, things: AAC_THINGS, feel: AAC_FEEL, need: AAC_NEED, basic: AAC_BASIC };
@@ -2323,8 +2900,10 @@ function cSay(c) { return c.t === "s" ? AAC_ST[c.i].L[lix()] : rowSpeech(cRow(c)
 function cSame(a, b) { return a.t === b.t && a.i === b.i && a.tab === b.tab; }
 function cHTML(c, extra) { return icon(cIcon(c)) + '<span class="cl">' + esc(cLabel(c)) + "</span>" + (extra || ""); }
 function fillPair(st, ob) {
-  var tpl = AAC_ST[st.i].T[lix()], row = cRow(ob);
-  return cap(tpl.replace("{x}", rowSpeech(row)).replace("{l}", rowText(row)));
+  var S0 = AAC_ST[st.i], row = cRow(ob);
+  if (S0.id === "where") { var w = ob.tab === "things" && AAC_WHERE[ob.i]; return w ? (w[lix()] || w[1]) : sentJoin(cap(S0.L[lix()]), cap(rowSpeech(row))); }
+  var tpl = S0.T[lix()];
+  return cap(tpl.replace("{x}", rowSpeech(row)).replace("{l}", rowText(row)).replace("{p}", rowPlural(row)));
 }
 function compose(strip) {
   var out = "", i = 0;
@@ -2342,7 +2921,7 @@ function renderAacFree() {
   var A = V.aac, h = topHTML(g) + heroHTML(true);
   h += '<div class="strip" id="strip" role="button" tabindex="0">' + (A.strip.length ? A.strip.map(function (c) { return '<span class="scard">' + cHTML(c) + "</span>"; }).join("") : '<span class="ph">' + esc(t("aacFree")) + "</span>") + "</div>";
   h += '<div class="stripbtns"><button type="button" class="big primary" id="sayB">🔊 ' + esc(t("sayIt")) + '</button><button type="button" class="big" id="delB" aria-label="' + esc(t("delLast")) + '">⌫</button><button type="button" class="big" id="clrB" aria-label="' + esc(t("clearAll")) + '">🗑️</button></div>';
-  h += '<div class="tabs" role="tablist">' + AAC_TABS.map(function (tb, i) { return '<button type="button" role="tab" data-tab="' + i + '" aria-selected="' + (i === A.tab) + '"><span aria-hidden="true">' + tb.ic + "</span> " + esc(t(tb.k)) + "</button>"; }).join("") + "</div>";
+  h += '<div class="tabs" role="tablist">' + AAC_TABS.map(function (tb, i) { return '<button type="button" role="tab" data-tab="' + i + '" aria-selected="' + (i === A.tab) + '"><span aria-hidden="true">' + icHTML(tb.ic) + "</span> " + esc(t(tb.k)) + "</button>"; }).join("") + "</div>";
   var cards = AAC_TABS[A.tab].cards();
   h += '<div class="aacgrid">' + cards.map(function (c, i) { return '<button type="button" class="acard ' + (c.t === "s" ? "st" : c.t === "p" ? "ph2" : "") + '" data-c="' + i + '">' + cHTML(c) + "</button>"; }).join("") + "</div>";
   screenEl.innerHTML = h;
@@ -2374,13 +2953,14 @@ function renderAacFreeKeep() {
   setBubble(A.strip.length ? compose(A.strip) : t("aacFree"));
 }
 function genAacQ(level) {
-  var st = { t: "s", i: level === 2 ? rnd(0, 2) : 0 };
-  var useFood = st.i !== 0 || Math.random() < 0.7, tbl = useFood ? "food" : "things";
-  var ob = { t: "o", tab: tbl, i: rnd(0, AAC_TBL[tbl].length - 1) };
-  if (V.lastAac && cSame(ob, V.lastAac)) ob.i = (ob.i + 1) % AAC_TBL[tbl].length;
+  var st = { t: "s", i: level === 2 ? rnd(0, 3) : (level === 3 && Math.random() < 0.3) ? 3 : 0 };
+  var where = AAC_ST[st.i].id === "where", WK = Object.keys(AAC_WHERE).map(Number);
+  var useFood = !where && (st.i !== 0 || Math.random() < 0.7), tbl = useFood ? "food" : "things";
+  var ob = { t: "o", tab: tbl, i: where ? WK[rnd(0, WK.length - 1)] : rnd(0, AAC_TBL[tbl].length - 1) };
+  if (V.lastAac && cSame(ob, V.lastAac)) ob.i = where ? WK[(WK.indexOf(ob.i) + 1) % WK.length] : (ob.i + 1) % AAC_TBL[tbl].length;
   V.lastAac = ob;
   var target = OBJ_FIRST[S.lang] ? [ob, st] : [st, ob];
-  if (level === 3) target.push({ t: "p", tab: "basic", i: 2 });
+  if (level === 3 && !where) target.push({ t: "p", tab: "basic", i: 2 });
   var pool = target.slice();
   if (level >= 2) { var d; do { d = { t: "o", tab: "food", i: rnd(0, AAC_FOOD.length - 1) }; } while (cSame(d, ob)); pool.push(d); }
   var sentence = compose(target);
@@ -2487,14 +3067,14 @@ function genRutQ(level) {
 /* ---------- Rincón de calma ---------- */
 function renderCalm() {
   var g = V.game; stopCalm();
-  var h = '<div class="gtitle"><span class="nm">' + g.ic + " " + esc(t(g.k)) + "</span></div>" + heroHTML(true) +
+  var h = '<div class="gtitle"><span class="nm">' + icHTML(g.ic) + " " + esc(t(g.k)) + "</span></div>" + heroHTML(true) +
     '<div class="breath" id="breath" aria-hidden="true"><div class="ball" id="ball"><span id="ballTx">🌿</span></div></div>' +
     '<div class="calmbtns">' +
     '<button type="button" class="big" id="cBreath">🌬️ ' + esc(t("calmBreath")) + "</button>" +
     '<button type="button" class="big" id="cCount">🔢 ' + esc(t("calmCount")) + "</button>" +
     '<button type="button" class="big" id="cMusic" aria-pressed="' + !!V.calmMusic + '">🎵 ' + esc(t("music")) + "</button>" +
     '<button type="button" class="big" id="cHug">🤗 ' + esc(t("calmHug")) + "</button></div>" +
-    "<h3>" + esc(t("calmFeelQ")) + '</h3><div class="feelrow">' + [5, 6, 7, 8, 2].map(function (i) { return '<button type="button" class="fbtn" data-f="' + i + '" aria-label="' + esc(rowText(AAC_FEEL[i])) + '">' + AAC_FEEL[i][0] + "</button>"; }).join("") + "</div>";
+    "<h3>" + esc(t("calmFeelQ")) + '</h3><div class="feelrow">' + [5, 6, 7, 8, 2].map(function (i) { return '<button type="button" class="fbtn" data-f="' + i + '" aria-label="' + esc(rowText(AAC_FEEL[i])) + '">' + icon(AAC_FEEL[i][0]) + "</button>"; }).join("") + "</div>";
   screenEl.innerHTML = h;
   V.bubble = t("calmIntro"); bindHero(); speak(V.bubble);
   var ball = document.getElementById("ball"), tx = document.getElementById("ballTx");
@@ -2538,7 +3118,7 @@ function letList() { return LETTERS[S.lang] || (LATIN_L.indexOf(S.lang) >= 0 ? L
 function isLatin() { return S.lang === "es" || LATIN_L.indexOf(S.lang) >= 0; }
 function vocCount(g) { return g.kind === "io" ? IO_LIST.length : g.kind === "let" ? letList().length : g.kind === "opp" ? g.data.length / 2 : g.data.length; }
 function vocRow(i) { var g = V.game; return g.kind === "io" ? IO_LIST[i].r : g.data[i]; }
-function vocIcon(ic) { return ic.indexOf("svg:") === 0 ? '<span class="vsvg' + (ic.indexOf("svg:pos") === 0 ? " pos" : "") + '">' + svgIcon(ic.slice(4)) + "</span>" : ic; }
+function vocIcon(ic) { return ic.indexOf("svg:") === 0 ? '<span class="vsvg' + (ic.indexOf("svg:pos") === 0 ? " pos" : ic.indexOf("svg:kid_") === 0 ? " kid" : "") + '">' + svgIcon(ic.slice(4)) + "</span>" : ic; }
 function vocVisual(i) {
   if (V.game.kind === "let") return '<span class="digit let">' + esc(letList()[i]) + "</span>";
   return '<span class="face">' + vocIcon(vocRow(i)[0]) + "</span>";
@@ -2727,7 +3307,7 @@ function holdBegin() {
 }
 function holdEnd() { clearTimeout(holdT); clearInterval(holdIv); holdT = 0; holdIv = 0; navBtn.style.setProperty("--p", 0); holdStart = 0; }
 function renderSettings() {
-  V.screen = "settings"; updHeader();
+  V.screen = "settings"; updHeader(); s5Leave();
   stopCalm();
   var rows = [["quiet", "🤫"], ["voice", "🗣️"], ["sfx", "🔔"], ["music", "🎵"], ["calm", "🐢"]];
   var labels = { quiet: t("quiet"), voice: t("voice"), sfx: t("sounds"), music: t("music"), calm: t("motion") };
@@ -2736,6 +3316,7 @@ function renderSettings() {
   h += '</div><p class="note">🤫 ' + esc(t("quietHint")) + '</p><label class="namebox"><span>👦👧 ' + esc(t("childName")) + '</span><input id="nameIn" type="text" maxlength="24" autocomplete="off" autocapitalize="words" placeholder="' + esc(t("childNamePh")) + '" value="' + esc(S.name || "") + '"></label>';
   h += '<h2>🗣️ ' + esc(t("pvoice")) + '</h2><div class="rows vlist" id="vlist"></div>';
   h += '<button type="button" class="big" id="repBtn">📊 ' + esc(t("report")) + "</button>";
+  h += '<button type="button" class="big" id="famBtn">📷 ' + esc(t("famManage")) + "</button>";
   h += "<h2>🌐 " + esc(t("language")) + "</h2>" + langButtons("langgrid") +
     '<button type="button" class="big danger" id="rst">🗑️ ' + esc(t("reset")) + '</button><button type="button" class="big primary" id="bk">' + esc(t("back")) + "</button>";
   screenEl.innerHTML = h;
@@ -2747,7 +3328,7 @@ function renderSettings() {
     if (k === "music") setMusic(S.s.music);
     if (k === "calm" || k === "quiet") applyCalm();
     if (k === "quiet") setMusic(S.s.music);
-    if (k === "voice" && !S.s.voice && synth) try { synth.cancel(); } catch (x) {}
+    if (k === "voice" && !S.s.voice) hush();
     updHeader(); sfx("tap");
   });
   var armed = false, rst = document.getElementById("rst");
@@ -2760,13 +3341,14 @@ function renderSettings() {
   ni.addEventListener("input", function () { S.name = ni.value.replace(/[<>]/g, "").trim().slice(0, 24); save(); });
   ni.addEventListener("keydown", function (e) { if (e.key === "Enter") ni.blur(); });
   document.getElementById("repBtn").addEventListener("click", function () { sfx("tap"); renderReport(); });
+  document.getElementById("famBtn").addEventListener("click", function () { sfx("tap"); renderFamEdit(); });
   fillVoicePicker();
 }
 /* parent voice picker: the device's natural voices for the current language */
 function fillVoicePicker() {
   var box = document.getElementById("vlist"); if (!box) return;
   var list = langVoices(S.lang).list, cur = (S.vpick && S.vpick[S.lang]) || "";
-  var opts = [{ key: "", label: t("vAuto"), v: null }].concat(list.map(function (v) {
+  var opts = [{ key: "", label: (CLIP_BASE && CLIPS[S.lang]) ? "⭐ " + t("vRec") : t("vAuto"), v: null, rec: !!(CLIP_BASE && CLIPS[S.lang]) }].concat(list.map(function (v) {
     return { key: vKey(v), label: String(v.name || "").replace(/\s*\(.*\)\s*$/, "") + " · " + v.lang + (isHQ(v) ? " ⭐" : "") + (maleRank(v) >= 0 ? " 👨" : ""), v: v }; }));
   if (cur && !opts.some(function (o) { return o.key === cur; })) cur = "";
   var h = "";
@@ -2775,13 +3357,13 @@ function fillVoicePicker() {
       '<button type="button" class="vtry" data-vt="' + i + '">▶️ ' + esc(t("vTry")) + "</button></div>";
   });
   box.innerHTML = h;
-  var test = function (o) { speak(t("vTest"), false, o.v || null); };
+  var test = function (o) { if (o.rec) speak(t("vTest")); else speak(t("vTest"), false, o.v || null); };
   box.querySelectorAll("[data-vi]").forEach(function (b) { b.addEventListener("click", function () {
     var o = opts[+b.getAttribute("data-vi")]; if (!S.vpick) S.vpick = {};
     if (o.key) S.vpick[S.lang] = o.key; else delete S.vpick[S.lang];
-    save(); fillVoicePicker(); test(o.v ? o : { v: findVoice(S.lang).v }); }); });
+    save(); fillVoicePicker(); test(o.v || o.rec ? o : { v: findVoice(S.lang).v }); }); });
   box.querySelectorAll("[data-vt]").forEach(function (b) { b.addEventListener("click", function () {
-    var o = opts[+b.getAttribute("data-vt")]; test(o.v ? o : { v: findVoice(S.lang).v }); }); });
+    var o = opts[+b.getAttribute("data-vt")]; test(o.v || o.rec ? o : { v: findVoice(S.lang).v }); }); });
 }
 
 /* ---------- boot ---------- */
@@ -2791,7 +3373,7 @@ function boot() {
   applyLang(); applyCalm();
   voiceBtn.addEventListener("click", function () {
     S.s.voice = !S.s.voice; save(); updHeader();
-    if (!S.s.voice) { if (synth) try { synth.cancel(); } catch (e) {} } else speak(V.bubble);
+    if (!S.s.voice) hush(); else speak(V.bubble);
   });
   musicBtn.addEventListener("click", function () { S.s.music = !S.s.music; save(); setMusic(S.s.music); updHeader(); });
   navBtn.addEventListener("pointerdown", function (e) {
@@ -2810,7 +3392,7 @@ function boot() {
   navBtn.addEventListener("click", function () {
     if (V.screen === "home") return;
     if (swallow && Date.now() - swallow < 8000) { swallow = 0; return; }
-    if (synth) try { synth.cancel(); } catch (e) {}
+    hush();
     sfx("tap"); renderHome();
   });
   route();
@@ -2834,12 +3416,399 @@ function route() {
   if (p[0] === "stickers") return renderStickers();
   if (p[0] === "ajustes") return renderSettings();
   if (p[0] === "reporte") return renderReport();
+  if (p[0] === "fotos") return renderFamEdit();
   if (gameById(p[0])) return openGame(p[0], p[1] === "learn" || p[1] === "aprender" ? "learn" : "play");
   renderHome();
 }
-window.AJ = { S: S, V: V, voiceFor: findVoice, setLang: function (c) { if (TR[c]) { S.lang = c; save(); applyLang(); route(); } }, save: save, home: renderHome, openGame: openGame, stickers: renderStickers, settings: renderSettings, report: renderReport, LOG: function () { return LOG; },
+
+/* ======================= v3 stage 5 ======================= */
+var S5 = {};
+function s5Title(g) { return '<div class="gtitle"><span class="nm">' + icHTML(g.ic) + " " + esc(t(g.k)) + "</span></div>"; }
+function s5Modes(m) { return '<div class="modes"><button type="button" data-m5="learn" aria-pressed="' + (m === "learn") + '">📖 ' + esc(t("learn")) + '</button><button type="button" data-m5="play" aria-pressed="' + (m === "play") + '">🎲 ' + esc(t("play")) + "</button></div>"; }
+function on(id, ev, fn) { var e = document.getElementById(id); if (e) e.addEventListener(ev, fn); return e; }
+function onAll(sel, fn) { var bs = screenEl.querySelectorAll(sel); for (var i = 0; i < bs.length; i++) bs[i].addEventListener("click", fn); }
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function plainPraise() { return pick(L().praise); }
+/* several pieces in a row (each piece its own clip): "Primero" · "baño" · "Después" · "tablet" */
+function saySeq(parts, bubble) {
+  parts = parts.filter(Boolean); if (!parts.length) return;
+  setBubble(bubble || parts.join(" "));
+  speak(parts[0]); for (var i = 1; i < parts.length; i++) speak(parts[i], true);
+}
+/* a sentence around a family name: recorded pieces + device voice for the name */
+function sayName(text, name, queue) {
+  if (!queue) setBubble(text);
+  if (!S.s.voice) return;
+  if (useClips()) {
+    var plan = CLIPCORE.plan(text, clipHas, name || "");
+    if (plan.some(function (p) { return p.k; })) {
+      if (!queue) { clipStop(); if (synth) try { synth.cancel(); } catch (e) {} }
+      plan.forEach(function (p) { p.lang = S.lang; clipQ.push(p); });
+      if (!clipBusy) clipNext(clipTok); return;
+    }
+  }
+  speak(text, queue);
+}
+var tmIv = 0, recSt = null, recMr = null, recTimer = 0, recUrls = [], recAud = null;
+function s5Leave() {
+  clearInterval(tmIv); tmIv = 0; if (V.tm) V.tm.run = false;
+  recStop(true);
+  if (recAud) try { recAud.onended = recAud.onerror = null; recAud.pause(); recAud.removeAttribute("src"); recAud.load(); } catch (e) {}
+  recUrls.forEach(function (u) { try { URL.revokeObjectURL(u); } catch (e) {} }); recUrls = [];
+  if (V.rep) V.rep.rec = null;
+}
+
+/* ---------- (a) Repetir conmigo ---------- */
+var micOK = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+S5.rep = function (g) {
+  if (!V.rep) V.rep = { lv: lv(g.id).level, i: 0, intro: false, rec: null, st: "idle", lvAt: lv(g.id).level };
+  renderRep(g);
+};
+function repItem() { var R = V.rep, list = REP[R.lv - 1]; R.i = (R.i + list.length) % list.length; return list[R.i]; }
+function repText() { return cap(rowText(repItem())); }
+function renderRep(g) {
+  g = g || V.game; var R = V.rep, row = repItem(), list = REP[R.lv - 1];
+  var h = s5Title(g) + '<div class="modes m3">' + [1, 2, 3].map(function (n) { return '<button type="button" data-rl="' + n + '" aria-pressed="' + (R.lv === n) + '">' + esc(t("repLv" + n)) + "</button>"; }).join("") + "</div>";
+  h += heroHTML(true) + '<div class="learnbox repbox" id="lb"><span class="emo bigi">' + row[0] + '</span><span class="lname">' + esc(repText()) + "</span></div>";
+  h += '<div class="repbtns">';
+  h += '<button type="button" class="big" id="rListen">🔊 ' + esc(t("repListen")) + "</button>";
+  if (micOK && !V.micDenied) h += '<button type="button" class="big primary micb' + (R.st === "rec" ? " rec" : "") + '" id="rRec">' + (R.st === "rec" ? "⏹️ " + esc(t("repStop")) : "🎤 " + esc(t("repRec"))) + "</button>";
+  if (R.rec) h += '<button type="button" class="big" id="rMine">▶️ ' + esc(t("repMine")) + "</button>";
+  h += '<button type="button" class="big said" id="rSaid">⭐ ' + esc(t("repSaid")) + "</button></div>";
+  h += '<div class="lnav"><button type="button" class="big" id="pv">' + esc(t("prev")) + '</button><span class="cnt">' + (R.i + 1) + "/" + list.length + '</span><button type="button" class="big primary" id="nx">' + esc(t("next")) + "</button></div>";
+  h += '<p class="note">🔒 ' + esc(t("repPriv")) + (micOK && !V.micDenied ? "" : "<br>🎙️ " + esc(t("repNoMic"))) + "</p>";
+  screenEl.innerHTML = h;
+  V.bubble = repText(); bindHero();
+  if (!R.intro) { R.intro = true; setBubble(t("repIntro")); speak(t("repIntro")); speak(repText(), true); setTimeout(function () { setBubble(repText()); }, 1800); }
+  else speak(repText());
+  onAll("[data-rl]", function (e) { sfx("tap"); recStop(true); R.lv = +e.currentTarget.getAttribute("data-rl"); R.i = 0; R.rec = null; renderRep(); });
+  on("lb", "click", function () { speak(repText()); });
+  on("rListen", "click", function () { sfx("tap"); speak(repText()); });
+  on("rRec", "click", function () { if (R.st === "rec") recStop(false); else recStart(); });
+  on("rMine", "click", function () { playMine(false); });
+  on("rSaid", "click", function () { repPraise(); });
+  on("pv", "click", function () { sfx("tap"); recStop(true); R.i--; R.rec = null; renderRep(); });
+  on("nx", "click", function () { sfx("tap"); recStop(true); repNext(); });
+}
+function repNext() {
+  var R = V.rep, cur = lv(V.game.id).level; R.rec = null;
+  if (cur > R.lvAt && cur > R.lv) { R.lv = cur; R.i = 0; } else R.i++;
+  R.lvAt = cur; renderRep();
+}
+function repPraise() {
+  var R = V.rep, g = V.game, w = repText();
+  sfx("yes"); dance(); sparkle(document.getElementById("lb"));
+  logCount("p", w); logAnswer(g, true);
+  say(t("repGood")); reward(g, 1, 1);
+}
+function recStart() {
+  var R = V.rep; hush();
+  navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (st) {
+    if (V.screen !== "game" || !V.game || V.game.kind !== "rep") { st.getTracks().forEach(function (x) { x.stop(); }); return; }
+    recSt = st; var chunks = [];
+    try { recMr = new MediaRecorder(st); } catch (e) { recFail(); return; }
+    recMr.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+    recMr.onstop = function () {
+      var cancel = recMr && recMr._cancel; recRelease();
+      if (cancel || !chunks.length) return;
+      var url = URL.createObjectURL(new Blob(chunks, { type: chunks[0].type || "audio/mp4" })); recUrls.push(url);
+      R.rec = url; R.st = "done"; renderRepKeep(); setTimeout(function () { playMine(true); }, 250);
+    };
+    recMr.start(); R.st = "rec"; renderRepKeep();
+    recTimer = setTimeout(function () { recStop(false); }, 5000);
+  }, function () { recFail(); });
+}
+function recFail() { V.micDenied = true; recRelease(); if (V.rep) V.rep.st = "idle"; if (V.game && V.game.kind === "rep") { renderRep(); } }
+function recRelease() { clearTimeout(recTimer); if (recSt) recSt.getTracks().forEach(function (x) { try { x.stop(); } catch (e) {} }); recSt = null; recMr = null; if (V.rep && V.rep.st === "rec") V.rep.st = "idle"; }
+function recStop(cancel) {
+  clearTimeout(recTimer);
+  if (recMr && recMr.state === "recording") { recMr._cancel = !!cancel; try { recMr.stop(); } catch (e) { recRelease(); } }
+  else recRelease();
+}
+/* re-render the buttons only (keeps the picture still) */
+function renderRepKeep() {
+  var R = V.rep, b = document.getElementById("rRec");
+  if (b) { b.className = "big primary micb" + (R.st === "rec" ? " rec" : ""); b.innerHTML = R.st === "rec" ? "⏹️ " + esc(t("repStop")) : "🎤 " + esc(t("repRec")); }
+  if (R.rec && !document.getElementById("rMine") && b) {
+    var m = document.createElement("button"); m.type = "button"; m.className = "big"; m.id = "rMine"; m.innerHTML = "▶️ " + esc(t("repMine"));
+    m.addEventListener("click", function () { playMine(false); }); b.parentNode.insertBefore(m, b.nextSibling);
+  }
+}
+function playMine(thenPraise) {
+  var R = V.rep; if (!R || !R.rec) return; hush();
+  if (!recAud) { recAud = new Audio(); recAud.setAttribute("playsinline", ""); }
+  setBubble(t("repHearYou")); setTalking(false);
+  var fin = function () { recAud.onended = recAud.onerror = null; if (thenPraise && V.game && V.game.kind === "rep") repPraise(); };
+  recAud.onended = fin; recAud.onerror = fin;
+  try { recAud.src = R.rec; recAud.volume = 1; var p = recAud.play(); if (p && p.catch) p.catch(fin); } catch (e) { fin(); }
+}
+
+/* ---------- (b) Primero / Después ---------- */
+S5.fb = function (g) { if (!S.fb || typeof S.fb !== "object") S.fb = { a: null, b: null, d: 0 }; V.fbSlot = S.fb.a == null ? 0 : S.fb.b == null ? 1 : 0; renderFB(g, true); };
+function fbLabel(i) { return cap(rowText(FB[i])); }
+function fbSlotHTML(k) {
+  var F = S.fb, i = k ? F.b : F.a, done = k ? F.d > 1 : F.d > 0;
+  return '<button type="button" class="fbslot' + (V.fbSlot === k ? " sel" : "") + (done ? " done" : "") + '" data-slot="' + k + '"><span class="fbh">' + esc(t(k ? "fbThen" : "fbFirst")) + "</span>" +
+    (i == null ? '<span class="fbq">?</span>' : '<span class="emo">' + FB[i][0] + '</span><span class="cl">' + esc(fbLabel(i)) + "</span>") + (done ? '<b class="ck">✓</b>' : "") + "</button>";
+}
+function fbSentence() { var F = S.fb; return F.a == null || F.b == null ? null : [t("fbFirst"), fbLabel(F.a), t("fbThen"), fbLabel(F.b)]; }
+function renderFB(g, intro) {
+  g = g || V.game; var F = S.fb;
+  var h = s5Title(g) + heroHTML(true) + '<div class="fbboard" id="fbb">' + fbSlotHTML(0) + '<span class="fbarr" aria-hidden="true">➡️</span>' + fbSlotHTML(1) + "</div>";
+  h += '<div class="stripbtns"><button type="button" class="big primary" id="fbSay">🔊 ' + esc(t("sayIt")) + '</button><button type="button" class="big" id="fbDone"' + (F.a == null || F.d > 1 ? " disabled" : "") + '>✓ ' + esc(t("fbDone")) + '</button><button type="button" class="big" id="fbClr" aria-label="' + esc(t("clearAll")) + '">🗑️</button></div>';
+  h += '<div class="aacgrid fbgrid">' + FB.map(function (r, i) { return '<button type="button" class="acard" data-fb="' + i + '">' + icon(r[0]) + '<span class="cl">' + esc(fbLabel(i)) + "</span></button>"; }).join("") + "</div>";
+  screenEl.innerHTML = h;
+  var s = fbSentence(); V.bubble = s ? s.join(" ") : t("fbHelp"); bindHero();
+  if (intro) { if (s) saySeq(s); else speak(t("fbHelp")); }
+  onAll("[data-slot]", function (e) { sfx("tap"); V.fbSlot = +e.currentTarget.getAttribute("data-slot"); renderFB(); });
+  onAll("[data-fb]", function (e) {
+    var i = +e.currentTarget.getAttribute("data-fb"); sfx("tap");
+    if (V.fbSlot === 0) { F.a = i; F.d = 0; } else { F.b = i; if (F.d > 1) F.d = 1; }
+    V.fbSlot = F.a == null ? 0 : F.b == null ? 1 : (V.fbSlot === 0 ? 1 : 0);
+    save(); renderFB();
+    var s2 = fbSentence(); if (s2) { saySeq(s2); logCount("s", s2.join(" ")); } else speak(fbLabel(i));
+  });
+  on("fbSay", "click", function () { var s3 = fbSentence(); if (s3) { saySeq(s3); dance(); } else say(t("fbHelp")); });
+  on("fbDone", "click", function () {
+    if (F.a == null) return;
+    if (F.d === 0) { F.d = 1; save(); renderFB(); sfx("yes"); dance(); reward(g, 1, 0); saySeq([plainPraise(), F.b != null ? t("fbNow") : "", F.b != null ? fbLabel(F.b) : ""]); }
+    else if (F.d === 1 && F.b != null) { F.d = 2; save(); renderFB(); sfx("yes"); dance(); sparkle(document.getElementById("fbb")); reward(g, 1, 0); say(plainPraise()); }
+  });
+  on("fbClr", "click", function () { sfx("tap"); S.fb = { a: null, b: null, d: 0 }; V.fbSlot = 0; save(); renderFB(); say(t("fbHelp")); });
+}
+
+/* ---------- (c) Reloj visual ---------- */
+S5.timer = function (g) { V.tm = V.tm && V.tm.run ? V.tm : { run: false, total: 0, left: 0, end: 0, paused: false, warned: false }; renderTimer(g, true); };
+function tmText(n) { var k = "tmStart" + n; return L()[k] ? L()[k] : t("tmStart", { n: n }); }
+function fmtClock(ms) { var s = Math.ceil(ms / 1000), m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+function renderTimer(g, intro) {
+  g = g || V.game; var T = V.tm;
+  var h = s5Title(g) + heroHTML(true) + '<div class="tmwrap"><div class="tmdial" id="tmDial"><div class="tmpie" id="tmPie"></div><div class="tmface"><b id="tmClock">' + (T.total ? fmtClock(T.left) : "⏳") + "</b></div></div></div>";
+  if (!T.total) {
+    h += "<h3>" + esc(t("tmPick")) + '</h3><div class="tmpick">' + [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (n) { return '<button type="button" class="big" data-min="' + n + '">' + n + ' <small>' + esc(t("tmUnit")) + "</small></button>"; }).join("") + "</div>";
+  } else {
+    h += '<div class="lnav"><button type="button" class="big" id="tmP">' + (T.paused ? "▶️ " + esc(t("tmGo")) : "⏸️ " + esc(t("tmPause"))) + '</button><button type="button" class="big primary" id="tmS">⏹️ ' + esc(t("repStop")) + "</button></div>";
+  }
+  screenEl.innerHTML = h;
+  V.bubble = T.total ? (T.left > 0 ? tmText(Math.max(1, Math.ceil(T.total / 60000))) : t("tmEnd")) : t("tmPick"); bindHero();
+  if (intro && !T.total) speak(t("tmPick"));
+  tmDraw();
+  onAll("[data-min]", function (e) {
+    var n = +e.currentTarget.getAttribute("data-min"); unlock();
+    T.total = n * 60000; T.left = T.total; T.end = Date.now() + T.total; T.run = true; T.paused = false; T.warned = n === 1;
+    renderTimer(); say(tmText(n)); tmLoop();
+  });
+  on("tmP", "click", function () {
+    sfx("tap");
+    if (!T.paused) { T.left = Math.max(0, T.end - Date.now()); T.paused = true; T.run = false; clearInterval(tmIv); }
+    else { T.end = Date.now() + T.left; T.paused = false; T.run = true; tmLoop(); }
+    renderTimer();
+  });
+  on("tmS", "click", function () { sfx("tap"); clearInterval(tmIv); V.tm = { run: false, total: 0, left: 0, end: 0, paused: false, warned: false }; renderTimer(); });
+  if (T.run && !tmIv) tmLoop();
+}
+function tmDraw() {
+  var T = V.tm, pie = document.getElementById("tmPie"), clk = document.getElementById("tmClock"); if (!pie) return;
+  var f = T.total ? Math.max(0, Math.min(1, T.left / T.total)) : 1;
+  pie.style.background = "conic-gradient(#E58C7A " + (f * 360).toFixed(1) + "deg, transparent 0)";
+  if (clk && T.total) clk.textContent = fmtClock(T.left);
+}
+function tmLoop() {
+  clearInterval(tmIv);
+  tmIv = setInterval(function () {
+    var T = V.tm; if (!T || !T.run) { clearInterval(tmIv); tmIv = 0; return; }
+    T.left = Math.max(0, T.end - Date.now());
+    if (V.screen !== "game" || !V.game || V.game.kind !== "timer") { clearInterval(tmIv); tmIv = 0; T.run = false; return; }
+    tmDraw();
+    if (!T.warned && T.left <= 60000 && T.total > 60000) { T.warned = true; say(t("tmLeft1")); }
+    if (T.left <= 0) {
+      T.run = false; clearInterval(tmIv); tmIv = 0;
+      chime(); say(t("tmEnd")); dance(); logCount("s", t("g_timer") + " " + Math.round(T.total / 60000) + " " + t("tmUnit"));
+      var d = document.getElementById("tmDial"); if (d && !calm()) d.classList.add("ring");
+    }
+  }, 250);
+}
+/* gentle bell (Web Audio); silent in quiet mode */
+function chime() {
+  if (S.s.quiet || !ac()) return;
+  var n = AC.currentTime + 0.02;
+  [[784, 0], [659.25, 0.45], [523.25, 0.9]].forEach(function (x) { tone(x[0], n + x[1], 1.6, 0.08, "sine"); tone(x[0] * 2, n + x[1], 0.9, 0.015, "sine"); });
+}
+
+/* ---------- (d) Pedir ---------- */
+S5.req = function (g) {
+  var h = s5Title(g) + heroHTML(true) + '<div class="reqgrid">' + REQ.map(function (r, i) { return '<button type="button" class="reqb c' + i + '" data-rq="' + i + '"><span class="emo">' + r[0] + '</span><span class="cl">' + esc(rowText(r)) + "</span></button>"; }).join("") + "</div>";
+  screenEl.innerHTML = h;
+  V.bubble = t("reqIntro"); bindHero(); speak(V.bubble);
+  onAll("[data-rq]", function (e) {
+    var b = e.currentTarget, i = +b.getAttribute("data-rq"), s = REQ_SAY[i][lix()] || REQ_SAY[i][0];
+    sfx("tap"); say(s); dance(); logCount("s", s); logCount("w", rowText(REQ[i])); lastAct = Date.now();
+    var ons = screenEl.querySelectorAll(".reqb.on"); for (var k = 0; k < ons.length; k++) ons[k].classList.remove("on");
+    b.classList.add("on"); setTimeout(function () { b.classList.remove("on"); }, 2500);
+  });
+};
+
+/* ---------- (e) Mi familia con fotos (IndexedDB on this device only; never uploaded) ---------- */
+var FAMDB = "aprendoJugandoFotos", famDb = null, famCache = null;
+function famOpen(cb) {
+  if (famDb) return cb(famDb);
+  try {
+    var rq = indexedDB.open(FAMDB, 1);
+    rq.onupgradeneeded = function () { rq.result.createObjectStore("p", { keyPath: "id" }); };
+    rq.onsuccess = function () { famDb = rq.result; cb(famDb); };
+    rq.onerror = rq.onblocked = function () { cb(null); };
+  } catch (e) { cb(null); }
+}
+function famLS() { try { return JSON.parse(localStorage.getItem(FAMDB) || "[]") || []; } catch (e) { return []; } }
+function famAll(cb) {
+  famOpen(function (db) {
+    if (!db) { famCache = famLS(); return cb(famCache); }
+    try { var out = [], c = db.transaction("p", "readonly").objectStore("p").openCursor();
+      c.onsuccess = function () { var r = c.result; if (r) { out.push(r.value); r.continue(); } else { out.sort(function (a, b) { return a.id - b.id; }); famCache = out; cb(out); } };
+      c.onerror = function () { cb(famCache = famLS()); };
+    } catch (e) { cb(famCache = famLS()); }
+  });
+}
+function famPut(rec, cb) {
+  famOpen(function (db) {
+    if (!db) { var a = famLS().filter(function (x) { return x.id !== rec.id; }); a.push(rec); try { localStorage.setItem(FAMDB, JSON.stringify(a)); cb(true); } catch (e) { cb(false); } return; }
+    try { var tx = db.transaction("p", "readwrite"); tx.objectStore("p").put(rec); tx.oncomplete = function () { cb(true); }; tx.onerror = function () { cb(false); }; } catch (e) { cb(false); }
+  });
+}
+function famDel(id, cb) {
+  famOpen(function (db) {
+    if (!db) { try { localStorage.setItem(FAMDB, JSON.stringify(famLS().filter(function (x) { return x.id !== id; }))); } catch (e) {} return cb(); }
+    try { var tx = db.transaction("p", "readwrite"); tx.objectStore("p").delete(id); tx.oncomplete = function () { cb(); }; tx.onerror = function () { cb(); }; } catch (e) { cb(); }
+  });
+}
+/* photo -> square-ish JPEG, max 640 px (keeps storage small) */
+function famShrink(file, cb) {
+  var rd = new FileReader();
+  rd.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      var M = 640, w = im.naturalWidth, h = im.naturalHeight, k = Math.min(1, M / Math.max(w, h));
+      var c = document.createElement("canvas"); c.width = Math.round(w * k); c.height = Math.round(h * k);
+      c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+      try { cb(c.toDataURL("image/jpeg", 0.82)); } catch (e) { cb(null); }
+    };
+    im.onerror = function () { cb(null); }; im.src = rd.result;
+  };
+  rd.onerror = function () { cb(null); }; rd.readAsDataURL(file);
+}
+function famImg(p, cls) { return '<span class="famimg ' + (cls || "") + '"><img alt="" src="' + p.img + '"></span>'; }
+S5.myfam = function (g) { V.fam = V.fam || { m: "learn", i: 0 }; famAll(function (list) { if (V.game === g) renderMyFam(g, list); }); };
+function renderMyFam(g, list) {
+  var F = V.fam, h = s5Title(g);
+  if (list.length >= 2) h += s5Modes(F.m);
+  h += heroHTML(true);
+  if (!list.length) {
+    h += '<div class="learnbox"><span class="emo bigi">📷</span><span class="lname sm">' + esc(t("famEmpty")) + '</span></div><p class="note">🔒 ' + esc(t("famPriv")) + "</p>";
+    screenEl.innerHTML = h; V.bubble = t("famEmpty"); bindHero(); speak(V.bubble); return;
+  }
+  if (F.m === "play" && list.length >= 2) {
+    var k = Math.min(3, list.length), c; do { c = rnd(0, list.length - 1); } while (list.length > 1 && c === F.last); F.last = c;
+    var opts = shuffle([c].concat(shuffle(range(list.length).filter(function (x) { return x !== c; })).slice(0, k - 1)));
+    F.q = { c: c, list: list };
+    h += '<div class="famopts n' + opts.length + '">' + opts.map(function (i) { return '<button type="button" class="famopt" data-fo="' + i + '" aria-label="' + esc(list[i].name) + '">' + famImg(list[i]) + "</button>"; }).join("") + "</div>";
+    h += '<button type="button" class="big primary next" id="nx" hidden>' + esc(t("next")) + "</button>";
+    screenEl.innerHTML = h; bindModesFam(g);
+    var q = t("famWhere", { x: list[c].name }); V.bubble = q; bindHero(); sayName(q, list[c].name);
+    var answered = false;
+    onAll("[data-fo]", function (e) {
+      if (answered) return; var b = e.currentTarget, i = +b.getAttribute("data-fo");
+      if (i === c) { answered = true; b.classList.add("ok"); sfx("yes"); dance(); logAnswer(g, true); reward(g, 1, 0); logCount("w", list[c].name);
+        setBubble(plainPraise() + " " + t("famLook", { x: list[c].name })); speak(plainPraise()); sayName(t("famLook", { x: list[c].name }), list[c].name, true);
+        document.getElementById("nx").hidden = false; }
+      else { sfx("soft"); logAnswer(g, false); if (!calm()) { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); } setBubble(t("tryAgain") + ". " + q); speak(t("tryAgain")); sayName(q, list[c].name, true); }
+    });
+    on("nx", "click", function () { sfx("tap"); renderMyFam(g, list); });
+    return;
+  }
+  F.i = (F.i + list.length) % list.length; var p = list[F.i];
+  h += '<div class="learnbox fambox" id="lb">' + famImg(p, "lg") + '<span class="lname">' + esc(p.name) + "</span></div>";
+  h += '<div class="lnav"><button type="button" class="big" id="pv">' + esc(t("prev")) + '</button><span class="cnt">' + (F.i + 1) + "/" + list.length + '</span><button type="button" class="big primary" id="nx">' + esc(t("next")) + "</button></div>";
+  if (list.length < 2) h += '<p class="note">' + esc(t("famNeed2")) + "</p>";
+  screenEl.innerHTML = h; bindModesFam(g);
+  var s = t("famLook", { x: p.name }); V.bubble = s; bindHero(); sayName(s, p.name);
+  on("lb", "click", function () { sayName(s, p.name); });
+  on("pv", "click", function () { sfx("tap"); F.i--; renderMyFam(g, list); });
+  on("nx", "click", function () { sfx("tap"); F.i++; renderMyFam(g, list); });
+}
+function bindModesFam(g) { onAll("[data-m5]", function (e) { sfx("tap"); V.fam.m = e.currentTarget.getAttribute("data-m5"); famAll(function (l) { renderMyFam(g, l); }); }); }
+/* parent screen (from settings): add / delete photos */
+function renderFamEdit() {
+  V.screen = "famedit"; updHeader(); s5Leave();
+  famAll(function (list) {
+    var h = "<h2>📷 " + esc(t("famManage")) + '</h2><p class="note">🔒 ' + esc(t("famPriv")) + "</p>";
+    h += '<div class="famadd"><input type="file" id="famFile" accept="image/*" hidden><button type="button" class="big" id="famPick">🖼️ ' + esc(t("famPhotoBtn")) + '</button><span class="famprev" id="famPrev"></span>' +
+      '<label class="namebox"><span>' + esc(t("famName")) + '</span><input id="famName" type="text" maxlength="24" autocomplete="off" autocapitalize="words"></label>' +
+      '<button type="button" class="big primary" id="famSave" disabled>💾 ' + esc(t("famSave")) + "</button></div>";
+    h += '<div class="famlist">' + list.map(function (p) { return '<div class="famrow">' + famImg(p, "th") + "<b>" + esc(p.name) + '</b><button type="button" class="big danger" data-fdel="' + p.id + '">🗑️ ' + esc(t("famDel")) + "</button></div>"; }).join("") + "</div>";
+    h += '<button type="button" class="big primary" id="bk">' + esc(t("back")) + "</button>";
+    screenEl.innerHTML = h;
+    var img = null, inp = document.getElementById("famFile"), nm = document.getElementById("famName"), sv = document.getElementById("famSave");
+    var upd = function () { sv.disabled = !(img && nm.value.trim()); };
+    on("famPick", "click", function () { inp.click(); });
+    inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (!f) return; famShrink(f, function (d) { img = d; document.getElementById("famPrev").innerHTML = d ? '<img alt="" src="' + d + '">' : "⚠️"; upd(); }); });
+    nm.addEventListener("input", upd);
+    sv.addEventListener("click", function () {
+      if (!img || !nm.value.trim()) return;
+      famPut({ id: Date.now(), name: nm.value.replace(/[<>]/g, "").trim().slice(0, 24), img: img }, function (ok) { toast(ok ? "✅ " + nm.value.trim() : "⚠️"); renderFamEdit(); });
+    });
+    onAll("[data-fdel]", function (e) {
+      var b = e.currentTarget; if (!b._armed) { b._armed = true; b.textContent = "⚠️ " + t("famDel") + "?"; return; }
+      famDel(+b.getAttribute("data-fdel"), renderFamEdit);
+    });
+    on("bk", "click", function () { sfx("tap"); renderSettings(); });
+  });
+}
+
+/* ---------- (f) Cuentos cortos ---------- */
+S5.story = function (g) { V.st = null; renderStoryPick(g); };
+function stT(a) { return a[lix()] || a[0]; }
+function renderStoryPick(g) {
+  g = g || V.game; V.st = null;
+  var h = s5Title(g) + heroHTML(true) + '<div class="rutpick">' + STORIES.map(function (s, i) { return '<button type="button" class="big rutbtn" data-st="' + i + '"><span class="emo">' + s.ic + "</span><span>" + esc(stT(s.t)) + '</span><small aria-hidden="true">' + s.p.map(function (p) { return p.v.split(" ")[0]; }).join("") + "</small></button>"; }).join("") + "</div>";
+  screenEl.innerHTML = h; V.bubble = t("stPick"); bindHero(); speak(V.bubble);
+  onAll("[data-st]", function (e) { sfx("tap"); V.st = { s: +e.currentTarget.getAttribute("data-st"), p: 0 }; renderStoryPage(); });
+}
+function renderStoryPage() {
+  var g = V.game, st = STORIES[V.st.s], k = V.st.p, n = st.p.length, h = s5Title(g);
+  if (k >= n) {
+    h += heroHTML(true) + '<div class="learnbox stepbox"><span class="emo bigi">🌟</span><span class="lname">' + esc(t("stEnd")) + '</span></div><div class="lnav"><button type="button" class="big" id="again">🔁 ' + esc(t("stAgain")) + '</button><button type="button" class="big primary" id="other">📚 ' + esc(t("stOther")) + "</button></div>";
+    screenEl.innerHTML = h; V.bubble = t("stEnd"); bindHero(); speak(V.bubble); sfx("yes"); dance(); reward(g, 1, 0); logCount("w", stT(st.t));
+    on("again", "click", function () { sfx("tap"); V.st.p = 0; renderStoryPage(); });
+    on("other", "click", function () { sfx("tap"); renderStoryPick(); });
+    return;
+  }
+  var pg = st.p[k], txt = stT(pg.s);
+  h += '<div class="sthead"><b>' + esc(stT(st.t)) + '</b><span class="cnt">' + (k + 1) + " / " + n + "</span></div>";
+  h += '<div class="stpage" id="lb"><div class="stscene s' + (k % 4) + '" aria-hidden="true">' + pg.v.split(" ").map(function (e) { return "<span>" + e + "</span>"; }).join("") + '</div><p class="sttext">' + esc(txt) + "</p></div>";
+  h += '<div class="lnav"><button type="button" class="big" id="pv"' + (k === 0 ? " disabled" : "") + ">" + esc(t("prev")) + '</button><button type="button" class="big" id="rp" aria-label="' + esc(t("repListen")) + '">🔊</button><button type="button" class="big primary" id="nx">' + esc(t("next")) + "</button></div>";
+  screenEl.innerHTML = h; V.bubble = txt; speak(txt);
+  on("lb", "click", function () { speak(txt); });
+  on("rp", "click", function () { sfx("tap"); speak(txt); });
+  on("pv", "click", function () { if (k > 0) { sfx("tap"); V.st.p--; renderStoryPage(); } });
+  on("nx", "click", function () { sfx("tap"); V.st.p++; renderStoryPage(); });
+}
+
+/* every phrase stage 5 can say (for the clip generator); NAME stands in for a family member's name */
+function s5Texts(NAME) {
+  var o = [], P = function (x) { if (x) o.push(String(x)); };
+  ["repIntro", "repGood", "repHearYou", "repYourTurn", "repSaid", "fbFirst", "fbThen", "fbNow", "fbHelp", "tmPick", "tmLeft1", "tmEnd", "reqIntro", "famEmpty", "famNeed2", "stPick", "stEnd", "tryAgain"].forEach(function (k) { P(t(k)); });
+  for (var n = 1; n <= 10; n++) P(tmText(n));
+  L().praise.forEach(P);
+  REP.forEach(function (lvl) { lvl.forEach(function (r) { P(cap(rowText(r))); }); });
+  FB.forEach(function (r, i) { P(fbLabel(i)); });
+  REQ_SAY.forEach(function (r) { P(r[lix()]); }); REQ.forEach(function (r) { P(rowText(r)); });
+  STORIES.forEach(function (s) { P(stT(s.t)); s.p.forEach(function (p) { P(stT(p.s)); }); });
+  P(t("famLook", { x: NAME })); P(t("famWhere", { x: NAME }));
+  return o;
+}
+window.AJ = { S: S, V: V, clipPlan: function (x) { return CLIPCORE.plan(x, clipHas, S.name || ""); }, clipsReady: function (l) { return !!CLIPS[l || S.lang]; }, pack: function (l) { var P = PACK[l || S.lang]; return P ? { parts: P.parts.length, loaded: P.buf.filter(Boolean).length, bad: P.bad, clips: Object.keys(CLIPS[l || S.lang]).length } : null; }, useClips: function () { return useClips(); }, voiceFor: findVoice, setLang: function (c) { if (TR[c]) { S.lang = c; save(); applyLang(); route(); } }, save: save, home: renderHome, openGame: openGame, stickers: renderStickers, settings: renderSettings, report: renderReport, LOG: function () { return LOG; },
   /* hooks for future games (Frases, Rutinas): data stays in localStorage only */
-  logWord: function (w) { logCount("w", w); }, logSentence: function (s) { logCount("s", s); }, logRoutine: function (i) { logCount("r", i); } };
+  logWord: function (w) { logCount("w", w); }, logSentence: function (s) { logCount("s", s); }, logRoutine: function (i) { logCount("r", i); }, s5Texts: s5Texts, famEdit: function () { renderFamEdit(); } };
 boot();
 })();
 
